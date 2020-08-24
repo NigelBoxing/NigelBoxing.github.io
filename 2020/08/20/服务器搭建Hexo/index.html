@@ -27,7 +27,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24073480-2a8cfc81aa4b02f5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="article:published_time" content="2020-08-20T08:45:02.534Z">
-<meta property="article:modified_time" content="2020-08-24T13:18:42.273Z">
+<meta property="article:modified_time" content="2020-08-24T13:21:35.882Z">
 <meta property="article:author" content="Ferrilata">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
@@ -384,85 +384,87 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Using Ubuntu</span></span><br><span class="line">curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br><span class="line"></span><br><span class="line"><span class="comment"># Using Debian, as root</span></span><br><span class="line">curl -sL https://deb.nodesource.com/setup_lts.x | bash -</span><br><span class="line">apt-get install -y nodejs</span><br></pre></td></tr></table></figure></li>
 <li><p>验证是否安装成功：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># node -v返回 v12.18.3</span></span><br><span class="line">node -v</span><br><span class="line"><span class="comment"># npm -v返回 6.14.6</span></span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
-<pre><code>2. 初始化Hexo博客</code></pre>
-<ul>
+<ol start="2">
+<li>初始化Hexo博客<ul>
 <li>安装Hexo<br>选择目录存放本地hexo博客内容（假设主目录<code>/home/xxx/</code>），运行<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></li>
 <li>初始化hexo：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog  <span class="comment"># blog可以是其他任何你想起的名字</span></span><br></pre></td></tr></table></figure></li>
 <li>安装hexo其他插件：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install   <span class="comment">#这个操作功能是补全依赖环境</span></span><br><span class="line">npm install hexo-deployer-git --save   <span class="comment"># 自动部署到服务器需要的插件</span></span><br><span class="line">npm install hexo-server     <span class="comment"># 本地简单的服务器，可以测试hexo是否安装成功</span></span><br></pre></td></tr></table></figure></li>
 <li>测试hexo是否安装成功。执行如下命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo server</span><br></pre></td></tr></table></figure>
 然后访问localhost:4000，如果能看到hexo界面说明本地hexo安装成功。<h4 id="二、服务端配置网站根目录、Git裸仓库、Git-hooks、Git上传用户、Nginx。"><a href="#二、服务端配置网站根目录、Git裸仓库、Git-hooks、Git上传用户、Nginx。" class="headerlink" title="二、服务端配置网站根目录、Git裸仓库、Git-hooks、Git上传用户、Nginx。"></a>二、服务端配置网站根目录、Git裸仓库、Git-hooks、Git上传用户、Nginx。</h4></li>
 </ul>
-<ol>
-<li>配置网站根目录备用</li>
+</li>
 </ol>
-<ul>
-<li>指定一个目录，假设主目录<code>/home/xxx/</code>，创建文件夹<code>hexo</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/xxx</span><br><span class="line">mkdir hexo</span><br></pre></td></tr></table></figure></li>
+</li>
 </ul>
-<ol start="2">
-<li>服务端配置Git裸仓库</li>
-</ol>
+</li>
+<li><p>配置网站根目录备用</p>
 <ul>
-<li>指定一个目录创建git裸仓库，可以选择<code>/var/repo/</code>。执行：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo git init --bare blog.git</span><br></pre></td></tr></table></figure></li>
+<li>指定一个目录，假设主目录<code>/home/xxx/</code>，创建文件夹<code>hexo</code> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/xxx</span><br><span class="line">mkdir hexo</span><br></pre></td></tr></table></figure></li>
 </ul>
+</li>
+<li><p>服务端配置Git裸仓库</p>
+<ul>
+<li>指定一个目录创建git裸仓库，可以选择<code>/var/repo/</code>。执行： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo git init --bare blog.git</span><br></pre></td></tr></table></figure>
 <ol start="3">
-<li>配置git-hooks</li>
-</ol>
-<ul>
+<li>配置git-hooks<ul>
 <li>切换到hooks文件夹<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/repo/blog.git/hooks</span><br></pre></td></tr></table></figure>
 创建文件<code>post-receive</code>，执行<code>vim post-receive</code>，进入vim在insert模式下输入：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/bin/sh</span></span><br><span class="line">git --work-tree=/home/xxx/hexo --git-dir=/var/repo/blog.git checkout -f</span><br></pre></td></tr></table></figure>
 然后<code>:wq</code>保存</li>
 </ul>
 </li>
-</ul>
-</li>
-<li><p>配置Nginx</p>
+<li>配置Nginx</li>
+</ol>
 <ul>
 <li>安装Nginx：  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure></li>
 <li>配置Nginx.conf：<br><code>Nginx.conf</code>位置是<code>/etc/nginx/nginx.conf</code>（也可能是<code>/user/local/nginx/conf</code>，可以<code>whereis nginx</code>命令查看具体位置）。<br>编辑该文件内容，修改<code>user</code>、<code>server</code><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">user root;</span><br><span class="line">....</span><br><span class="line">http &#123;</span><br><span class="line">    server &#123;</span><br><span class="line">        listen  80;      <span class="comment"># 监听端口</span></span><br><span class="line">        server_name     <span class="string">&quot;your url or ip&quot;</span>;   <span class="comment"># 域名或者ip地址</span></span><br><span class="line"></span><br><span class="line">        location / &#123;</span><br><span class="line">            root    /home/xxx/hexo;    <span class="comment"># 服务端网站根目录</span></span><br><span class="line">            index   index.html;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 然后保存。<h4 id="三、本地计算机与服务端建立通道，实现hexo上传。"><a href="#三、本地计算机与服务端建立通道，实现hexo上传。" class="headerlink" title="三、本地计算机与服务端建立通道，实现hexo上传。"></a>三、本地计算机与服务端建立通道，实现hexo上传。</h4><ol>
-<li>服务端创建并配置git用户，专门用于博客上传。</li>
-</ol>
+ 然后保存。<h4 id="三、本地计算机与服务端建立通道，实现hexo上传。"><a href="#三、本地计算机与服务端建立通道，实现hexo上传。" class="headerlink" title="三、本地计算机与服务端建立通道，实现hexo上传。"></a>三、本地计算机与服务端建立通道，实现hexo上传。</h4></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>服务端创建并配置git用户，专门用于博客上传。</p>
 <ul>
 <li>创建git用户，并更改git仓库的所有者<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser git   <span class="comment"># 创建用户</span></span><br><span class="line">sudo chown -R git:git /var/repo/blog.git</span><br></pre></td></tr></table></figure></li>
-<li>禁用 git 用户的 shell 登录权限<br>出于安全考虑，我们要让 git 用户不能通过 shell 登录。可以编辑 <code>/etc/passwd </code>来实现<br>将<code>git:x:1001:1001:,,,:/home/git:/bin/bash</code>改成<code>git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell</code><br>这样 git 用户可以通过 ssh 正常使用 git，但是无法登录 shell。可以在服务端试一下，su git无法切换到git用户，报错<code>fatal: Interactive git shell is not enabled.</code><br>为什么非得搞一个新的git用户，我感觉原因出在这里，如果直接使用服务端原来的用户远程上传博客也行，只是存在安全问题。</li>
-</ul>
-<ol start="2">
+<li>禁用 git 用户的 shell 登录权限<br> 出于安全考虑，我们要让 git 用户不能通过 shell 登录。可以编辑 <code>/etc/passwd </code>来实现<br>   将<code>git:x:1001:1001:,,,:/home/git:/bin/bash</code>改成<code>git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell</code><br>   这样 git 用户可以通过 ssh 正常使用 git，但是无法登录 shell。可以在服务端试一下，su git无法切换到git用户，报错<code>fatal: Interactive git shell is not enabled.</code><br>   为什么非得搞一个新的git用户，我感觉原因出在这里，如果直接使用服务端原来的用户远程上传博客也行，只是存在安全问题。<ol start="2">
 <li>本地计算机与服务端建立ssh通道。</li>
 </ol>
-<ul>
+</li>
 <li>本地计算机执行：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
 一直回车即可。这一步操作会在<code>/home/xxx/.ssh/</code>下生成两个文件<code>id_rsa</code>和<code>id_rsa.pub</code>。</li>
 <li>服务端在<code>/home/git</code>目录下创建文件夹<code>.ssh</code>，并在<code>/home/git/.ssh</code>下创建文件<code>authorized_keys</code>。<br>把<code>id_rsa.pub</code>的内容复制到服务端的<code>authorized_keys</code>中。注意是把<strong>本地计算机</strong>的<code>/home/xxx/.ssh/id_rsa.pub</code>复制到<strong>服务端的</strong><code>/home/git/.sshauthorized_keys</code>。</li>
 </ul>
-<ol start="3">
-<li>本地计算机配置hexo deploy。</li>
-</ol>
+</li>
+<li><p>本地计算机配置hexo deploy。</p>
 <ul>
 <li>编辑<code>/home/xxx/blog/_config.yml</code>，配置deploy：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">    repo: git@<span class="string">&quot;your url or ip&quot;</span>:/var/repo/blog.git</span><br><span class="line">    branch: master</span><br></pre></td></tr></table></figure>
 保存。<h4 id="四、本地计算机渲染博客并部署到服务器。"><a href="#四、本地计算机渲染博客并部署到服务器。" class="headerlink" title="四、本地计算机渲染博客并部署到服务器。"></a>四、本地计算机渲染博客并部署到服务器。</h4></li>
 </ul>
-<ol>
-<li>编写博客</li>
-</ol>
+</li>
+<li><p>编写博客</p>
 <ul>
-<li>方式一：创建博客使用的markdown文件，然后书写内容<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">&quot;xxxx&quot;</span></span><br></pre></td></tr></table></figure>
-创建成功后，该markdown文件在<code>source/_posts</code>目录下。继续编辑<code>xxx.md</code>即可。</li>
+<li>方式一：创建博客使用的markdown文件，然后书写内容 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">&quot;xxxx&quot;</span></span><br></pre></td></tr></table></figure>
+  创建成功后，该markdown文件在<code>source/_posts</code>目录下。继续编辑<code>xxx.md</code>即可。</li>
 <li>方式二：直接把写好了的md文件丢进<code>source/_posts</code>目录下。</li>
 </ul>
-<ol start="2">
-<li>渲染博客：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo gernerate</span><br></pre></td></tr></table></figure>
-或者<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure></li>
-<li>部署博客到服务器<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
-或者<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure></li>
-<li>第二步和第三步可以一起使用<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
-或者<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
-或者<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
-操作完成后，服务端目录<code>/home/deepin/hexo</code>下会有刚刚提交的博客，但<code>/var/repo/blog.git/branches</code>不会有博客文件，因为它是裸仓库。</li>
-</ol>
-<strong>注意：</strong>hexo d可能会报错<code>Error: EACCES: permission denied, unlink ...</code>，说什么权限拒绝。如果使用<code>sudo hexo d</code>，就会报另外一种错误：<code>git@github.com: Permission denied (publickey). fatal: 无法读取远程仓库。</code>。解决办法：一劳永逸，直接<code>chmod -R 777 blog/</code>。参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38781075/article/details/102781226">使用Hexo+Github搭建博客的各种问题</a></li>
-</ul>
+</li>
+<li><p>渲染博客：</p>
+   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo gernerate</span><br></pre></td></tr></table></figure>
+<p>   或者</p>
+   <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g</span><br></pre></td></tr></table></figure></li>
+<li><p>部署博客到服务器</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+<p> 或者</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure></li>
+<li><p>第二步和第三步可以一起使用</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+<p> 或者</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+<p> 或者</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d -g</span><br></pre></td></tr></table></figure>
+<p> 操作完成后，服务端目录<code>/home/deepin/hexo</code>下会有刚刚提交的博客，但<code>/var/repo/blog.git/branches</code>不会有博客文件，因为它是裸仓库。</p>
 </li>
 </ol>
+<p><strong>注意：</strong>hexo d可能会报错<code>Error: EACCES: permission denied, unlink ...</code>，说什么权限拒绝。如果使用<code>sudo hexo d</code>，就会报另外一种错误：<code>git@github.com: Permission denied (publickey). fatal: 无法读取远程仓库。</code>。解决办法：一劳永逸，直接<code>chmod -R 777 blog/</code>。参考博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38781075/article/details/102781226">使用Hexo+Github搭建博客的各种问题</a></p>
 <p>完工。整个流程请照文章开头的架构图理解一下，比较难理解的是第二章节和第三章节。</p>
 <h6 id="其他发现："><a href="#其他发现：" class="headerlink" title="其他发现："></a>其他发现：</h6><p>hexo官网文档的<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/one-command-deployment">一键部署</a>，支持除了Git上传的其他部署方式，包括SFTP、RSync，逻辑应该是直接远程传输到服务端制定文件夹，配置相对简单，直接配置_config.yml的deploy属性即可。</p>
 <p>有时间试一下。</p>
