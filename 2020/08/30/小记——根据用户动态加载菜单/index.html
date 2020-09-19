@@ -39,8 +39,8 @@
 <meta property="article:modified_time" content="2020-08-24T11:56:03.000Z">
 <meta property="article:author" content="Ferrilata">
 <meta property="article:tag" content="Spring Boot">
-<meta property="article:tag" content="Java Web">
 <meta property="article:tag" content="Vue">
+<meta property="article:tag" content="Java Web">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/24073480-d50b586f2a4bf03f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   <!-- Canonical links -->
@@ -600,5 +600,20 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
