@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>后端登录拦截/过滤 | Caracal&#39;s blog</title>
+  <meta name="description" content="记录项目学习过程中的一个知识点——后端登录拦截。并思考用一种方式——Servlet Filter实现该功能。  注：拦截器@Override的prehandle逻辑，在后期学习过程修改为了shiro验证，本文代码不再修改，详情见Vue + Spring Boot 项目实战（十四）：用户认证方案与完善的访问拦截  项目还是那个项目：Vue + Spring Boot 项目实战（一）：项目简介还是第6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后端登录拦截&#x2F;过滤">
+<meta property="og:url" content="119.3.128.89/2020/08/24/%E5%90%8E%E7%AB%AF%E7%99%BB%E5%BD%95%E6%8B%A6%E6%88%AA-%E8%BF%87%E6%BB%A4/index.html">
+<meta property="og:site_name" content="Ferrilata&#39;s blog">
+<meta property="og:description" content="记录项目学习过程中的一个知识点——后端登录拦截。并思考用一种方式——Servlet Filter实现该功能。  注：拦截器@Override的prehandle逻辑，在后期学习过程修改为了shiro验证，本文代码不再修改，详情见Vue + Spring Boot 项目实战（十四）：用户认证方案与完善的访问拦截  项目还是那个项目：Vue + Spring Boot 项目实战（一）：项目简介还是第6">
+<meta property="og:locale">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24073480-39b3eced0c90e622.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24073480-06ba6bc8f33ec496.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24073480-5a3d4d0f193750ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24073480-da76e368dbb0c99e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24073480-086e501edbb77361.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/24073480-a8fcaeec386dd89e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2020-08-24T11:59:40.507Z">
+<meta property="article:modified_time" content="2020-08-24T11:56:05.000Z">
+<meta property="article:author" content="Ferrilata">
+<meta property="article:tag" content="Java Web">
+<meta property="article:tag" content="Spring Boot">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/24073480-39b3eced0c90e622.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  <!-- Canonical links -->
+  <link rel="canonical" href="119.3.128.89/2020/08/24/%E5%90%8E%E7%AB%AF%E7%99%BB%E5%BD%95%E6%8B%A6%E6%88%AA-%E8%BF%87%E6%BB%A4/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body class="main-center theme-green" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://github.com/NigelBoxing" target="_blank">
+          <img class="img-circle img-rotate" src="/images/caracal.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Caracal</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Deepin/">Deepin</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Web/">Java Web</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LeetCode/">LeetCode</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-Shell/">Linux/Shell</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E6%8A%80%E5%B7%A7/">工具技巧</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98%E7%9B%AE/">算法题目</a><span class="category-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Intellij-IDEA/" rel="tag">Intellij-IDEA</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Web/" rel="tag">Java Web</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LeetCode/" rel="tag">LeetCode</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mininet/" rel="tag">Mininet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis-Plus/" rel="tag">Mybatis-Plus</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shiro/" rel="tag">Shiro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VSCode/" rel="tag">VSCode</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">1</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/Deepin/" style="font-size: 13.75px;">Deepin</a> <a href="/tags/Intellij-IDEA/" style="font-size: 13px;">Intellij-IDEA</a> <a href="/tags/Java-Web/" style="font-size: 14px;">Java Web</a> <a href="/tags/LeetCode/" style="font-size: 13.25px;">LeetCode</a> <a href="/tags/Linux/" style="font-size: 13.25px;">Linux</a> <a href="/tags/Mininet/" style="font-size: 13px;">Mininet</a> <a href="/tags/Mybatis-Plus/" style="font-size: 13px;">Mybatis-Plus</a> <a href="/tags/SQL/" style="font-size: 13px;">SQL</a> <a href="/tags/Shell/" style="font-size: 13.25px;">Shell</a> <a href="/tags/Shiro/" style="font-size: 13px;">Shiro</a> <a href="/tags/Spring-Boot/" style="font-size: 13.5px;">Spring Boot</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/VSCode/" style="font-size: 13px;">VSCode</a> <a href="/tags/Vue/" style="font-size: 13.75px;">Vue</a> <a href="/tags/hexo/" style="font-size: 13px;">hexo</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">17</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/LeetCode/">LeetCode</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/09/05/Leetcode-11-%E7%9B%9B%E6%9C%80%E5%A4%9A%E6%B0%B4%E7%9A%84%E5%AE%B9%E5%99%A8/" class="title">Leetcode 11 盛最多水的容器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-09-05T04:00:22.000Z" itemprop="datePublished">2020-09-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Deepin/">Deepin</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/09/05/Deepin%E9%9B%B6%E6%95%A3%E8%AE%B0%E5%BD%95/" class="title">Deepin零散记录</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-09-04T16:09:48.000Z" itemprop="datePublished">2020-09-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Deepin/">Deepin</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/09/05/deepin%E7%BC%96%E8%BE%91%E8%8F%9C%E5%8D%95%E9%A1%B9/" class="title">deepin编辑开始菜单项</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-09-04T16:05:22.011Z" itemprop="datePublished">2020-09-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Deepin/">Deepin</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/09/05/deepin%E5%88%A0%E9%99%A4%E6%89%93%E5%BC%80%E6%96%B9%E5%BC%8F%E7%9A%84%E5%A4%9A%E4%BD%99%E9%A1%B9/" class="title">Deepin删除打开方式的多余项</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-09-04T16:05:22.011Z" itemprop="datePublished">2020-09-05</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Deepin/">Deepin</a>
+              </p>
+              <p class="item-title">
+                <a href="/2020/09/05/deepin%E5%AE%89%E8%A3%85mininet/" class="title">Deepin安装Mininet</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2020-09-04T16:02:21.325Z" itemprop="datePublished">2020-09-05</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-后端登录拦截-过滤" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      后端登录拦截/过滤
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2020/08/24/%E5%90%8E%E7%AB%AF%E7%99%BB%E5%BD%95%E6%8B%A6%E6%88%AA-%E8%BF%87%E6%BB%A4/" class="article-date">
+	  <time datetime="2020-08-24T11:59:40.507Z" itemprop="datePublished">2020-08-24</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Java-Web/">Java Web</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Java-Web/" rel="tag">Java Web</a>, <a class="article-tag-link-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/08/24/%E5%90%8E%E7%AB%AF%E7%99%BB%E5%BD%95%E6%8B%A6%E6%88%AA-%E8%BF%87%E6%BB%A4/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.6k(words)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 6(minutes)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>记录项目学习过程中的一个知识点——后端登录拦截。<br>并思考用一种方式——Servlet Filter实现该功能。</p>
+<blockquote>
+<p>注：拦截器@Override的prehandle逻辑，在后期学习过程修改为了shiro验证，本文代码不再修改，详情见<a target="_blank" rel="noopener" href="https://learner.blog.csdn.net/article/details/102788866">Vue + Spring Boot 项目实战（十四）：用户认证方案与完善的访问拦截</a></p>
+</blockquote>
+<p>项目还是那个项目：<a target="_blank" rel="noopener" href="https://learner.blog.csdn.net/article/details/88925013">Vue + Spring Boot 项目实战（一）：项目简介</a><br>还是第6节<a target="_blank" rel="noopener" href="https://learner.blog.csdn.net/article/details/89422585">Vue + Spring Boot 项目实战（六）：前端路由与登录拦截器</a>。</p>
+<p>文中有讲到一个需求——后端登录拦截，意思就是没有登录的用户，必须要求其登录之后才可以访<a href="localhost:8843/blog/index">localhost:8843/blog/index</a>页面。<br>文中实现的方式使用拦截器，*拦截器是什么?*拦截器是SpringMVC的一种机制，类似于Servlet的过滤器Filter，主要实现对某个处理方法进行拦截，执行某些操作。有个链接可参考： <a target="_blank" rel="noopener" href="https://www.cnblogs.com/junzi2099/p/8260137.html">Spring MVC拦截器（Interceptor ）详解</a></p>
+<ol>
+<li>如何使用拦截器实现登录拦截? （原文：<a target="_blank" rel="noopener" href="https://learner.blog.csdn.net/article/details/89422585">Vue + Spring Boot 项目实战（六）：前端路由与登录拦截器</a>的实现方式）</li>
+</ol>
+<ul>
+<li>首先自定义一个类实现<code>HandlerInterceptor</code>，比如<code>public class  LoginInterceptor implements HandlerInterceptor</code>，然后重写回调函数<code>preHandle</code>。这里的逻辑就是：判断<code>request.getServletPath()</code>是否是否是<code>&quot;/index&quot;</code>，如果是，就判断是否登录（<code>session.getAttribute(&quot;user&quot;)</code> 是否为空），没有登录就重定向到<code>&quot;/login&quot;</code>（<code>response.sendRedirect(request.getContextPath() + &quot;/login&quot;</code>);<br><img src="https://upload-images.jianshu.io/upload_images/24073480-39b3eced0c90e622.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="request_xxPath.jpg"></li>
+<li>然后自定义类实现<code>WebMvcConfigurer</code> ，重写<code>addInterceptors</code>，把上面的<code>LoginInterceptor</code>注册到拦截器中。<br>贴一个我自己写的代码，可以对比着原文代码看看(注意不要忘了注解)：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginInterceptor</span> <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        String servletPath = request.getServletPath();</span><br><span class="line">        <span class="keyword">if</span> (servletPath.startsWith(<span class="string">&quot;/index&quot;</span>)) &#123;</span><br><span class="line">            <span class="keyword">if</span> (session.getAttribute(<span class="string">&quot;user&quot;</span>) == <span class="keyword">null</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Not Login&quot;</span>);</span><br><span class="line">                response.sendRedirect(request.getContextPath() + <span class="string">&quot;/login&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootConfiguration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyWebConfigurer</span> <span class="keyword">implements</span> <span class="title">WebMvcConfigurer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> LoginInterceptor <span class="title">getLoginInterceptor</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> LoginInterceptor();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addInterceptors</span><span class="params">(InterceptorRegistry registry)</span> </span>&#123;</span><br><span class="line">        registry.addInterceptor(getLoginInterceptor()).addPathPatterns(<span class="string">&quot;/**&quot;</span>).excludePathPatterns(<span class="string">&quot;/index.html&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ <em>下面是原博客中的LoginInterceptor的实现：</em><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginInterceptor</span>  <span class="keyword">implements</span> <span class="title">HandlerInterceptor</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">preHandle</span> <span class="params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        HttpSession session = httpServletRequest.getSession();</span><br><span class="line">        String contextPath=session.getServletContext().getContextPath();</span><br><span class="line">        String[] requireAuthPages = <span class="keyword">new</span> String[]&#123;</span><br><span class="line">                <span class="string">&quot;index&quot;</span>,</span><br><span class="line">        &#125;;</span><br><span class="line"></span><br><span class="line">        String uri = httpServletRequest.getRequestURI();</span><br><span class="line"></span><br><span class="line">        uri = StringUtils.remove(uri, contextPath+<span class="string">&quot;/&quot;</span>);</span><br><span class="line">        String page = uri;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(begingWith(page, requireAuthPages))&#123;</span><br><span class="line">            User user = (User) session.getAttribute(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span>(user==<span class="keyword">null</span>) &#123;</span><br><span class="line">                httpServletResponse.sendRedirect(<span class="string">&quot;login&quot;</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">begingWith</span><span class="params">(String page, String[] requiredAuthPages)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">boolean</span> result = <span class="keyword">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (String requiredAuthPage : requiredAuthPages) &#123;</span><br><span class="line">            <span class="keyword">if</span>(StringUtils.startsWith(page, requiredAuthPage)) &#123;</span><br><span class="line">                result = <span class="keyword">true</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol start="2">
+<li>既然一些博客在介绍SpringMVC的拦截器时说类似Servlet的Filter，那能否用Filter实现呢？<br>我做了做实验，应该是可以的。但因为博主还是小白，因此如果写的不对，还请读者指教。<br>逻辑和拦截器的代码差不多，就是对所有url先拦截，在判断ServletPath的前缀是不是<code>&quot;/index&quot;</code>，是的话就判断用户是否登录，没有登录就重定向到<code>&quot;/login&quot;</code>，已经登录就放行。<br>直接上代码吧，同样注意不要忘了注解。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@WebFilter(filterName = &quot;LoginFilter&quot;, urlPatterns = &#123;&quot;/*&quot;&#125;)</span></span><br><span class="line"><span class="meta">@Order(value = 1)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginFilter</span> <span class="keyword">implements</span> <span class="title">Filter</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(FilterConfig filterConfig)</span> <span class="keyword">throws</span> ServletException </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException </span>&#123;</span><br><span class="line">        HttpServletRequest request = (HttpServletRequest) servletRequest;</span><br><span class="line">        HttpServletResponse response = (HttpServletResponse) servletResponse;</span><br><span class="line">        HttpSession session = request.getSession();</span><br><span class="line">        System.out.println(<span class="string">&quot;Servlet Path=&quot;</span> + request.getServletPath());</span><br><span class="line">        <span class="keyword">if</span> (request.getServletPath().startsWith(<span class="string">&quot;/index&quot;</span>)) &#123;</span><br><span class="line">            User user = (User) session.getAttribute(<span class="string">&quot;user&quot;</span>);</span><br><span class="line">            <span class="keyword">if</span> (user == <span class="keyword">null</span>) &#123;</span><br><span class="line">                System.out.println(<span class="string">&quot;Not Login&quot;</span>);</span><br><span class="line">                response.sendRedirect(request.getContextPath() + <span class="string">&quot;/login&quot;</span>);</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="comment">//放行</span></span><br><span class="line">                filterChain.doFilter(request, response);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            filterChain.doFilter(request, response);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>请仔细理解这两种方式的代码。如果您感觉我写的不对，请批评指正。我能写出来也是“麦芒掉进针眼里——凑巧了”。<br>如果您也在学习<a target="_blank" rel="noopener" href="https://learner.blog.csdn.net/article/details/89422585">Vue + Spring Boot 项目实战（六）：前端路由与登录拦截器</a>，并且您实践了我说的这两种方式（前提我写对了，嘿嘿），请您继续往下看。<br>我说一个小细节吧。使用过滤器Filter可以对<code>&quot;/index&quot;</code>和<code>&quot;/index.html&quot;</code>都进行过滤，要求登录以后才能访问，但是使用拦截器的方式并不能对<code>&quot;/index.html&quot;</code>进行拦截，即不要求登录就能访问（注：这个<code>index.html</code>是<code>Vue.js</code>单页面开发，直接访问是空白页面，由于不懂前端，我并不知道是否存在危害，或许可以直接访问并不存在危害，只是我感觉不太好）。<br>因为<code>MyWebConfigurer·中的·addInterceptor()</code>方法有一句<code>excludePathPatterns(&quot;/index.html&quot;)</code>。可是为什么要加这一句呢？原博客也有说明原因，是因为未登录状态下，<code>&quot;/index&quot;</code>会重定向到<code>&quot;/login&quot;</code>界面，然后又因为<code>&quot;/login&quot;</code>使用了<code>ErrorConfig</code>（这个请看原博客，属于项目内容），将<code>HTTP 404</code>重定向到了<code>&quot;/index.html&quot;</code>，<code>&quot;/index.html&quot;</code>的前缀同样是<code>&quot;/index&quot;</code>，未登录情况下再次重定向到<code>&quot;/login&quot;</code>，然后这就造成了死循环，即重定向过多导致页面访问失败了。<br>那为什么Filter不会重定向过多呢？我认为和拦截器、过滤器的机制不同有关，拦截器是属于<code>SpringMVC</code>规范，但过滤器是属于<code>Servlet</code>规范。博客（蛮不错的）《<a target="_blank" rel="noopener" href="https://blog.csdn.net/heweimingming/article/details/79993591">spring boot 过滤器、拦截器的区别与使用</a>》给了几个图，并指出“过滤器和拦截器触发时机不一样，过滤器是在请求进入容器后，但请求进入servlet之前进行预处理的。请求结束返回也是，是在servlet处理完后，返回给前端之前。”<br><img src="https://upload-images.jianshu.io/upload_images/24073480-06ba6bc8f33ec496.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Interceptor_Filter1.png"><br><img src="https://upload-images.jianshu.io/upload_images/24073480-5a3d4d0f193750ce.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Interceptor_Filter2.png"><br><img src="https://upload-images.jianshu.io/upload_images/24073480-da76e368dbb0c99e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Interceptor_Filter3.png"><br>这说明，过滤器Filter是在进入容器之后就起作用了，但是拦截器Interceptor是在进入了<code>LoginController</code>之前才被调用，并且这个过程应该是在<code>ErrorConfig</code>的后面（我感觉<code>ErrorConfig</code>的重定向应该是属于dispatcher）。这还有个利用<code>System.out.println()</code>输出<code>Spring</code>组件加载顺序的图，<br><img src="https://upload-images.jianshu.io/upload_images/24073480-086e501edbb77361.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Error_Interceptor.png"><br>因此，如果<code>MyWebConfigurer</code>中的<code>addIntercepto</code>不写<code>excludePathPatterns(&quot;/index.html&quot;)</code>，就会造成这样的重定向死循环顺序：<code>&quot;/index&quot;(未登录) --&gt; &quot;/login&quot; --&gt; &quot;/index.html&quot; --&gt; &quot;/login&quot; --&gt; &quot;/index.html&quot; --&gt; ...</code>，要把<code>&quot;/index.html&quot;</code>排除在外。<br>截了个图可以看一下：<br><img src="https://upload-images.jianshu.io/upload_images/24073480-a8fcaeec386dd89e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="wrongRedirection.png"><br>当然，加了<code>excludePathPatterns(&quot;/index.html&quot;)</code>，也就如前面所说，意味着<code>&quot;/index.html&quot;</code>不需要登录了，可以直接访问。</li>
+</ol>
+<p>好了，说完了。欢迎批评指正。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="119.3.128.89/2020/08/24/%E5%90%8E%E7%AB%AF%E7%99%BB%E5%BD%95%E6%8B%A6%E6%88%AA-%E8%BF%87%E6%BB%A4/" title="后端登录拦截/过滤" target="_blank" rel="external">119.3.128.89/2020/08/24/%E5%90%8E%E7%AB%AF%E7%99%BB%E5%BD%95%E6%8B%A6%E6%88%AA-%E8%BF%87%E6%BB%A4/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/NigelBoxing" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/caracal.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/NigelBoxing" target="_blank"><span class="text-dark">Caracal</span><small class="ml-1x">Developer</small></a></h3>
+        <div>学无止境</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="uyan_frame"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2020/08/24/%E5%89%8D%E7%AB%AFVue%E6%95%B4%E5%90%88%E5%90%8E%E7%AB%AF%E9%83%A8%E7%BD%B2%E9%A1%B5%E9%9D%A2%E4%B8%80%E7%89%87%E7%A9%BA%E7%99%BD/" title="前端Vue整合后端部署页面一片空白"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2020/08/24/Vuex%E5%AE%9E%E7%8E%B0%E5%89%8D%E7%AB%AF%E6%8B%A6%E6%88%AA%E5%B0%8F%E8%AE%B0/" title="小记——Vuex实现前端拦截"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=[object Object]"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
