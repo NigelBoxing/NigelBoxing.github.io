@@ -26,7 +26,7 @@
 <meta property="og:description" content="题目链接：11. 盛最多水的容器 解答对任意$(i,j)$组合，面积$area&#x3D;min(height[i],height[j])*(j-i)$ 方法一：暴力搜索遍历所有$(i,j)$，代码： 12345678910111213class Solution &amp;#123;    public int maxArea(int[] height) &amp;#123;        int n &#x3D; height.">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-09-05T04:00:22.000Z">
-<meta property="article:modified_time" content="2020-09-05T04:32:21.068Z">
+<meta property="article:modified_time" content="2020-09-19T09:13:07.281Z">
 <meta property="article:author" content="Ferrilata">
 <meta property="article:tag" content="LeetCode">
 <meta name="twitter:card" content="summary">
@@ -39,6 +39,8 @@
   
 <link rel="stylesheet" href="/css/style.css">
 
+  
+    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
   
   
   
@@ -368,7 +370,6 @@
 <h4 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h4><p>对任意$(i,j)$组合，面积$area=min(height[i],height[j])*(j-i)$</p>
 <h5 id="方法一：暴力搜索"><a href="#方法一：暴力搜索" class="headerlink" title="方法一：暴力搜索"></a>方法一：暴力搜索</h5><p>遍历所有$(i,j)$，代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = height.length;</span><br><span class="line">        <span class="keyword">int</span> res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i =<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j =<span class="number">0</span>;j&lt;i;j++)&#123;</span><br><span class="line">                <span class="keyword">int</span> T=Math.min(height[i],height[j])*(i-j);</span><br><span class="line">                res = Math.max(res,T);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>时间复杂度：$O(N^2)$，空间复杂度：$O(1)$</p>
 <h5 id="方法二：双指针"><a href="#方法二：双指针" class="headerlink" title="方法二：双指针"></a>方法二：双指针</h5><ol>
 <li><p>定义左右指针$i$和$j$，分别代表容器的左右边界。</p>
@@ -393,7 +394,6 @@
 </li>
 <li><p>代码：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maxArea</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i=<span class="number">0</span>,j=height.length-<span class="number">1</span>,res=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i&lt;j)&#123;</span><br><span class="line">            <span class="keyword">int</span> area=Math.min(height[i],height[j])*(j-i);</span><br><span class="line">            res=Math.max(res,area);</span><br><span class="line">            <span class="keyword">if</span>(height[i]&lt;height[j]) i++;</span><br><span class="line">            <span class="keyword">else</span> j--;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>时间复杂度：$O(N)$，空间复杂度：$O(1)$</p>
 </li>
 </ol>
