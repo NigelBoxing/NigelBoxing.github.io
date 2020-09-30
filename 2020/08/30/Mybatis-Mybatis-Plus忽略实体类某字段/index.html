@@ -18,15 +18,15 @@
   
   
   <title>Mybatis-Mybatis-Plus忽略实体类某字段 | 狞猫-K</title>
-  <meta name="description" content="情况： 1. 数据库表有字段id、cola、colb，映射到Java实体类会有属性id，colA，colB。但需要再在实体类中新添加一个自定义属性colC。 2. colC并非数据库字段，如果不做处理，mybatis执行sql过程中会报错，&#96;Cause: java.sql.SQLSyntaxErrorException: Unknown column &#39;children&#39; in &amp;">
+  <meta name="description" content="情况： 1. 数据库表有字段id、cola、colb，映射到Java实体类会有属性id，colA，colB。现在我们需要再在实体类中新添加一个自定义属性colC。 2. 但是，colC并非数据库字段，如果不做处理，mybatis执行sql过程中会报错，&#96;Cause: java.sql.SQLSyntaxErrorException: Unknown column &#39;children&amp;#39">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mybatis-Mybatis-Plus忽略实体类某字段">
 <meta property="og:url" content="119.3.128.89/2020/08/30/Mybatis-Mybatis-Plus%E5%BF%BD%E7%95%A5%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%9F%90%E5%AD%97%E6%AE%B5/index.html">
 <meta property="og:site_name" content="Ferrilata&#39;s blog">
-<meta property="og:description" content="情况： 1. 数据库表有字段id、cola、colb，映射到Java实体类会有属性id，colA，colB。但需要再在实体类中新添加一个自定义属性colC。 2. colC并非数据库字段，如果不做处理，mybatis执行sql过程中会报错，&#96;Cause: java.sql.SQLSyntaxErrorException: Unknown column &#39;children&#39; in &amp;">
+<meta property="og:description" content="情况： 1. 数据库表有字段id、cola、colb，映射到Java实体类会有属性id，colA，colB。现在我们需要再在实体类中新添加一个自定义属性colC。 2. 但是，colC并非数据库字段，如果不做处理，mybatis执行sql过程中会报错，&#96;Cause: java.sql.SQLSyntaxErrorException: Unknown column &#39;children&amp;#39">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-08-30T04:00:05.928Z">
-<meta property="article:modified_time" content="2020-08-24T13:14:42.000Z">
+<meta property="article:modified_time" content="2020-09-30T09:19:17.436Z">
 <meta property="article:author" content="Ferrilata">
 <meta property="article:tag" content="Java Web">
 <meta property="article:tag" content="Mybatis-Plus">
@@ -355,7 +355,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/08/30/Mybatis-Mybatis-Plus%E5%BF%BD%E7%95%A5%E5%AE%9E%E4%BD%93%E7%B1%BB%E6%9F%90%E5%AD%97%E6%AE%B5/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 151(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 156(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1(minutes)</span>
@@ -366,8 +366,8 @@
     <div class="article-entry marked-body" itemprop="articleBody">
       
         <p>情况：</p>
-<pre><code>1. 数据库表有字段id、cola、colb，映射到Java实体类会有属性id，colA，colB。但需要再在实体类中新添加一个自定义属性colC。
-2. colC并非数据库字段，如果不做处理，mybatis执行sql过程中会报错，`Cause: java.sql.SQLSyntaxErrorException: Unknown column &#39;children&#39; in &#39;field list&#39;`
+<pre><code>1. 数据库表有字段id、cola、colb，映射到Java实体类会有属性id，colA，colB。现在我们需要再在实体类中新添加一个自定义属性colC。
+2. 但是，colC并非数据库字段，如果不做处理，mybatis执行sql过程中会报错，`Cause: java.sql.SQLSyntaxErrorException: Unknown column &#39;children&#39; in &#39;field list&#39;`
 </code></pre><p>解决：对colC属性使用注解<code>@TableField(exist = false)</code><br>参考博客：<br><a target="_blank" rel="noopener" href="https://blog.csdn.net/fragrant_no1/article/details/83547086">MyBatisPlus 如何忽略数据库和实体类之间的映射字段</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhuzejiang/article/details/101430500">MyBatis实体非字段的属性注解</a>（ps：该博客另外提到：hibernate实现该目的是使用注解@Transient ）</p>
 
       
