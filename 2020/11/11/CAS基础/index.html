@@ -27,7 +27,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://i.loli.net/2020/11/11/PqwfWeH34uAJcja.jpg">
 <meta property="article:published_time" content="2020-11-11T14:34:36.513Z">
-<meta property="article:modified_time" content="2020-11-11T14:37:19.455Z">
+<meta property="article:modified_time" content="2020-11-12T02:51:41.292Z">
 <meta property="article:author" content="Ferrilata">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -356,7 +356,7 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/11/11/CAS%E5%9F%BA%E7%A1%80/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 523(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 575(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 2(minutes)</span>
@@ -378,7 +378,12 @@
 <p>LOCK_IF_MP是说：如果多线程(MP=Multi Processor)，则需要在汇编命令cmpxchg前加上lock</p>
 <p>因此，关键指令就是<strong>lock cmpxchgl</strong></p>
 <p>lock指令可以保证线程执行CAS的过程不受干扰，即加上锁，避免线程写回内存过程位置V处的值发生改变。</p>
-<p>lock的硬件原理是：lock指令在执行后面指令的时候锁定一个北桥信号。</p>
+<p>lock的硬件原理是：lock指令在执行后面指令的时候锁定一个北桥信号，网上也说是锁内存总线或者cache，这部分去网上翻了翻，大致找到了以下几个资料：</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/neo949332116/article/details/100600145">计算机总线结构详解</a></li>
+<li><a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-20357359-id-1963542.html">lock指令</a></li>
+<li><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1634000s">x86系统cache locking的原理</a></li>
+</ol>
 <p>最后感谢马老师精彩公开课程，醍醐灌顶。</p>
 
       
