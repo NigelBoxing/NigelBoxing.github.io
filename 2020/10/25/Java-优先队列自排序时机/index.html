@@ -22,7 +22,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java 优先队列自排序时机">
 <meta property="og:url" content="blog.kcaracal.com/2020/10/25/Java-%E4%BC%98%E5%85%88%E9%98%9F%E5%88%97%E8%87%AA%E6%8E%92%E5%BA%8F%E6%97%B6%E6%9C%BA/">
-<meta property="og:site_name" content="Ferrilata&#39;s blog">
+<meta property="og:site_name" content="Karakarua&#39;s blog">
 <meta property="og:description" content="今天做算法题，使用到了优先队列数据结构——PriorityQueue，但忘记了它发生自动排序的时机，记录一下。 结论：优先队列只有在元素个数发生变化时才发生自排序，如果只是改变已有元素内容，并不能引发自排序。 实例证明： 优先队列元素类，自定义MC类，包含两个属性，编号No和时间aTime。  12345678910class MC &amp;#123;    int No;    int aTime;">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-10-25T13:41:48.000Z">
