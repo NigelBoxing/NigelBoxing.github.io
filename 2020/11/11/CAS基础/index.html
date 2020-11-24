@@ -27,7 +27,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://i.loli.net/2020/11/11/PqwfWeH34uAJcja.jpg">
 <meta property="article:published_time" content="2020-11-11T14:34:36.513Z">
-<meta property="article:modified_time" content="2020-11-24T02:56:15.055Z">
+<meta property="article:modified_time" content="2020-11-24T02:58:28.889Z">
 <meta property="article:author" content="Ferrilata">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -373,7 +373,7 @@
 <h5 id="CAS原理"><a href="#CAS原理" class="headerlink" title="CAS原理"></a>CAS原理</h5><p>CAS是使用JDK类UnSafe实现的，UnSafe类是使用C++代码实现的，往更底层来讲，是通过汇编代码实现的。</p>
 <p>Unsafe类中对应的代码是：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">inline</span> jint <span class="title">Atomic::cmpxchg</span> <span class="params">(jint exchange_value, <span class="keyword">volatile</span> jint* dest, jint compare_value)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mp == os::is_MP();</span><br><span class="line">    __asm__ volatile (LOCK_IF_MP(%4)) &quot;cmpxchgl %1,(%3)&quot;</span><br><span class="line">        : <span class="string">&quot;=a&quot;</span> (exchange_value)</span><br><span class="line">        : <span class="string">&quot;r&quot;</span> (exchange_value), <span class="string">&quot;a&quot;</span> (compare_value), <span class="string">&quot;r&quot;</span> (dest), <span class="string">&quot;r&quot;</span> (mp)</span><br><span class="line">        : <span class="string">&quot;cc&quot;</span>, <span class="string">&quot;memory&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> exchange_value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>关键在于：(LOCK_IF_MP(%4)) “cmpxchg %1,(%3)”。</p>
+<p>关键在于：(LOCK_IF_MP(%4)) “cmpxchgl %1,(%3)”。</p>
 <p>这说明CAS的底层实现还是依靠汇编指令cmpxchg</p>
 <p>LOCK_IF_MP是说：如果多线程(MP=Multi Processor)，则需要在汇编命令cmpxchg前加上lock</p>
 <p>因此，关键指令就是<strong>lock cmpxchg</strong></p>
