@@ -26,7 +26,7 @@
 <meta property="og:description" content="问题起源：循环体内无法实现异步。Python使用异步模块Asyncio实现多线程并发，一般方式是:12345678async def func():    # code...    async def main():    await(func())if __name__ &#x3D;&#x3D;&amp;#x27;__main__&amp;#x27;:    asyncio.run(main())但实验过程中有个需求，是让循环体的">
 <meta property="og:locale">
 <meta property="article:published_time" content="2020-12-18T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-03-11T12:46:20.584Z">
+<meta property="article:modified_time" content="2021-03-13T06:51:56.956Z">
 <meta property="article:author" content="Ferrilata">
 <meta property="article:tag" content="Python">
 <meta property="article:tag" content="Asycnio">
@@ -174,7 +174,7 @@
   <div class="widget">
     <h3 class="widget-title">Categories</h3>
     <div class="widget-body">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code/">Code</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deepin/">Deepin</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Web/">Java Web</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-Shell/">Linux/Shell</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Python/">Python</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E6%8A%80%E5%B7%A7/">工具技巧</a><span class="category-list-count">4</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code/">Code</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deepin/">Deepin</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Web/">Java Web</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux-Shell/">Linux/Shell</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B7%A5%E5%85%B7%E6%8A%80%E5%B7%A7/">工具技巧</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%B9%B6%E5%8F%91/">并发</a><span class="category-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -264,7 +264,7 @@
             
             <div class="item-inner">
               <p class="item-category">
-                <a class="category-link" href="/categories/Python/">Python</a>
+                <a class="category-link" href="/categories/%E5%B9%B6%E5%8F%91/">并发</a>
               </p>
               <p class="item-title">
                 <a href="/2020/12/18/78eee4d0e7ba/" class="title">Python循环体内实现异步并发</a>
@@ -334,7 +334,7 @@
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Python/">Python</a>
+    <a class="article-category-link" href="/categories/%E5%B9%B6%E5%8F%91/">并发</a>
   </span>
 
         
@@ -583,5 +583,20 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
