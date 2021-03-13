@@ -27,7 +27,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://i.loli.net/2020/11/11/498vbCdgyNmqYeI.png">
 <meta property="article:published_time" content="2020-08-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-03-13T12:46:22.440Z">
+<meta property="article:modified_time" content="2021-03-13T13:09:30.242Z">
 <meta property="article:author" content="Ferrilata">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
@@ -392,7 +392,8 @@
 </li>
 <li><p>初始化Hexo博客</p>
 <ul>
-<li>安装Hexo<br>选择目录存放本地hexo博客内容（假设主目录<code>/home/xxx/</code>），运行<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></li>
+<li><p>安装Hexo<br>选择目录存放本地hexo博客内容（假设在主目录<code>/home/$(whoami)/</code>），运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></li>
 <li>初始化hexo：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog  <span class="comment"># blog可以是其他任何你想起的名字</span></span><br></pre></td></tr></table></figure></li>
 <li>安装hexo其他插件：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install   <span class="comment">#这个操作功能是补全依赖环境</span></span><br><span class="line">npm install hexo-deployer-git --save   <span class="comment"># 自动部署到服务器需要的插件</span></span><br><span class="line">npm install hexo-server     <span class="comment"># 本地简单的服务器，可以测试hexo是否安装成功</span></span><br></pre></td></tr></table></figure></li>
 <li>测试hexo是否安装成功。执行如下命令：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g &amp;&amp; hexo server</span><br></pre></td></tr></table></figure>
@@ -400,7 +401,7 @@
 </ul>
 </li>
 <li>配置网站根目录备用<ul>
-<li>指定一个目录，本文指定主目录<code>/home/$(whoami)/</code>，创建文件夹<code>hexo</code> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~         <span class="comment"># 非root用户下，~的路径等于/home/$(whoami)</span></span><br><span class="line">mkdir hexo</span><br></pre></td></tr></table></figure></li>
+<li>指定一个目录，本文指定主目录<code>/home/$(whoami)/</code>，创建文件夹<code>hexo</code> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/$(whoami)         <span class="comment">#/home/$(whoami)就是主目录~</span></span><br><span class="line">mkdir hexo</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 <li><p>服务端配置Git裸仓库<br> 指定一个目录创建git裸仓库，本文选择目录<code>/var/repo/</code>。执行：</p>
@@ -663,5 +664,20 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
