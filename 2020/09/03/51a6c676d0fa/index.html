@@ -17,21 +17,22 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>(Windows-Linux)Spring Boot启动异常：Sprint-Boot-Tomcat--An-incompatible-version-[1-x-x]-o | karakarua&#39;s blog</title>
-  <meta name="description" content="情景：启动spring-boot项目，报错 An incompatible version [1.2.12] of the Apache Tomcat Native library is installed, while Tomcat requires [1.2.14]。原因：spring-boot内置tomcat要求的native库版本和本地native库版本不一致，需要升级。解决办法：  Wi">
+  <title>小记——Vuex实现前端拦截 | karakarua&#39;s blog</title>
+  <meta name="description" content="之前讲过后端拦截的实现，后端拦截与前端拦截的区别：发生拦截的位置不同，一个在后端，一个在前端。后端拦截时请求肯定是已经到达了服务端，后端已经要做处理了。后端拦截的逻辑是对session判断，是否包含用户信息，没有就执行重定向请求，方法是response.sendRedirect(“&#x2F;xxx”)，这个过程一直是后端在操纵，最后返回给浏览器。前端拦截是前端框架分别利用状态管理和路由，判断登录状态和重定">
 <meta property="og:type" content="article">
-<meta property="og:title" content="(Windows-Linux)Spring Boot启动异常：Sprint-Boot-Tomcat--An-incompatible-version-[1-x-x]-o">
-<meta property="og:url" content="http://blog.kcaracal.com/1970/01/01/fd04b222c9db/">
+<meta property="og:title" content="小记——Vuex实现前端拦截">
+<meta property="og:url" content="http://blog.kcaracal.com/2020/09/03/51a6c676d0fa/">
 <meta property="og:site_name" content="Karakarua&#39;s blog">
-<meta property="og:description" content="情景：启动spring-boot项目，报错 An incompatible version [1.2.12] of the Apache Tomcat Native library is installed, while Tomcat requires [1.2.14]。原因：spring-boot内置tomcat要求的native库版本和本地native库版本不一致，需要升级。解决办法：  Wi">
+<meta property="og:description" content="之前讲过后端拦截的实现，后端拦截与前端拦截的区别：发生拦截的位置不同，一个在后端，一个在前端。后端拦截时请求肯定是已经到达了服务端，后端已经要做处理了。后端拦截的逻辑是对session判断，是否包含用户信息，没有就执行重定向请求，方法是response.sendRedirect(“&#x2F;xxx”)，这个过程一直是后端在操纵，最后返回给浏览器。前端拦截是前端框架分别利用状态管理和路由，判断登录状态和重定">
 <meta property="og:locale">
-<meta property="article:published_time" content="1970-01-01T00:00:00.000Z">
-<meta property="article:modified_time" content="2020-09-04T15:34:25.000Z">
+<meta property="article:published_time" content="2020-09-03T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-03-13T08:21:43.356Z">
 <meta property="article:author" content="Ferrilata">
-<meta property="article:tag" content="Spring Boot">
+<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="Java Web">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://blog.kcaracal.com/1970/01/01/fd04b222c9db/index.html">
+  <link rel="canonical" href="http://blog.kcaracal.com/2020/09/03/51a6c676d0fa/index.html">
   
   
     <link rel="icon" href="/favicon.png" type="image/x-icon">
@@ -201,7 +202,7 @@
   <div class="widget">
     <h3 class="widget-title">Archive</h3>
     <div class="widget-body">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/01/">January 1970</a><span class="archive-list-count">19</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/1970/01/">January 1970</a><span class="archive-list-count">17</span></li></ul>
     </div>
   </div>
 
@@ -310,14 +311,14 @@
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-(Windows-Linux)--Sprint-Boot-Tomcat--An-incompatible-version-[1-x-x]-o" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-Vuex实现前端拦截小记" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      (Windows-Linux)Spring Boot启动异常：Sprint-Boot-Tomcat--An-incompatible-version-[1-x-x]-o
+      小记——Vuex实现前端拦截
     </h1>
   
 
@@ -325,8 +326,8 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/1970/01/01/fd04b222c9db/" class="article-date">
-	  <time datetime="1970-01-01T00:00:00.000Z" itemprop="datePublished">1970-01-01</time>
+	<a href="/2020/09/03/51a6c676d0fa/" class="article-date">
+	  <time datetime="2020-09-03T16:00:00.000Z" itemprop="datePublished">2020-09-04</time>
 	</a>
 </span>
         
@@ -338,7 +339,7 @@
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a>
+	<a class="article-tag-link-link" href="/tags/Java-Web/" rel="tag">Java Web</a>, <a class="article-tag-link-link" href="/tags/Vue/" rel="tag">Vue</a>
   </span>
 
 
@@ -351,42 +352,24 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/1970/01/01/fd04b222c9db/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/09/03/51a6c676d0fa/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 388(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 799(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1(minutes)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3(minutes)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p><strong>情景：</strong><br>启动spring-boot项目，报错 An incompatible version [1.2.12] of the Apache Tomcat Native library is installed, while Tomcat requires [1.2.14]。<br><strong>原因：</strong><br>spring-boot内置tomcat要求的native库版本和本地native库版本不一致，需要升级。<br><strong>解决办法：</strong></p>
-<ol>
-<li><em>Windows：</em></li>
-</ol>
-<ul>
-<li>方法一：下载安装对应版本native库，文件一般是tcnative-1.dll，把它安装到C:\Windows\System32目录下覆盖原来的tcnative-1.dll。一般百度这个错误搜到的教程都是针对Windows平台的，比较好处理。这个不再赘述，给个教程链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/lgcxd1234/article/details/89812283">An incompatible version [1.2.12] of the APR based Apache Tomcat Native library is installed, while Tomcat requires version [1.2.14]</a></li>
-<li>方法二：源码编译安装该native库。首先下载所需要的native库源码文件。链接地址为：<a target="_blank" rel="noopener" href="http://archive.apache.org/dist/tomcat/tomcat-connectors/native/1.2.14/source/。">http://archive.apache.org/dist/tomcat/tomcat-connectors/native/1.2.14/source/。</a><br>下载/tomcat-native-1.2.14-win32-src.zip。<br>然后解压后按照官方给定的教程编译安装。官方教程地址：<a target="_blank" rel="noopener" href="http://archive.apache.org/dist/tomcat/tomcat-connectors/native/1.2.14/source/">http://archive.apache.org/dist/tomcat/tomcat-connectors/native/1.2.14/source/</a></li>
-</ul>
-<ol>
-<li><em>Linux</em>:</li>
-</ol>
-<ul>
-<li>暂时没有找到Linux下比较方便安装native库的方式，因此只能以源码方式编译安装该native库，不过步骤也不麻烦。</li>
-<li>参考教程：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/jason1990/p/10250468.html">Linux下Springboot解决<code>APR based Apache Tomcat Native library</code>提示</a> ；<a target="_blank" rel="noopener" href="http://archive.apache.org/dist/tomcat/tomcat-connectors/native/1.2.14/source/">官方教程</a></li>
-<li>首先下载对应版本native库源码，下载source/tomcat-native-1.2.14-src.tar.gz，解压。</li>
-<li>执行如下命令：<blockquote>
-<p>sudo apt-get autoremove libtcnative-1 #删除安装的库<br>cd native<br>./configure —with-apr=/usr/bin/apr-1-config<br>sudo make<br>sudo make install</p>
+        <p>之前讲过后端拦截的实现，后端拦截与前端拦截的区别：发生拦截的位置不同，一个在后端，一个在前端。<br>后端拦截时请求肯定是已经到达了服务端，后端已经要做处理了。后端拦截的逻辑是对session判断，是否包含用户信息，没有就执行重定向请求，方法是response.sendRedirect(“/xxx”)，这个过程一直是后端在操纵，最后返回给浏览器。<br>前端拦截是前端框架分别利用状态管理和路由，判断登录状态和重定向请求，比如Vue.js利用Vuex保存一个浏览器用户状态，当用户状态是未登录时，使用vue-router重定向到<code>&quot;/login&quot;</code>。这个过程是发生在前端的，只有必须要请求后端时才向服务端发送请求(<code>&quot;/login&quot;</code>)。<br>前端拦截的实现代码来自博客<a target="_blank" rel="noopener" href="https://learner.blog.csdn.net/article/details/89422585">Vue + Spring Boot 项目实战（六）：前端路由与登录拦截器</a></p>
+<blockquote>
+<p>仅仅靠下面的前端拦截实现是不可行的，存在绕过风险，这里暂不讨论。详细请参考博客<a target="_blank" rel="noopener" href="https://learner.blog.csdn.net/article/details/102788866">Vue + Spring Boot 项目实战（十四）：用户认证方案与完善的访问拦截</a>的第二部分：完善的访问拦截。</p>
 </blockquote>
-</li>
-</ul>
-<ol>
-<li>重新运行spring-boot项目一般就不再报错误了。<br><strong>完毕。</strong></li>
-</ol>
+<p>引入Vuex：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line"></span><br><span class="line">Vue.use(Vuex)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    user: &#123;</span><br><span class="line">      username: <span class="built_in">window</span>.localStorage.getItem(<span class="string">&#x27;user&#x27;</span> || <span class="string">&#x27;[]&#x27;</span>) == <span class="literal">null</span> ? <span class="string">&#x27;&#x27;</span> : <span class="built_in">JSON</span>.parse(<span class="built_in">window</span>.localStorage.getItem(<span class="string">&#x27;user&#x27;</span> || <span class="string">&#x27;[]&#x27;</span>)).username</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    login (state, user) &#123;</span><br><span class="line">      state.user = user</span><br><span class="line">      <span class="built_in">window</span>.localStorage.setItem(<span class="string">&#x27;user&#x27;</span>, <span class="built_in">JSON</span>.stringify(user))</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><br>配置vue-router，修改router/index.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> AppIndex <span class="keyword">from</span> <span class="string">&#x27;@/components/home/AppIndex&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Login <span class="keyword">from</span> <span class="string">&#x27;@/components/Login&#x27;</span></span><br><span class="line"></span><br><span class="line">Vue.use(Router)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;</span><br><span class="line">  mode: <span class="string">&#x27;history&#x27;</span>,</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">&#x27;/login&#x27;</span>,</span><br><span class="line">      name: <span class="string">&#x27;Login&#x27;</span>,</span><br><span class="line">      component: Login</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">&#x27;/index&#x27;</span>,</span><br><span class="line">      name: <span class="string">&#x27;AppIndex&#x27;</span>,</span><br><span class="line">      component: AppIndex,</span><br><span class="line">      meta: &#123;</span><br><span class="line">        requireAuth: <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><br>配置main.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span></span><br><span class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">&#x27;./App&#x27;</span></span><br><span class="line"><span class="keyword">import</span> router <span class="keyword">from</span> <span class="string">&#x27;./router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">&#x27;./store&#x27;</span></span><br><span class="line"><span class="keyword">import</span> ElementUI <span class="keyword">from</span> <span class="string">&#x27;element-ui&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;element-ui/lib/theme-chalk/index.css&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> axios = <span class="built_in">require</span>(<span class="string">&#x27;axios&#x27;</span>)</span><br><span class="line">axios.defaults.baseURL = <span class="string">&#x27;http://localhost:8443/api&#x27;</span></span><br><span class="line">Vue.prototype.$axios = axios</span><br><span class="line">Vue.config.productionTip = <span class="literal">false</span></span><br><span class="line"></span><br><span class="line">Vue.use(ElementUI)</span><br><span class="line"></span><br><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (to.meta.requireAuth) &#123;</span><br><span class="line">      <span class="keyword">if</span> (store.state.user.username) &#123;</span><br><span class="line">        next()</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        next(&#123;</span><br><span class="line">          path: <span class="string">&#x27;login&#x27;</span>,</span><br><span class="line">          query: &#123;<span class="attr">redirect</span>: to.fullPath&#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      next()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">/* eslint-disable no-new */</span></span><br><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">&#x27;#app&#x27;</span>,</span><br><span class="line">  render: <span class="function"><span class="params">h</span> =&gt;</span> h(App),</span><br><span class="line">  router,</span><br><span class="line">  store,</span><br><span class="line">  components: &#123; App &#125;,</span><br><span class="line">  template: <span class="string">&#x27;&lt;App/&gt;&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><br>配置Login.vue（已删除UI部分，只保留了js脚本）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  name: <span class="string">&#x27;Login&#x27;</span>,</span><br><span class="line">  data () &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      loginForm: &#123;</span><br><span class="line">        username: <span class="string">&#x27;admin&#x27;</span>,</span><br><span class="line">        password: <span class="string">&#x27;123&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      responseResult: []</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    login () &#123;</span><br><span class="line">      <span class="keyword">var</span> _this = <span class="built_in">this</span></span><br><span class="line">      <span class="built_in">console</span>.log(<span class="built_in">this</span>.$store.state)</span><br><span class="line">      <span class="built_in">this</span>.$axios</span><br><span class="line">        .post(<span class="string">&#x27;/login&#x27;</span>, &#123;</span><br><span class="line">          username: <span class="built_in">this</span>.loginForm.username,</span><br><span class="line">          password: <span class="built_in">this</span>.loginForm.password</span><br><span class="line">        &#125;)</span><br><span class="line">        .then(<span class="function"><span class="params">successResponse</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">if</span> (successResponse.data.code === <span class="number">200</span>) &#123;</span><br><span class="line">            <span class="comment">// var data = this.loginForm</span></span><br><span class="line">            _this.$store.commit(<span class="string">&#x27;login&#x27;</span>, _this.loginForm)</span><br><span class="line">            <span class="keyword">var</span> path = <span class="built_in">this</span>.$route.query.redirect</span><br><span class="line">            <span class="built_in">this</span>.$router.replace(&#123;<span class="attr">path</span>: path === <span class="string">&#x27;/&#x27;</span> || path === <span class="literal">undefined</span> ? <span class="string">&#x27;/index&#x27;</span> : path&#125;)</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(<span class="function"><span class="params">failResponse</span> =&gt;</span> &#123;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>后端拦截可参考本人另外的博客：<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/93ce668e9b09">后端登录拦截/过滤</a><br>这两篇博客均是学习<a target="_blank" rel="noopener" href="https://learner.blog.csdn.net/article/details/89422585">Vue + Spring Boot 项目实战（六）：前端路由与登录拦截器</a>的解决心得。</p>
 
       
     </div>
@@ -396,7 +379,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://blog.kcaracal.com/1970/01/01/fd04b222c9db/" title="(Windows-Linux)Spring Boot启动异常：Sprint-Boot-Tomcat--An-incompatible-version-[1-x-x]-o" target="_blank" rel="external">http://blog.kcaracal.com/1970/01/01/fd04b222c9db/</a>
+      <a href="http://blog.kcaracal.com/2020/09/03/51a6c676d0fa/" title="小记——Vuex实现前端拦截" target="_blank" rel="external">http://blog.kcaracal.com/2020/09/03/51a6c676d0fa/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -443,12 +426,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/1970/01/01/f516cd5057f5/" title="多线程基础——CAS"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2020/09/03/6bc02d38245f/" title="(Windows-Linux)Spring Boot启动异常：Sprint-Boot-Tomcat--An-incompatible-version-[1-x-x]-o"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/1970/01/01/f3baf0d72b9f/" title="Intellij-IDEA利用spring-initializr添加maven依赖包"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2020/08/19/5efb209b3054/" title="服务器搭建Hexo"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
@@ -587,20 +570,5 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
