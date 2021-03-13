@@ -27,7 +27,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://i.loli.net/2020/11/11/498vbCdgyNmqYeI.png">
 <meta property="article:published_time" content="2020-08-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-03-13T13:10:29.737Z">
+<meta property="article:modified_time" content="2021-03-13T13:39:48.956Z">
 <meta property="article:author" content="Ferrilata">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
@@ -431,7 +431,7 @@
 <li>本地计算机与服务端建立ssh通道。<ul>
 <li>本地计算机在<code>/home/$(whoami)/.ssh</code>执行如下命令（若/home/$(whoami)下没有.ssh目录，则创建.ssh目录）。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
 一直回车即可。这一步操作会在<code>/home/$(whoami)/.ssh/</code>下生成两个文件<code>id_rsa</code>和<code>id_rsa.pub</code>。</li>
-<li>服务端在<code>/home/git</code>目录下创建文件夹<code>.ssh</code>，并在<code>/home/git/.ssh</code>下创建文件<code>authorized_keys</code>。<br>把<code>id_rsa.pub</code>的内容复制到服务端的<code>authorized_keys</code>中。注意是把<strong>本地计算机</strong>的<code>/home/$(whoami)/.ssh/id_rsa.pub</code>复制到<strong>服务端的</strong><code>/home/git/.sshauthorized_keys</code>。</li>
+<li>服务端在<code>/home/git</code>目录下创建文件夹<code>.ssh</code>，并在<code>/home/git/.ssh</code>下创建文件<code>authorized_keys</code>。<br>把<code>id_rsa.pub</code>的内容复制到服务端的<code>authorized_keys</code>中。注意是把<strong>本地计算机</strong>的<code>/home/$(whoami)/.ssh/id_rsa.pub</code>复制到<strong>服务端的</strong><code>/home/git/.ssh/authorized_keys</code>。</li>
 </ul>
 </li>
 <li><p>本地计算机配置hexo deploy。</p>
@@ -664,20 +664,5 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
