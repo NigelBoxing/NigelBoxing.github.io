@@ -27,7 +27,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://i.loli.net/2020/11/11/498vbCdgyNmqYeI.png">
 <meta property="article:published_time" content="2020-08-19T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-03-13T12:13:13.720Z">
+<meta property="article:modified_time" content="2021-03-13T12:46:22.440Z">
 <meta property="article:author" content="Ferrilata">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
@@ -356,10 +356,10 @@
         <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/08/19/5efb209b3054/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.4k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.6k(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 5(minutes)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 6(minutes)</span>
 	
 
       </div>
@@ -370,14 +370,28 @@
 <h3 id="步骤大纲："><a href="#步骤大纲：" class="headerlink" title="步骤大纲："></a>步骤大纲：</h3><p>一、 本地计算机配置Hexo程序<br>二、服务端配置网站根目录、Git裸仓库、Git-hooks、Nginx。<br>三、 本地计算机与服务端建立通道，实现hexo上传。<br>四、本地计算机渲染博客并部署到服务器。</p>
 <h4 id="一、本地计算机配置Hexo程序"><a href="#一、本地计算机配置Hexo程序" class="headerlink" title="一、本地计算机配置Hexo程序"></a>一、本地计算机配置Hexo程序</h4><p><strong>Note: 本地计算机为Deepin系统，理论上适用Ubuntu、Debian</strong></p>
 <ol>
-<li><p>hexo需要node.js的支持，所以第一步是安装nodejs</p>
+<li><p>安装及配置git（使用git形式向服务器部署博客时需要安装git）</p>
 <ul>
-<li><p>打开终端窗口，根据系统输入以下命令之一：<br>其他nodejs版本请参考<a target="_blank" rel="noopener" href="https://github.com/nodesource/distributions">Node.js Binary Distributions</a><br>npm会随nodejs一起安装成功。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Using Ubuntu</span></span><br><span class="line">curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br><span class="line"></span><br><span class="line"><span class="comment"># Using Debian, as root</span></span><br><span class="line">curl -sL https://deb.nodesource.com/setup_lts.x | bash -</span><br><span class="line">apt-get install -y nodejs</span><br></pre></td></tr></table></figure></li>
-<li>验证是否安装成功：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># node -v返回 v12.18.3</span></span><br><span class="line">node -v</span><br><span class="line"><span class="comment"># npm -v返回 6.14.6</span></span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure></li>
+<li><p>确保本地计算机中含有git，否则安装git，Ubuntu下安装git命令是</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install -y git   <span class="comment"># -y的含义是确定安装git，如果没有-y，系统会提问你是否确认安装git，输入y即可</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置本机git属性</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;your name&quot;</span>  <span class="comment"># 引号内填写用户名</span></span><br><span class="line">git config --global user.email <span class="string">&quot;your email&quot;</span>  <span class="comment"># 引号内填写邮箱</span></span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
-<li>初始化Hexo博客<ul>
+<li><p>hexo需要node.js的支持，所以需要安装nodejs</p>
+<ul>
+<li><p>打开终端窗口，根据系统输入以下命令之一：<br>其他nodejs版本请参考<a target="_blank" rel="noopener" href="https://github.com/nodesource/distributions">Node.js Binary Distributions</a><br>npm会随nodejs一起安装成功。</p>
+  <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Using Ubuntu</span></span><br><span class="line">curl -sL https://deb.nodesource.com/setup_lts.x | sudo -E bash -</span><br><span class="line">sudo apt-get install -y nodejs</span><br><span class="line"></span><br><span class="line"><span class="comment"># Using Debian, as root</span></span><br><span class="line">curl -sL https://deb.nodesource.com/setup_lts.x | bash -</span><br><span class="line">apt-get install -y nodejs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证是否安装成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># node -v返回 v12.18.3</span></span><br><span class="line">node -v</span><br><span class="line"><span class="comment"># npm -v返回 6.14.6</span></span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>初始化Hexo博客</p>
+<ul>
 <li>安装Hexo<br>选择目录存放本地hexo博客内容（假设主目录<code>/home/xxx/</code>），运行<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo-cli</span><br></pre></td></tr></table></figure></li>
 <li>初始化hexo：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init blog  <span class="comment"># blog可以是其他任何你想起的名字</span></span><br></pre></td></tr></table></figure></li>
 <li>安装hexo其他插件：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> blog</span><br><span class="line">npm install   <span class="comment">#这个操作功能是补全依赖环境</span></span><br><span class="line">npm install hexo-deployer-git --save   <span class="comment"># 自动部署到服务器需要的插件</span></span><br><span class="line">npm install hexo-server     <span class="comment"># 本地简单的服务器，可以测试hexo是否安装成功</span></span><br></pre></td></tr></table></figure></li>
@@ -386,13 +400,14 @@
 </ul>
 </li>
 <li>配置网站根目录备用<ul>
-<li>指定一个目录，假设主目录<code>/home/xxx/</code>，创建文件夹<code>hexo</code> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /home/xxx</span><br><span class="line">mkdir hexo</span><br></pre></td></tr></table></figure></li>
+<li>指定一个目录，本文指定主目录<code>/home/$(whoami)/</code>，创建文件夹<code>hexo</code> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~         <span class="comment"># 非root用户下，~的路径等于/home/$(whoami)</span></span><br><span class="line">mkdir hexo</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li>服务端配置Git裸仓库<br> 指定一个目录创建git裸仓库，可以选择<code>/var/repo/</code>。执行： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo git init --bare blog.git</span><br></pre></td></tr></table></figure></li>
+<li><p>服务端配置Git裸仓库<br> 指定一个目录创建git裸仓库，本文选择目录<code>/var/repo/</code>。执行：</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo git init --bare blog.git</span><br></pre></td></tr></table></figure></li>
 <li>配置git-hooks<ul>
 <li>切换到hooks文件夹<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /var/repo/blog.git/hooks</span><br></pre></td></tr></table></figure></li>
-<li>创建文件<code>post-receive</code>，执行<code>vim post-receive</code>，进入vim在insert模式下输入：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/bin/sh</span></span><br><span class="line">git --work-tree=/home/xxx/hexo --git-dir=/var/repo/blog.git checkout -f</span><br></pre></td></tr></table></figure></li>
+<li>创建文件<code>post-receive</code>，执行<code>vim post-receive</code>，进入vim在insert模式下输入以下命令，其中$(whoami)就是用户名。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># !/bin/sh</span></span><br><span class="line">git --work-tree=/home/$(whoami)/hexo --git-dir=/var/repo/blog.git checkout -f</span><br></pre></td></tr></table></figure></li>
 <li>然后<code>:wq</code>保存</li>
 </ul>
 </li>
@@ -402,22 +417,35 @@
  然后保存。<h4 id="三、本地计算机与服务端建立通道，实现hexo上传。"><a href="#三、本地计算机与服务端建立通道，实现hexo上传。" class="headerlink" title="三、本地计算机与服务端建立通道，实现hexo上传。"></a>三、本地计算机与服务端建立通道，实现hexo上传。</h4></li>
 </ul>
 </li>
-<li>服务端创建并配置git用户，专门用于博客上传。<ul>
-<li>创建git用户，并更改git仓库的所有者<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser git   <span class="comment"># 创建用户</span></span><br><span class="line">sudo chown -R git:git /var/repo/blog.git</span><br></pre></td></tr></table></figure></li>
-<li>禁用 git 用户的 shell 登录权限<br> 出于安全考虑，我们要让 git 用户不能通过 shell 登录。可以编辑 <code>/etc/passwd</code>来实现<br>   将<code>git:x:1001:1001:,,,:/home/git:/bin/bash</code>改成<code>git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell</code><br>   这样 git 用户可以通过 ssh 正常使用 git，但是无法登录 shell。可以在服务端试一下，su git无法切换到git用户，报错<code>fatal: Interactive git shell is not enabled.</code><br>   为什么非得搞一个新的git用户，我感觉原因出在这里，如果直接使用服务端原来的用户远程上传博客也行，只是存在安全问题。</li>
+<li><p>服务端创建并配置git用户，专门用于博客上传。</p>
+<ul>
+<li><p>创建git用户，并更改git仓库的所有者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo adduser git   <span class="comment"># 创建用户</span></span><br><span class="line">sudo chown -R git:git /var/repo/blog.git  <span class="comment"># 指定blog.git的所有者为git</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>禁用 git 用户的 shell 登录权限<br> 出于安全考虑，我们要让 git 用户不能通过 shell 登录。可以编辑 <code>/etc/passwd</code>来实现<br>   将<code>git:x:1001:1001:,,,:/home/git:/bin/bash</code>改成<code>git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell</code><br>   这样 git 用户可以通过 ssh 正常使用 git，但是无法登录 shell。可以在服务端试一下，su git无法切换到git用户，报错<code>fatal: Interactive git shell is not enabled.</code></p>
+<p> 新建git用户的原因出在这里，要使用一个不可以ssh远程登录的用户，而服务器主用户不能完成这样的需求。</p>
+</li>
 </ul>
 </li>
 <li>本地计算机与服务端建立ssh通道。<ul>
-<li>本地计算机执行：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
-一直回车即可。这一步操作会在<code>/home/xxx/.ssh/</code>下生成两个文件<code>id_rsa</code>和<code>id_rsa.pub</code>。</li>
-<li>服务端在<code>/home/git</code>目录下创建文件夹<code>.ssh</code>，并在<code>/home/git/.ssh</code>下创建文件<code>authorized_keys</code>。<br>把<code>id_rsa.pub</code>的内容复制到服务端的<code>authorized_keys</code>中。注意是把<strong>本地计算机</strong>的<code>/home/xxx/.ssh/id_rsa.pub</code>复制到<strong>服务端的</strong><code>/home/git/.sshauthorized_keys</code>。</li>
+<li>本地计算机在<code>/home/$(whoami)/.ssh</code>执行如下命令（若/home/$(whoami)下没有.ssh目录，则创建.ssh目录）。<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen</span><br></pre></td></tr></table></figure>
+一直回车即可。这一步操作会在<code>/home/$(whoami)/.ssh/</code>下生成两个文件<code>id_rsa</code>和<code>id_rsa.pub</code>。</li>
+<li>服务端在<code>/home/git</code>目录下创建文件夹<code>.ssh</code>，并在<code>/home/git/.ssh</code>下创建文件<code>authorized_keys</code>。<br>把<code>id_rsa.pub</code>的内容复制到服务端的<code>authorized_keys</code>中。注意是把<strong>本地计算机</strong>的<code>/home/$(whoami)/.ssh/id_rsa.pub</code>复制到<strong>服务端的</strong><code>/home/git/.sshauthorized_keys</code>。</li>
 </ul>
 </li>
-<li>本地计算机配置hexo deploy。<ul>
-<li>编辑<code>/home/xxx/blog/_config.yml</code>，配置deploy：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">    repo: git@<span class="string">&quot;your url or ip&quot;</span>:/var/repo/blog.git</span><br><span class="line">    branch: master</span><br></pre></td></tr></table></figure>
-保存。<h4 id="四、本地计算机渲染博客并部署到服务器。"><a href="#四、本地计算机渲染博客并部署到服务器。" class="headerlink" title="四、本地计算机渲染博客并部署到服务器。"></a>四、本地计算机渲染博客并部署到服务器。</h4></li>
+<li><p>本地计算机配置hexo deploy。</p>
+<ul>
+<li><p>编辑<code>/home/xxx/blog/_config.yml</code>，配置deploy：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: git@<span class="string">&quot;your url or ip&quot;</span>:/var/repo/blog.git</span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure>
+<p>保存。</p>
+</li>
+<li><p>假如服务器端ssh服务的端口非默认端口22号，则本地计算机<code>_config.yml</code>按如下配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">   <span class="built_in">type</span>: git</span><br><span class="line">   repo: ssh://git@<span class="string">&quot;your url or ip&quot;</span>:<span class="string">&quot;ssh port&quot;</span>/var/repo/blog.git</span><br><span class="line">   branch: master</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 </li>
+</ol>
+<h4 id="四、本地计算机渲染博客并部署到服务器。"><a href="#四、本地计算机渲染博客并部署到服务器。" class="headerlink" title="四、本地计算机渲染博客并部署到服务器。"></a>四、本地计算机渲染博客并部署到服务器。</h4><ol>
 <li>编写博客<ul>
 <li>方式一：创建博客使用的markdown文件，然后书写内容 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new <span class="string">&quot;xxxx&quot;</span></span><br></pre></td></tr></table></figure>
   创建成功后，该markdown文件在<code>source/_posts</code>目录下。继续编辑<code>xxx.md</code>即可。</li>
@@ -435,7 +463,6 @@
 </ol>
 <p>完工。整个流程请照文章开头的架构图理解一下，比较难理解的是第二章节和第三章节。</p>
 <h6 id="其他发现："><a href="#其他发现：" class="headerlink" title="其他发现："></a>其他发现：</h6><p>hexo官网文档的<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/one-command-deployment">一键部署</a>，支持除了Git上传的其他部署方式，包括SFTP、RSync，逻辑应该是直接远程传输到服务端制定文件夹，配置相对简单，直接配置_config.yml的deploy属性即可。</p>
-<p>有时间试一下。</p>
 
       
     </div>
@@ -636,20 +663,5 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 </body>
 </html>
