@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>docker安装HedgeDoc/CodiMD/HackMD | karakarua&#39;s blog</title>
+  <meta name="description" content="HedgeDoc介绍HedgeDoc是一款在线Markdown软件，它的强大之处在于可以协作编写文档。 HedgeDoc的前身是codiMD，即hackMD的社区版分支（hackMD CE），它的历史：HedgeDoc History HedgeDoc的官网主页：HedgeDoc 关于HedgeDoc的前身的介绍：CodiMd 安装教程官方教程：123git clone https:&#x2F;&#x2F;githu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="docker安装HedgeDoc&#x2F;CodiMD&#x2F;HackMD">
+<meta property="og:url" content="http://blog.karakarua.com/2021/04/01/da28ce1d401d/">
+<meta property="og:site_name" content="Karakarua&#39;s blog">
+<meta property="og:description" content="HedgeDoc介绍HedgeDoc是一款在线Markdown软件，它的强大之处在于可以协作编写文档。 HedgeDoc的前身是codiMD，即hackMD的社区版分支（hackMD CE），它的历史：HedgeDoc History HedgeDoc的官网主页：HedgeDoc 关于HedgeDoc的前身的介绍：CodiMd 安装教程官方教程：123git clone https:&#x2F;&#x2F;githu">
+<meta property="og:locale">
+<meta property="og:image" content="https://i.loli.net/2021/04/01/yP4B9EgwfVXFrMT.png">
+<meta property="article:published_time" content="2021-03-31T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-01T08:28:47.356Z">
+<meta property="article:author" content="Ferrilata">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="HedgeDoc">
+<meta property="article:tag" content="CodiMD">
+<meta property="article:tag" content="HackMD">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/04/01/yP4B9EgwfVXFrMT.png">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://blog.karakarua.com/2021/04/01/da28ce1d401d/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body class="main-center theme-green" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="" target="_blank">
+          <img class="img-circle img-rotate" src="/images/caracal.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Karakarua</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code/">Code</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Concurrency/">Concurrency</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deepin/">Deepin</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HedgeDoc/">HedgeDoc</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Web/">Java Web</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/" rel="tag">Code</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodiMD/" rel="tag">CodiMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrency/" rel="tag">Concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HackMD/" rel="tag">HackMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HedgeDoc/" rel="tag">HedgeDoc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Web/" rel="tag">Java Web</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTeX/" rel="tag">LaTeX</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mininet/" rel="tag">Mininet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis-Plus/" rel="tag">Mybatis-Plus</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regex/" rel="tag">Regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shiro/" rel="tag">Shiro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/CentOS/" style="font-size: 13px;">CentOS</a> <a href="/tags/Code/" style="font-size: 13.8px;">Code</a> <a href="/tags/CodiMD/" style="font-size: 13px;">CodiMD</a> <a href="/tags/Concurrency/" style="font-size: 13px;">Concurrency</a> <a href="/tags/Deepin/" style="font-size: 13.6px;">Deepin</a> <a href="/tags/Docker/" style="font-size: 13.4px;">Docker</a> <a href="/tags/HackMD/" style="font-size: 13px;">HackMD</a> <a href="/tags/HedgeDoc/" style="font-size: 13px;">HedgeDoc</a> <a href="/tags/Java/" style="font-size: 13.2px;">Java</a> <a href="/tags/Java-Web/" style="font-size: 14px;">Java Web</a> <a href="/tags/LaTeX/" style="font-size: 13px;">LaTeX</a> <a href="/tags/Linux/" style="font-size: 13.4px;">Linux</a> <a href="/tags/Mininet/" style="font-size: 13px;">Mininet</a> <a href="/tags/Mybatis-Plus/" style="font-size: 13px;">Mybatis-Plus</a> <a href="/tags/Python/" style="font-size: 13.2px;">Python</a> <a href="/tags/Regex/" style="font-size: 13px;">Regex</a> <a href="/tags/SQL/" style="font-size: 13.2px;">SQL</a> <a href="/tags/Shell/" style="font-size: 13px;">Shell</a> <a href="/tags/Shiro/" style="font-size: 13px;">Shiro</a> <a href="/tags/Spring-Boot/" style="font-size: 13.6px;">Spring Boot</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/Vue/" style="font-size: 13.6px;">Vue</a> <a href="/tags/hexo/" style="font-size: 13.2px;">hexo</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/01/9a4cd3052e37/" class="title">Centos开启防火墙超时失败</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-03-31T16:00:00.000Z" itemprop="datePublished">2021-04-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/HedgeDoc/">HedgeDoc</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/01/da28ce1d401d/" class="title">docker安装HedgeDoc/CodiMD/HackMD</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-03-31T16:00:00.000Z" itemprop="datePublished">2021-04-01</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/SQL/">SQL</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/03/30/505a385dca9d/" class="title">转载：MySQL将查询结果存入新表</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-03-30T09:28:16.000Z" itemprop="datePublished">2021-03-30</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Misc/">Misc</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/03/22/a7d4b89ae5e4/" class="title">查询LaTeX英文论文中标点后无空格的句子</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-03-21T16:00:00.000Z" itemprop="datePublished">2021-03-22</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Code/">Code</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/03/16/fb2f8daaafda/" class="title">转载-数据结构与算法知识点思维导图</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-03-15T16:00:00.000Z" itemprop="datePublished">2021-03-16</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-5"><a class="toc-link" href="#HedgeDoc%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.</span> <span class="toc-text">HedgeDoc介绍</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B"><span class="toc-number"></span> <span class="toc-text">安装教程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E6%95%99%E7%A8%8B%EF%BC%9A"><span class="toc-number">1.</span> <span class="toc-text">官方教程：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89HedgeDoc"><span class="toc-number">2.</span> <span class="toc-text">自定义HedgeDoc</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#docker-compose-yml"><span class="toc-number">3.</span> <span class="toc-text">docker-compose.yml:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#nginx-conf%E4%BF%AE%E6%94%B9%E7%9A%84%E5%86%85%E5%AE%B9"><span class="toc-number">4.</span> <span class="toc-text">nginx.conf修改的内容</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9C%A8%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%98%B2%E7%81%AB%E5%A2%99%E4%B8%AD%E5%BC%80%E5%90%AFhttp%E6%9C%8D%E5%8A%A1%E5%92%8C88%E7%AB%AF%E5%8F%A3"><span class="toc-number">5.</span> <span class="toc-text">在服务端防火墙中开启http服务和88端口</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#centos%E4%B8%BB%E6%9C%BA%E5%BC%80%E5%90%AFhttp%E6%9C%8D%E5%8A%A1%E5%92%8C88%E7%AB%AF%E5%8F%A3%EF%BC%9A"><span class="toc-number">5.1.</span> <span class="toc-text">centos主机开启http服务和88端口：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#Ubuntu%E5%BC%80%E5%90%AF%E7%AB%AF%E5%8F%A3%EF%BC%88%E9%BB%98%E8%AE%A4http%E7%AD%89%E6%9C%8D%E5%8A%A1%E5%B7%B2%E5%BC%80%E5%90%AF%EF%BC%89"><span class="toc-number">5.2.</span> <span class="toc-text">Ubuntu开启端口（默认http等服务已开启）</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%88%90%E5%8A%9F%E5%90%8E%E7%9A%84HedgeDoc%E9%A1%B5%E9%9D%A2%EF%BC%88%E4%B8%8Ehttps-demo-hedgedoc-org-%E7%9B%B8%E5%90%8C%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">成功后的HedgeDoc页面（与https:&#x2F;&#x2F;demo.hedgedoc.org&#x2F;相同）</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-docker搭建hedgedoc" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      docker安装HedgeDoc/CodiMD/HackMD
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/04/01/da28ce1d401d/" class="article-date">
+	  <time datetime="2021-03-31T16:00:00.000Z" itemprop="datePublished">2021-04-01</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/HedgeDoc/">HedgeDoc</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/CodiMD/" rel="tag">CodiMD</a>, <a class="article-tag-link-link" href="/tags/Docker/" rel="tag">Docker</a>, <a class="article-tag-link-link" href="/tags/HackMD/" rel="tag">HackMD</a>, <a class="article-tag-link-link" href="/tags/HedgeDoc/" rel="tag">HedgeDoc</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/04/01/da28ce1d401d/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 971(words)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 5(minutes)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h5 id="HedgeDoc介绍"><a href="#HedgeDoc介绍" class="headerlink" title="HedgeDoc介绍"></a>HedgeDoc介绍</h5><p>HedgeDoc是一款在线Markdown软件，它的强大之处在于可以协作编写文档。</p>
+<p>HedgeDoc的前身是codiMD，即hackMD的社区版分支（hackMD CE），它的历史：<a target="_blank" rel="noopener" href="https://hedgedoc.org/history/">HedgeDoc History</a></p>
+<p>HedgeDoc的官网主页：<a target="_blank" rel="noopener" href="https://hedgedoc.org/">HedgeDoc</a></p>
+<p>关于HedgeDoc的前身的介绍：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/251390380">CodiMd</a></p>
+<h4 id="安装教程"><a href="#安装教程" class="headerlink" title="安装教程"></a>安装教程</h4><h5 id="官方教程："><a href="#官方教程：" class="headerlink" title="官方教程："></a>官方教程：</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/hedgedoc/container.git hedgedoc-container</span><br><span class="line"><span class="built_in">cd</span> hedgedoc-container</span><br><span class="line">docker-compose up</span><br></pre></td></tr></table></figure>
+<p><code>hedgedoc-container</code>文件下有官方给定的构建文件docker-compose.yml，可以自定义修改后使用<code>docker-compose up -d</code>创建并运行容器</p>
+<h5 id="自定义HedgeDoc"><a href="#自定义HedgeDoc" class="headerlink" title="自定义HedgeDoc"></a>自定义HedgeDoc</h5><p>我们在官方给出的docker-compose.yml文件中屏蔽了hedgedoc的映射端口，并加入加入了nginx。</p>
+<h5 id="docker-compose-yml"><a href="#docker-compose-yml" class="headerlink" title="docker-compose.yml:"></a>docker-compose.yml:</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Using version 3 to provide play-with-docker badge</span></span><br><span class="line"><span class="comment"># You can change to version 2 without breaking.</span></span><br><span class="line"><span class="comment">#version: &#x27;2&#x27;</span></span><br><span class="line"><span class="attr">version:</span> <span class="string">&#x27;3&#x27;</span></span><br><span class="line"><span class="attr">services:</span></span><br><span class="line">  <span class="comment"># database:</span></span><br><span class="line">    <span class="comment"># Don&#x27;t upgrade PostgreSQL by simply changing the version number</span></span><br><span class="line">    <span class="comment"># You need to migrate the Database to the new PostgreSQL version</span></span><br><span class="line">    <span class="comment"># image: postgres:9.6-alpine</span></span><br><span class="line">    <span class="comment">#mem_limit: 256mb         # version 2 only</span></span><br><span class="line">    <span class="comment">#memswap_limit: 512mb     # version 2 only</span></span><br><span class="line">    <span class="comment">#read_only: true          # not supported in swarm mode please enable along with tmpfs</span></span><br><span class="line">    <span class="comment">#tmpfs:</span></span><br><span class="line">    <span class="comment">#  - /run/postgresql:size=512K</span></span><br><span class="line">    <span class="comment">#  - /tmp:size=256K</span></span><br><span class="line">    <span class="comment"># environment:</span></span><br><span class="line">    <span class="comment">#  - POSTGRES_USER=hedgedoc</span></span><br><span class="line">    <span class="comment">#  - POSTGRES_PASSWORD=password</span></span><br><span class="line">    <span class="comment">#  - POSTGRES_DB=hedgedoc</span></span><br><span class="line">    <span class="comment"># volumes:</span></span><br><span class="line">    <span class="comment">#  - database:/var/lib/postgresql/data</span></span><br><span class="line">    <span class="comment"># networks:</span></span><br><span class="line">    <span class="comment">#  backend:</span></span><br><span class="line">    <span class="comment"># restart: always</span></span><br><span class="line"></span><br><span class="line">  <span class="comment"># MySQL example</span></span><br><span class="line">  <span class="comment"># Most of the documentation that applies to PostgreSQL applies also to MySQL</span></span><br><span class="line">  <span class="attr">database:</span></span><br><span class="line">  <span class="comment">#    # You should be able to upgrade MySQL without problems</span></span><br><span class="line">  <span class="comment">#    # but to make sure no even when a problem appears you</span></span><br><span class="line">  <span class="comment">#    # should have a backup</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">mariadb:10</span></span><br><span class="line">      <span class="attr">environment:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">MYSQL_USER=hedgedoc</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">MYSQL_PASSWORD=password</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">MYSQL_DATABASE=hedgedoc</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">MYSQL_ALLOW_EMPTY_PASSWORD=true</span></span><br><span class="line">      <span class="attr">volumes:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">./database:/var/lib/mysql</span></span><br><span class="line">  <span class="comment">#      # This config provides UTF-8 support to the database by default</span></span><br><span class="line">  <span class="comment">#      # If this config is not used, HedgeDoc breaks as it tries to write</span></span><br><span class="line">  <span class="comment">#      # UTF-8 to a latin database.</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">./resources/utf8.cnf:/etc/mysql/conf.d/utf8.cnf</span></span><br><span class="line">      <span class="attr">networks:</span></span><br><span class="line">        <span class="attr">backend:</span></span><br><span class="line">      <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line"></span><br><span class="line">  <span class="attr">hedgedoc:</span></span><br><span class="line">    <span class="comment"># Uncomment the following section to build the image yourself:</span></span><br><span class="line">    <span class="comment">#build:</span></span><br><span class="line">    <span class="comment">#  context: .</span></span><br><span class="line">    <span class="comment">#  dockerfile: debian/Dockerfile</span></span><br><span class="line">    <span class="comment">#  args:</span></span><br><span class="line">    <span class="comment">#    - &quot;VERSION=master&quot;</span></span><br><span class="line">    <span class="comment">#    - &quot;HEDGEDOC_REPOSITORY=https://github.com/hedgedoc/hedgedoc.git&quot;</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">quay.io/hedgedoc/hedgedoc:1.7.2</span></span><br><span class="line">    <span class="comment">#mem_limit: 256mb         # version 2 only</span></span><br><span class="line">    <span class="comment">#memswap_limit: 512mb     # version 2 only</span></span><br><span class="line">    <span class="comment">#read_only: true          # not supported in swarm mode, enable along with tmpfs</span></span><br><span class="line">    <span class="comment">#tmpfs:</span></span><br><span class="line">    <span class="comment">#  - /tmp:size=10M</span></span><br><span class="line">    <span class="comment">#  # Make sure you remove this when you use filesystem as upload type</span></span><br><span class="line">    <span class="comment">#  - /hedgedoc/public/uploads:size=10M</span></span><br><span class="line">    <span class="attr">environment:</span></span><br><span class="line">      <span class="comment"># DB_URL is formatted like: &lt;databasetype&gt;://&lt;username&gt;:&lt;password&gt;@&lt;hostname&gt;:&lt;port&gt;/&lt;database&gt;</span></span><br><span class="line">      <span class="comment"># Other examples are:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">CMD_DB_URL=mysql://hedgedoc:password@database:3306/hedgedoc</span></span><br><span class="line">      <span class="comment"># - sqlite:///data/sqlite.db (NOT RECOMMENDED)</span></span><br><span class="line">      <span class="comment"># - For details see the official sequelize docs: http://docs.sequelizejs.com/en/v3/</span></span><br><span class="line">      <span class="comment"># - CMD_DB_URL=postgres://hedgedoc:password@database:5432/hedgedoc</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./uploads:/hedgedoc/public/uploads</span></span><br><span class="line">    <span class="comment"># ports:</span></span><br><span class="line">    <span class="comment">#   # Ports that are published to the outside.</span></span><br><span class="line">    <span class="comment">#   # The latter port is the port inside the container. It should always stay on 3000</span></span><br><span class="line">    <span class="comment">#   # If you only specify a port it&#x27;ll published on all interfaces. If you want to use a</span></span><br><span class="line">    <span class="comment">#   # local reverse proxy, you may want to listen on 127.0.0.1.</span></span><br><span class="line">    <span class="comment">#   # Example:</span></span><br><span class="line">    <span class="comment">#   # - &quot;127.0.0.1:3000:3000&quot;</span></span><br><span class="line">    <span class="comment">#   - &quot;3000:3000&quot;</span></span><br><span class="line">    <span class="attr">expose:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;3000&quot;</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="attr">backend:</span></span><br><span class="line">    <span class="attr">restart:</span> <span class="string">always</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">database</span></span><br><span class="line">  <span class="comment"># adding nginx service</span></span><br><span class="line">  <span class="attr">nginx:</span></span><br><span class="line">    <span class="attr">image:</span> <span class="string">nginx</span></span><br><span class="line">    <span class="attr">volumes:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">./nginx.conf:/etc/nginx/nginx.conf</span></span><br><span class="line">    <span class="attr">ports:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">&quot;88:88&quot;</span></span><br><span class="line">    <span class="attr">depends_on:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">hedgedoc</span></span><br><span class="line">    <span class="attr">networks:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">backend</span></span><br><span class="line">    </span><br><span class="line"></span><br><span class="line"><span class="comment"># Define networks to allow best isolation</span></span><br><span class="line"><span class="attr">networks:</span></span><br><span class="line">  <span class="comment"># Internal network for communication with PostgreSQL/MySQL</span></span><br><span class="line">  <span class="attr">backend:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Define named volumes so data stays in place</span></span><br><span class="line"><span class="comment"># volumes:</span></span><br><span class="line"><span class="comment">#   # Volume for PostgreSQL/MySQL database</span></span><br><span class="line"><span class="comment">#   database: ./mysql</span></span><br><span class="line"><span class="comment">#   uploads: ./uploads</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>从其他地方拷贝一份nginx.conf到hedgedoc-container目录下，修改nginx.conf</p>
+<h5 id="nginx-conf修改的内容"><a href="#nginx-conf修改的内容" class="headerlink" title="nginx.conf修改的内容"></a>nginx.conf修改的内容</h5><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">server</span> &#123;</span><br><span class="line">  <span class="string">listen</span> <span class="number">88</span><span class="string">;</span></span><br><span class="line">  <span class="string">server_name</span> <span class="string">&lt;your_domain&gt;</span> <span class="string">&lt;your_server_ip&gt;;</span></span><br><span class="line">  </span><br><span class="line">  <span class="string">location</span> <span class="string">/</span> &#123;</span><br><span class="line">      <span class="comment"># 如果内网主机，可能需要设置跨域</span></span><br><span class="line">    <span class="string">add_header</span> <span class="string">Access-Control-Allow-Origin</span> <span class="string">*;</span></span><br><span class="line">    <span class="string">add_header</span> <span class="string">Access-Control-Allow-Methods</span> <span class="string">&#x27;GET, POST, OPTIONS&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">add_header</span> <span class="string">Access-Control-Allow-Headers</span> <span class="string">&#x27;DNT,X-Mx-ReqToken,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization&#x27;</span><span class="string">;</span></span><br><span class="line">    <span class="string">if</span> <span class="string">($request_method</span> <span class="string">=</span> <span class="string">&#x27;OPTIONS&#x27;</span><span class="string">)</span> &#123;</span><br><span class="line">       <span class="string">return</span> <span class="number">204</span><span class="string">;</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="string">proxy_pass</span> <span class="string">http://hedgedoc:3000;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">Host</span> <span class="string">$host;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">X-Real-IP</span> <span class="string">$remote_addr;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">X-Forwarded-For</span> <span class="string">$proxy_add_x_forwarded_for;</span></span><br><span class="line">    <span class="string">proxy_set_header</span> <span class="string">X-Forwarded-Proto</span> <span class="string">$scheme;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="在服务端防火墙中开启http服务和88端口"><a href="#在服务端防火墙中开启http服务和88端口" class="headerlink" title="在服务端防火墙中开启http服务和88端口"></a>在服务端防火墙中开启http服务和88端口</h5><p>如果买了大厂ECS服务器，请在提供商网站内更改安全组，开启88端口。（一般默认开启http服务）</p>
+<p>如果是本地服务器</p>
+<h6 id="centos主机开启http服务和88端口："><a href="#centos主机开启http服务和88端口：" class="headerlink" title="centos主机开启http服务和88端口："></a>centos主机开启http服务和88端口：</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 针对外开启http服务</span></span><br><span class="line">sudo firewall-cmd --zone=public --add-service=http --permanent</span><br><span class="line"><span class="comment"># 针对docker开启http服务</span></span><br><span class="line">sudo firewall-cmd --zone=docker --add-service=http --permanent</span><br><span class="line"><span class="comment"># 对外开放88端口</span></span><br><span class="line">sudo firewall-cmd --zone=public --add-port=88/tcp --permanent</span><br><span class="line"><span class="comment"># 重新加载firewall规则</span></span><br><span class="line">sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+<p>查看是否开启成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo firewall-cmd --zone=public --list-services <span class="comment">#正确结果包含http</span></span><br><span class="line">sudo firewall-cmd --zone=docker --list-services <span class="comment">#正确结果出现http</span></span><br><span class="line">sudo firewall-cmd --zone=public --list-ports <span class="comment"># 正确结果出现88/tcp</span></span><br></pre></td></tr></table></figure>
+<h6 id="Ubuntu开启端口（默认http等服务已开启）"><a href="#Ubuntu开启端口（默认http等服务已开启）" class="headerlink" title="Ubuntu开启端口（默认http等服务已开启）"></a>Ubuntu开启端口（默认http等服务已开启）</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow 88</span><br></pre></td></tr></table></figure>
+<h5 id="成功后的HedgeDoc页面（与https-demo-hedgedoc-org-相同）"><a href="#成功后的HedgeDoc页面（与https-demo-hedgedoc-org-相同）" class="headerlink" title="成功后的HedgeDoc页面（与https://demo.hedgedoc.org/相同）"></a>成功后的HedgeDoc页面（与<code>https://demo.hedgedoc.org/</code>相同）</h5><p><img src="https://i.loli.net/2021/04/01/yP4B9EgwfVXFrMT.png" alt="HedgeDoc页面"></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://blog.karakarua.com/2021/04/01/da28ce1d401d/" title="docker安装HedgeDoc/CodiMD/HackMD" target="_blank" rel="external">http://blog.karakarua.com/2021/04/01/da28ce1d401d/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/caracal.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="" target="_blank"><span class="text-dark">Karakarua</span><small class="ml-1x">Developer</small></a></h3>
+        <div>学无止境</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="uyan_frame"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    <li class="prev">
+      <a href="/2021/04/01/9a4cd3052e37/" title="Centos开启防火墙超时失败"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+    </li>
+    
+    
+    <li class="next">
+      <a href="/2021/03/30/505a385dca9d/" title="转载：MySQL将查询结果存入新表"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=[object Object]"></script>
+
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
