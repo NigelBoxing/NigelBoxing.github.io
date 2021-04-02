@@ -17,31 +17,27 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>前端Vue整合后端部署页面一片空白 | karakarua&#39;s blog</title>
-  <meta name="description" content="首先说明不懂前端，仅仅是在学习前后端分离时遇到了问题，说说怎么解决的。 情况是这样的，学习了一个Vue+Springboot前后端分离博客：Vue + Spring Boot 项目实战（一）：项目简介学习到第6节Vue + Spring Boot 项目实战（六）：前端路由与登录拦截器，把前端和后端整合时，出现了问题，访问localhost:8443&#x2F;blog&#x2F;login（Note: 我设置了项目路">
+  <title>docker-compose中顶级volumes自定义绑定路径 | karakarua&#39;s blog</title>
+  <meta name="description" content="问题举例子能说明问题： docker-compose.yml中的一段代码： 1234567891011121314151617service:    database:      image: mariadb:10      environment:        - MYSQL_USER&#x3D;xxx        - MYSQL_PASSWORD&#x3D;xxx        - MYSQL_DATABAS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="前端Vue整合后端部署页面一片空白">
-<meta property="og:url" content="http://blog.karakarua.com/2020/07/28/8ca54e056d31/">
+<meta property="og:title" content="docker-compose中顶级volumes自定义绑定路径">
+<meta property="og:url" content="http://blog.karakarua.com/2021/04/02/03b599d1db10/">
 <meta property="og:site_name" content="Karakarua&#39;s blog">
-<meta property="og:description" content="首先说明不懂前端，仅仅是在学习前后端分离时遇到了问题，说说怎么解决的。 情况是这样的，学习了一个Vue+Springboot前后端分离博客：Vue + Spring Boot 项目实战（一）：项目简介学习到第6节Vue + Spring Boot 项目实战（六）：前端路由与登录拦截器，把前端和后端整合时，出现了问题，访问localhost:8443&#x2F;blog&#x2F;login（Note: 我设置了项目路">
+<meta property="og:description" content="问题举例子能说明问题： docker-compose.yml中的一段代码： 1234567891011121314151617service:    database:      image: mariadb:10      environment:        - MYSQL_USER&#x3D;xxx        - MYSQL_PASSWORD&#x3D;xxx        - MYSQL_DATABAS">
 <meta property="og:locale">
-<meta property="og:image" content="https://i.loli.net/2020/11/11/c8KqPNhbHlve39p.png">
-<meta property="og:image" content="https://i.loli.net/2020/11/11/bKtq75RxgL61Npr.png">
-<meta property="og:image" content="https://i.loli.net/2020/11/11/jNvIzm6UecO5xb1.png">
-<meta property="og:image" content="https://i.loli.net/2020/11/11/pQxRYMbTDa1N8LC.png">
-<meta property="og:image" content="https://i.loli.net/2020/11/11/5WmAT8aCDQeX3gY.png">
-<meta property="og:image" content="https://i.loli.net/2020/11/11/U9ErdQcvOwZNIGa.png">
-<meta property="og:image" content="https://i.loli.net/2020/11/11/B7GcgqH1ovLreks.png">
-<meta property="og:image" content="https://i.loli.net/2020/11/11/G1q23rc6deaPjui.png">
-<meta property="og:image" content="https://i.loli.net/2020/11/11/dnAshxwzY8eilrB.png">
-<meta property="article:published_time" content="2020-07-27T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-03-16T05:18:37.628Z">
+<meta property="og:image" content="https://i.loli.net/2021/04/02/96TAQlIrhjanzqW.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/02/qmNl3BgLYhajDuc.png">
+<meta property="og:image" content="https://i.loli.net/2021/04/02/TdSZw2iR7mnB9qr.png">
+<meta property="og:image" content="c:/Users/lenovo/AppData/Roaming/Typora/typora-user-images/image-20210402182958370.png">
+<meta property="og:image" content="c:/Users/lenovo/AppData/Roaming/Typora/typora-user-images/image-20210402183714614.png">
+<meta property="article:published_time" content="2021-04-01T16:00:00.000Z">
+<meta property="article:modified_time" content="2021-04-02T11:15:03.449Z">
 <meta property="article:author" content="Ferrilata">
-<meta property="article:tag" content="Vue">
+<meta property="article:tag" content="Docker">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://i.loli.net/2020/11/11/c8KqPNhbHlve39p.png">
+<meta name="twitter:image" content="https://i.loli.net/2021/04/02/96TAQlIrhjanzqW.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://blog.karakarua.com/2020/07/28/8ca54e056d31/index.html">
+  <link rel="canonical" href="http://blog.karakarua.com/2021/04/02/03b599d1db10/index.html">
   
   
     <link rel="icon" href="/favicon.png" type="image/x-icon">
@@ -313,21 +309,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">解决方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%99%84%E5%BD%95%EF%BC%9A"><span class="toc-number"></span> <span class="toc-text">附录：</span></a>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-前端Vue整合后端部署页面一片空白" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-docker-compose中volumes自定义绑定路径" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      前端Vue整合后端部署页面一片空白
+      docker-compose中顶级volumes自定义绑定路径
     </h1>
   
 
@@ -335,20 +331,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/07/28/8ca54e056d31/" class="article-date">
-	  <time datetime="2020-07-27T16:00:00.000Z" itemprop="datePublished">2020-07-28</time>
+	<a href="/2021/04/02/03b599d1db10/" class="article-date">
+	  <time datetime="2021-04-01T16:00:00.000Z" itemprop="datePublished">2021-04-02</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Java-Web/">Java Web</a>
+    <a class="article-category-link" href="/categories/Docker/">Docker</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Vue/" rel="tag">Vue</a>
+	<a class="article-tag-link-link" href="/tags/Docker/" rel="tag">Docker</a>
   </span>
 
 
@@ -361,48 +357,74 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/07/28/8ca54e056d31/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/04/02/03b599d1db10/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 838(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 964(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3(minutes)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 4(minutes)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>首先说明不懂前端，仅仅是在学习前后端分离时遇到了问题，说说怎么解决的。</p>
-<p>情况是这样的，学习了一个Vue+Springboot前后端分离博客：<a target="_blank" rel="noopener" href="https://learner.blog.csdn.net/article/details/88925013">Vue + Spring Boot 项目实战（一）：项目简介</a><br>学习到第6节<a target="_blank" rel="noopener" href="https://learner.blog.csdn.net/article/details/89422585">Vue + Spring Boot 项目实战（六）：前端路由与登录拦截器</a>，把前端和后端整合时，出现了问题，访问<a href="localhost:8443/blog/login">localhost:8443/blog/login</a>（Note: 我设置了项目路径，即server.servlet.context-path:/blog/）,界面一篇空白。但可以保证，检查敲的代码一点错误没有，操作步骤完全正确。这就尴尬了，几乎不懂前端，全要靠自己排查了。</p>
-<p>排查步骤：</p>
-<ol>
-<li>首先注意到原博客有一句话：“虽然页面是空白的，但确实是获取到了这个页面”。<br><img src="https://i.loli.net/2020/11/11/c8KqPNhbHlve39p.png" alt="index.png"><br>然后对比我的index.html的F12 Network调试页面，发现刺眼的错误：脚本和样式的请求路径是错误的，缺少了<code>/blog/</code>路径。<br><img src="https://i.loli.net/2020/11/11/bKtq75RxgL61Npr.png" alt="index404.png"><br><img src="https://i.loli.net/2020/11/11/jNvIzm6UecO5xb1.png" alt="indexError1.png"></li>
-</ol>
-<p><img src="https://i.loli.net/2020/11/11/pQxRYMbTDa1N8LC.png" alt="indexError2.png">)</p>
-<ol>
-<li>问题出现：URL请求缺少项目路径。<br>那怎么才能能配置路径，让URL请求再加上一个项目路径”/blog/“呢？</li>
-</ol>
-<p>解决办法：</p>
-<blockquote>
-<p>参考博客#<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhuzhenwei918/p/6866094.html">为什么vue+webpack需要用到node，如何部署项目到服务器？</a><br>、知乎<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/46630687">vuejs怎么在服务器部署？</a>（主要参考papersnake的回答）<br>、官方配置文档<a target="_blank" rel="noopener" href="https://cli.vuejs.org/zh/config/">配置参考</a>、<a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/api/">API 参考</a>。<br>（顺嘴说一句，在什么不懂的前提下，与其乱百度，倒不如直接看官网，这更像是正确的学习方式）。</p>
-</blockquote>
-<ol>
-<li>首先配置index.html中的js、css等资源路径，这个相关的配置是前端项目<code>config/index.js</code>中，<code>build下</code>的<code>assetsPublicPath</code>。需要改成<code>assetsPublicPath: &#39;./&#39;</code>或者<code>assetsPublicPath: &#39;/blog/&#39;</code>。下图是官方<a target="_blank" rel="noopener" href="https://cli.vuejs.org/zh/config/">配置参考</a>文档（我的vue是Version 2.x，官方提供的好像是Version 3.x的文档，虽然属性名字有差别，但感觉指的是一个东西，如有不对，请指正哈！）。<br><img src="https://i.loli.net/2020/11/11/5WmAT8aCDQeX3gY.png" alt="publicPath.png"></li>
-</ol>
-<ol>
-<li><p>然后，配置前端项目<code>router/index.js</code>的Router，添加<code>base:/blog/</code>，这个的目的是告知router项目路径，即请求前缀。没有这一个，前端不能正确识别请求，即/blog/login会无法识别。配个官方配置<a target="_blank" rel="noopener" href="https://router.vuejs.org/zh/api/">API 参考</a>截图：<br><img src="https://i.loli.net/2020/11/11/U9ErdQcvOwZNIGa.png" alt="base.png"><br>这个一定要配置，如果不配置，则访问<code>/blog/login</code>还是空白，后端并没有把404转到index.html资源。</p>
+        <h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>举例子能说明问题：</p>
+<p>docker-compose.yml中的一段代码：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">service:</span></span><br><span class="line">    <span class="attr">database:</span></span><br><span class="line">      <span class="attr">image:</span> <span class="string">mariadb:10</span></span><br><span class="line">      <span class="attr">environment:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">MYSQL_USER=xxx</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">MYSQL_PASSWORD=xxx</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">MYSQL_DATABASE=xxx</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">MYSQL_ALLOW_EMPTY_PASSWORD=true</span></span><br><span class="line">      <span class="comment"># volume下使用</span></span><br><span class="line">      <span class="attr">volumes:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">database:/var/lib/mysql</span></span><br><span class="line"> </span><br><span class="line"> <span class="attr">volumes:</span></span><br><span class="line">     <span class="comment"># 由docker volume创建volumes定义的卷，可以通过参数指定属性</span></span><br><span class="line">     <span class="comment"># 可以不填写任何参数，按默认属性在/var/lib/docker/volumes下创建卷</span></span><br><span class="line">     <span class="comment">### 本文想在这里自定义路径</span></span><br><span class="line">     <span class="attr">database:</span></span><br></pre></td></tr></table></figure>
+<h4 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">volumes:</span></span><br><span class="line">  <span class="attr">database:</span></span><br><span class="line">    <span class="attr">driver_opts:</span>   <span class="comment">#更多选项可以查看Linux的Mount命令，与Mount相似</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">ext4</span>   <span class="comment"># 文件类型，必需</span></span><br><span class="line">      <span class="attr">o:</span> <span class="string">bind</span></span><br><span class="line">      <span class="attr">device:</span> <span class="string">&lt;absolute</span> <span class="string">path&gt;</span>  <span class="comment"># 绝对路径</span></span><br></pre></td></tr></table></figure>
+<h3 id="附录："><a href="#附录：" class="headerlink" title="附录："></a>附录：</h3><ol>
+<li><p>本文问题的缘由：<code>&lt;path1&gt;:&lt;path2&gt;</code>中的宿主机路径太长，想缩减<code>&lt;path1&gt;:&lt;path2&gt;</code>的长度，使代码更加美观。然而这个目的<strong>应该</strong>通过下面方式实现。</p>
+ <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">services:</span></span><br><span class="line">    <span class="attr">database:</span></span><br><span class="line">        <span class="attr">volumes:</span></span><br><span class="line">            <span class="attr">type:</span> <span class="string">bind</span></span><br><span class="line">            <span class="attr">source:</span> <span class="string">&lt;path1&gt;</span>    <span class="comment"># 绝对路径或是相对路径</span></span><br><span class="line">            <span class="attr">target:</span> <span class="string">&lt;path2&gt;</span>  <span class="comment"># 绝对路径或是相对路径</span></span><br></pre></td></tr></table></figure>
+<p> 一开始只是以为顶级volumes的含义只是用来缩写，实际上是不对的。</p>
 </li>
-<li><p><strong>注意：</strong>第一步中有个黄色的特别说明，<strong>当使用history路由方式时，尽量避免想对路径，</strong>即避免<code>assetsPublicPath: &#39;./&#39;</code>，即应该配置为：<code>assetsPublicPath: &#39;/blog/&#39;</code>。<br>如果疏忽了，在history模式下使用<code>./</code>相对路径的方式，会有什么后果呢？（因为粗心大意，没有按官方要求设置，出现了错误，却因祸得福让我注意到了这一点。）<br>给大家截个图：(前提：上面两个配置均操作完成。)<br>可以发现history模式下使用想对publicPath的后果是，部分资源请求路径发送错误。</p>
+<li><p>那顶级volume的含义真正是什么？</p>
+<p> 实际上，顶级volums的含义是指用docker volume create命令创建卷，并交由docker volume管理这些卷，关联容器中的路径。</p>
+</li>
+<li><p>那本文的这些操作到底做了些什么？</p>
+<p> 实际上宿主机卷仍然是由docker volume管理并关联容器中的路径。也就是说，选项<code>o</code>和<code>device</code>只不过是将docker volume管理的卷再绑定到<code>device</code>指向的位置</p>
+<ol>
+<li><p>docker volume管理的卷截图</p>
+<p><img src="https://i.loli.net/2021/04/02/96TAQlIrhjanzqW.png" alt="docker volume管理的卷"></p>
+<p><img src="https://i.loli.net/2021/04/02/qmNl3BgLYhajDuc.png" alt="image.png"></p>
+</li>
+<li><p>可以验证的是：<code>device</code>指向的位置、/var/lib/docker/volume/\<name>/_data、容器内路径，三者的内容是一样的。</p>
+<p><code>device</code>指向的位置截图：</p>
+<p><img src="https://i.loli.net/2021/04/02/TdSZw2iR7mnB9qr.png" alt="device指向位置"></p>
+<p>​        docker volume默认的宿主机位置（/var/lib/docker/volumes/\<name>/_data)</p>
+<p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20210402182958370.png" alt="docker volume默认的宿主机位置"></p>
+<p>​        docker容器内部目录：</p>
+<p><img src="C:\Users\lenovo\AppData\Roaming\Typora\typora-user-images\image-20210402183714614.png" alt="docker容器内部目录"></p>
 </li>
 </ol>
-<p><img src="https://i.loli.net/2020/11/11/B7GcgqH1ovLreks.png" alt="jsRight.png"><br><img src="https://i.loli.net/2020/11/11/G1q23rc6deaPjui.png" alt="errorPicture.png"></p>
-<p>到这一步，<code>/blog/index.html</code>页面虽然还是空白，但是该拿到的资源就都拿到了。<br><img src="https://i.loli.net/2020/11/11/dnAshxwzY8eilrB.png" alt="index2.png"></p>
-<ol>
-<li>配置完这两项后，再访问<a href="localhost:8443/blog/login">localhost:8443/blog/login</a>，就能看到页面了呦！</li>
+</li>
 </ol>
-<p><strong>总结：</strong>关键两步：1. 配置是前端项目<code>config/index.js</code>中，<code>build</code>下的<code>assetsPublicPath</code>；2. 配置前端项目<code>router/index.js</code>的Router，添加<code>base:/blog/</code>，<code>blog</code>是你的项目名称</p>
+<pre><code>3. 来自docker-compose中关于driver_opts的解释：[docker-compose driver_opts](https://docs.docker.com/compose/compose-file/compose-file-v3/#driver_opts)
+
+   &gt;  以键值对的形式指定用来传递给该数据卷所使用的数据卷驱动的列表选项
+
+   &lt;!--hexoPostRenderEscape:&lt;figure class=&quot;highlight yaml&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;attr&quot;&gt;volumes:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;  &lt;span class=&quot;attr&quot;&gt;example:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;    &lt;span class=&quot;attr&quot;&gt;driver_opts:&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;attr&quot;&gt;type:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&amp;quot;nfs&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;attr&quot;&gt;o:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&amp;quot;addr=10.40.0.199,nolock,soft,rw&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;      &lt;span class=&quot;attr&quot;&gt;device:&lt;/span&gt; &lt;span class=&quot;string&quot;&gt;&amp;quot;:/docker/example&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;:hexoPostRenderEscape--&gt;
+
+   这里的例子与本文很相似。
+
+4. 所以，本文的意义可能在于将docker volume管理的卷，再克隆一份到其他路径，多处进行持久化。🤔🤔🤔
+
+
+
+所以，从一开始理解错了顶级volumes的用法，从而走了弯路。
+
+最后，通过这次经历，我也有些明白了顶级volumes的含义。
+</code></pre><p>参考链接：</p>
+<ul>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/36387032/how-to-set-a-path-on-host-for-a-named-volume-in-docker-compose-yml">How to set a path on host for a named volume in docker-compose.yml</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/46907558/docker-compose-relative-paths-vs-docker-volume">Docker Compose Relative paths vs Docker volume</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/sanduzxcvbnm/p/13188274.html">Docker Compose配置文件详解（V3）</a></p>
+</li>
+<li></li>
+</ul>
 
       
     </div>
@@ -412,7 +434,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://blog.karakarua.com/2020/07/28/8ca54e056d31/" title="前端Vue整合后端部署页面一片空白" target="_blank" rel="external">http://blog.karakarua.com/2020/07/28/8ca54e056d31/</a>
+      <a href="http://blog.karakarua.com/2021/04/02/03b599d1db10/" title="docker-compose中顶级volumes自定义绑定路径" target="_blank" rel="external">http://blog.karakarua.com/2021/04/02/03b599d1db10/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -459,12 +481,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2020/07/29/e4da9ef1c798/" title="后端登录拦截/过滤"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2021/04/02/e5a33f78dc7c/" title="CnetOS中配置vi语法高亮"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2020/07/26/3bb75a65f0b6/" title="Intellij-IDEA利用spring-initializr添加maven依赖包"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/04/01/9a4cd3052e37/" title="Centos开启防火墙超时失败"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
