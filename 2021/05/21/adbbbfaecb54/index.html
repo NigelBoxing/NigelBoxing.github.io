@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>转载：BibTeX 定制自己的参考文献模板 BST | karakarua&#39;s blog</title>
+  <meta name="description" content="引用：BibTeX 定制自己的参考文献模板 bst_Xue Shengke 博客-CSDN博客  感谢作者付出，本文谨防CSDN丢失。  逆波兰语法是一种后缀语句。其内容并不算难，但是网上的资料几乎没有，而且也一般情况下没有人会去编写它。但是在需要自己设计 bibliography-style 文件 bst 之时，就需要了解这方面的知识了。 btxhak.pdf 是介绍 BibTeX 配置文件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="转载：BibTeX 定制自己的参考文献模板 BST">
+<meta property="og:url" content="http://blog.karakarua.com/2021/05/21/adbbbfaecb54/">
+<meta property="og:site_name" content="Karakarua&#39;s blog">
+<meta property="og:description" content="引用：BibTeX 定制自己的参考文献模板 bst_Xue Shengke 博客-CSDN博客  感谢作者付出，本文谨防CSDN丢失。  逆波兰语法是一种后缀语句。其内容并不算难，但是网上的资料几乎没有，而且也一般情况下没有人会去编写它。但是在需要自己设计 bibliography-style 文件 bst 之时，就需要了解这方面的知识了。 btxhak.pdf 是介绍 BibTeX 配置文件">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-05-21T14:53:40.000Z">
+<meta property="article:modified_time" content="2021-05-23T10:35:01.217Z">
+<meta property="article:author" content="Ferrilata">
+<meta property="article:tag" content="LaTeX">
+<meta property="article:tag" content="BibTeX">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://blog.karakarua.com/2021/05/21/adbbbfaecb54/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body class="main-center theme-green" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://blog.karakarua.com/about/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/caracal.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Karakarua</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code/">Code</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Concurrency/">Concurrency</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deepin/">Deepin</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HedgeDoc/">HedgeDoc</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Web/">Java Web</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LaTeX/">LaTeX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BibTeX/" rel="tag">BibTeX</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/" rel="tag">Code</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodiMD/" rel="tag">CodiMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrency/" rel="tag">Concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HackMD/" rel="tag">HackMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HedgeDoc/" rel="tag">HedgeDoc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Web/" rel="tag">Java Web</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTeX/" rel="tag">LaTeX</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mininet/" rel="tag">Mininet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis-Plus/" rel="tag">Mybatis-Plus</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regex/" rel="tag">Regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shiro/" rel="tag">Shiro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/BibTeX/" style="font-size: 13.17px;">BibTeX</a> <a href="/tags/CentOS/" style="font-size: 13.5px;">CentOS</a> <a href="/tags/Code/" style="font-size: 13.83px;">Code</a> <a href="/tags/CodiMD/" style="font-size: 13px;">CodiMD</a> <a href="/tags/Concurrency/" style="font-size: 13px;">Concurrency</a> <a href="/tags/Deepin/" style="font-size: 13.5px;">Deepin</a> <a href="/tags/Docker/" style="font-size: 13.67px;">Docker</a> <a href="/tags/HackMD/" style="font-size: 13px;">HackMD</a> <a href="/tags/HedgeDoc/" style="font-size: 13px;">HedgeDoc</a> <a href="/tags/Java/" style="font-size: 13.17px;">Java</a> <a href="/tags/Java-Web/" style="font-size: 14px;">Java Web</a> <a href="/tags/LaTeX/" style="font-size: 13.33px;">LaTeX</a> <a href="/tags/Linux/" style="font-size: 13.83px;">Linux</a> <a href="/tags/Mininet/" style="font-size: 13px;">Mininet</a> <a href="/tags/Mybatis-Plus/" style="font-size: 13px;">Mybatis-Plus</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Python/" style="font-size: 13.17px;">Python</a> <a href="/tags/Regex/" style="font-size: 13px;">Regex</a> <a href="/tags/SQL/" style="font-size: 13.17px;">SQL</a> <a href="/tags/Shell/" style="font-size: 13px;">Shell</a> <a href="/tags/Shiro/" style="font-size: 13px;">Shiro</a> <a href="/tags/Spring-Boot/" style="font-size: 13.5px;">Spring Boot</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/Vue/" style="font-size: 13.5px;">Vue</a> <a href="/tags/hexo/" style="font-size: 13.17px;">hexo</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/LaTeX/">LaTeX</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/21/adbbbfaecb54/" class="title">转载：BibTeX 定制自己的参考文献模板 BST</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-21T14:53:40.000Z" itemprop="datePublished">2021-05-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/LaTeX/">LaTeX</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/21/e1331dc9bf12/" class="title">LaTeX参考文献模板 BST语法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-21T14:33:40.000Z" itemprop="datePublished">2021-05-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/11/4abf9b4212e8/" class="title">CentOS使用ptrash防止rm误删</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-10T16:00:00.000Z" itemprop="datePublished">2021-04-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Nginx/">Nginx</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/03/73582942da17/" class="title">Nginx反向代理多个docker容器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-03T07:23:00.000Z" itemprop="datePublished">2021-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Docker/">Docker</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/02/0326889327e6/" class="title">docker-compose中顶级volumes自定义绑定路径</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-02T11:15:00.000Z" itemprop="datePublished">2021-04-02</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4"><span class="toc-number">1.</span> <span class="toc-text">命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">2.</span> <span class="toc-text">内置函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%BA%E5%90%8D%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">人名格式化</span></a></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-转载BST语法" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      转载：BibTeX 定制自己的参考文献模板 BST
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/05/21/adbbbfaecb54/" class="article-date">
+	  <time datetime="2021-05-21T14:53:40.000Z" itemprop="datePublished">2021-05-21</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/LaTeX/">LaTeX</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/BibTeX/" rel="tag">BibTeX</a>, <a class="article-tag-link-link" href="/tags/LaTeX/" rel="tag">LaTeX</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/05/21/adbbbfaecb54/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.2k(words)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 8(minutes)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <blockquote>
+<p> 引用：<a target="_blank" rel="noopener" href="https://blog.csdn.net/xueshengke/article/details/77446478">BibTeX 定制自己的参考文献模板 bst_Xue Shengke 博客-CSDN博客</a></p>
+<p> 感谢作者付出，本文谨防CSDN丢失。</p>
+</blockquote>
+<p>逆波兰语法是一种后缀语句。其内容并不算难，但是网上的资料几乎没有，而且也一般情况下没有人会去编写它。但是在需要自己设计 bibliography-style 文件 bst 之时，就需要了解这方面的知识了。</p>
+<p>btxhak.pdf 是介绍 BibTeX 配置文件中的逆波兰代码基本语法的，位于系统 CTeX 安装目录下： /doc/texlive-base/bibtex/base/btxhak.pdf</p>
+<h4 id="命令"><a href="#命令" class="headerlink" title="命令"></a>命令</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ENTRY</td>
+<td>定义词条变量</td>
+</tr>
+<tr>
+<td>EXECUTE</td>
+<td>执行一个函数</td>
+</tr>
+<tr>
+<td>FUNCTION</td>
+<td>函数</td>
+</tr>
+<tr>
+<td>INTEGERS</td>
+<td>整数变量</td>
+</tr>
+<tr>
+<td>ITERATE</td>
+<td>执行一个函数</td>
+</tr>
+<tr>
+<td>MACRO</td>
+<td>宏定义：用于定义一些月份缩写，或是期刊名缩写</td>
+</tr>
+<tr>
+<td>READ</td>
+<td>未知</td>
+</tr>
+<tr>
+<td>REVERSE</td>
+<td>和 ITERATE 一样，不过以逆序执行</td>
+</tr>
+<tr>
+<td>SORT</td>
+<td>排序</td>
+</tr>
+<tr>
+<td>STRINGS</td>
+<td>字符串变量</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="内置函数"><a href="#内置函数" class="headerlink" title="内置函数"></a>内置函数</h4><p>这里一共介绍 37 个内置函数。每一个函数都以 $ 为结尾。这里的第一个和第二个指的是弹出堆栈的顺序（与压入堆栈时相反）。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>built-in 函数</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&gt;</td>
+<td>弹出堆栈最上层的两个整数，并比较它们，如果第二个大于第一个，则压入 1；否则，压入 0 。</td>
+</tr>
+<tr>
+<td>&lt;</td>
+<td>弹出堆栈最上层的两个整数，并比较它们，如果第一个大于第二个，则压入 1；否则，压入 0 。</td>
+</tr>
+<tr>
+<td>=</td>
+<td>弹出堆栈最上层的两个元素，并比较它们，如果二者相等，则压入 1；否则，压入 0 。</td>
+</tr>
+<tr>
+<td>+</td>
+<td>弹出堆栈最上层的两个整数，两者相加，结果压入栈 。</td>
+</tr>
+<tr>
+<td>-</td>
+<td>弹出堆栈最上层的两个整数，第二个减去第一个，结果压入栈 。</td>
+</tr>
+<tr>
+<td>*</td>
+<td>弹出堆栈最上层的两个元素，并将它们连接起来，顺序为 “第二个”“第一个”，并把结果压入堆栈中。</td>
+</tr>
+<tr>
+<td>:=</td>
+<td>弹出堆栈最上层的两个元素，将第二个元素赋值给第一个（变量）。</td>
+</tr>
+<tr>
+<td>add.period$</td>
+<td>弹出堆栈最上层的（字符串）元素，如果最后一个非 } 字符不是 .，？，或 ！，加一个 .，然后将结果压入堆栈。</td>
+</tr>
+<tr>
+<td>call.type$</td>
+<td>执行一个名称和词条类型一致的函数。比如词条类型是 book，那么执行 book 函数。</td>
+</tr>
+<tr>
+<td>change.case$</td>
+<td>弹出堆栈最上层的两个字符串，根据第一个字符串的值来改变。如果第一个字符串是“t”，那么将第二个字符串的所有字母都改为小写（除了第一个字母，和冒号之后的第一个字母）；如果第一个字符串是“l”，那么将第二个字符串所有的字母都转为小写；如果第一个字符串是“u”，那么将第二个字符串所有的字母都转为大写；然后将结果压入堆栈中。如果任意一个字符串的格式不对，那么会报错，并压入一个空字符串。如果类型对了，但是指定的值不是“l,t,u”，直接将第二个字符串压回堆栈。（“t”或“T”大小写没有区别）</td>
+</tr>
+<tr>
+<td>chr.to.int$</td>
+<td>弹出堆栈最上层的字符串，确保其只是一个简单的字符，将其转化为对应的 ASCII 码整数，然后压回堆栈。</td>
+</tr>
+<tr>
+<td>cite$</td>
+<td>将这个 \cite 命令参数的词条，以字符串形式压入堆栈。</td>
+</tr>
+<tr>
+<td>duplicate$</td>
+<td>弹出堆栈最上层的一个元素，复制一个后，两个都压回堆栈。</td>
+</tr>
+<tr>
+<td>empty$</td>
+<td>弹出堆栈最上层的一个元素，如果它是空白字符串或没有内容，压入 1 至堆栈；否则，压入 0 。</td>
+</tr>
+<tr>
+<td>format.name$</td>
+<td>弹出堆栈最上层的三个元素，分别是字符串，整数，字符串。第一个字符串代表一个名字列表（人名），第二个整数表示将列表中哪一个人名提出，最后一个字符串代表如何进行格式化。最后将格式化后的人名结果压回堆栈。</td>
+</tr>
+<tr>
+<td>if$</td>
+<td>弹出堆栈最上层的三个元素，按顺序分别是（两个函数，一个整数），如果整数大于 0，执行第二个函数，否则，执行第一个函数。</td>
+</tr>
+<tr>
+<td>int.to.chr$</td>
+<td>弹出堆栈最上层的整数，将其转化为对应的 ASCII 码单字符，然后压回堆栈。</td>
+</tr>
+<tr>
+<td>int.to.str$</td>
+<td>弹出堆栈最上层的整数，将其转化为唯一对应的字符串（根据编码），然后压回堆栈。</td>
+</tr>
+<tr>
+<td>missing$</td>
+<td>弹出堆栈最上层的一个元素，如果它是没有内容，压入 1 至堆栈；否则，压入 0 。</td>
+</tr>
+<tr>
+<td>newline$</td>
+<td>将输出缓存中的内容写入到 bbl 文件中去。如果缓存是空的，就会写入一个空行。由于 write$ 函数能进行合理的断行，所以只在需要一个空行或是断行的时候使用该函数。</td>
+</tr>
+<tr>
+<td>num.name$</td>
+<td>弹出堆栈最上层的字符串，计算其中的人名的个数，其中每出现一个 “and” （忽略大小写），并之前有非空的字符，则计数加一。最后将结果压入堆栈。</td>
+</tr>
+<tr>
+<td>pop$</td>
+<td>弹出堆栈最上层的元素，但是不打印它，用于除去一些不需要的堆栈内容。</td>
+</tr>
+<tr>
+<td>preamble$</td>
+<td>将所有 @premable 字符串（来自数据文件 bib）连接起来，并压入堆栈中。</td>
+</tr>
+<tr>
+<td>purify$</td>
+<td>弹出堆栈最上层的字符串，除去其中所有的非字母数字符号，除去特殊字符，但空格例外，(连接符和波浪符会变成空格），结果压回堆栈。</td>
+</tr>
+<tr>
+<td>quote$</td>
+<td>将含有双引号的字符串压入堆栈。</td>
+</tr>
+<tr>
+<td>skip$</td>
+<td>一个空操作，什么也不执行。</td>
+</tr>
+<tr>
+<td>stack$</td>
+<td>将此时堆栈中的所有内容按顺序弹出，并打印出来。仅供调试使用。</td>
+</tr>
+<tr>
+<td>substring$</td>
+<td>弹出堆栈最上层的三个元素，按顺序分别是（两个整数，长度 len 和起始位置 start，一个字符串），取出长度为 len，从第 start 个字符开始（索引从 1 开始）的子字符串，并压回堆栈。如果 start 是负数，只将第 -start 个字符取出，压回堆栈。</td>
+</tr>
+<tr>
+<td>swap$</td>
+<td>交换堆栈顶部的两个元素。</td>
+</tr>
+<tr>
+<td>text.length$</td>
+<td>弹出堆栈最上层的字符串，计算其中的文本字符的数量，带音标的字符也记作一个字符，括号不计。结果压入堆栈。</td>
+</tr>
+<tr>
+<td>text.prefix$</td>
+<td>弹出堆栈最上层的两个元素，按顺序分别是（一个整数 len，一个字符串），取出从第一个文本字符开始，长度为 len 的子字符串，并压回堆栈。类似于 substring$，但是带音标的字符也记作一个文本字符，括号不会被当作文本字符。另外，此函数会添加需要的匹配的右括号。</td>
+</tr>
+<tr>
+<td>top$</td>
+<td>将堆栈最上层的元素弹出，并输出到终端或 log 文件中，用于调试。</td>
+</tr>
+<tr>
+<td>type$</td>
+<td>将当前词条的类型压入堆栈中（比如，book，atricle，inproceedings），但是如果类型未知，会压入空字符串。</td>
+</tr>
+<tr>
+<td>warning$</td>
+<td>弹出堆栈最上层的元素，并打印到 warning 信息中。</td>
+</tr>
+<tr>
+<td>while$</td>
+<td>弹出堆栈最上层的两个函数，只要留在堆栈中的整数值大于 0（在第一个函数中判断），就继续执行第二个函数。</td>
+</tr>
+<tr>
+<td>width$</td>
+<td>弹出堆栈最上层的字符串，计算其宽度，并压入堆栈中。使用一些相对单位，目前是 cmr10 字体，六月 1987 版。该函数会将字符串按真实打印处理。此函数用于比较标签字符串。</td>
+</tr>
+<tr>
+<td>write$</td>
+<td>弹出堆栈最上层的元素，并写入到 *.bbl 文件中</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p> 注意到 while$ 和 if$ 命令都需要 2 个函数在堆栈中。一种是方法是在函数名前加一个单引号，或是直接将一段语句用 { } 包住，即表示一个函数定义，比如：</p>
+</blockquote>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">label &quot;&quot; =</span><br><span class="line">    &#x27;skip<span class="formula">$</span></span><br><span class="line"><span class="formula">    &#123; label &quot;a&quot; * &#x27;label := &#125;</span></span><br><span class="line"><span class="formula">if$</span></span><br></pre></td></tr></table></figure>
+<h4 id="人名格式化"><a href="#人名格式化" class="headerlink" title="人名格式化"></a>人名格式化</h4><p>人名在 bibtex 中被看作四部分，分别是：First name，von，Last name, Jr 。每一部分都对应着名字的一部分，比如：<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">author = &quot;Charles Louis Xavier Joseph de la Vall&#123;<span class="tag">\<span class="name">&#x27;</span></span>e&#125;e Poussin&quot;</span><br></pre></td></tr></table></figure><br>如果按照如下的格式进行格式化：<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;&#123;vv~&#125;&#123;ll&#125;&#123;, jj&#125;&#123;, f&#123;.&#125;.&#125;&quot;</span><br></pre></td></tr></table></figure><br>那么会得到如下的人名输出：<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">de~la Vall&#123;<span class="tag">\<span class="name">&#x27;</span></span>e&#125;e~Poussin, C.L.X.J.</span><br></pre></td></tr></table></figure><br>仔细分析：vv 表示将 de la 部分不缩写（单个 v 表示缩写），vv~表示必要时会加上波浪号；ll 表示姓不缩写（单个 l 表示缩写）；, jj 表示先输出一个逗号加一个空格，然后将 Jr 部分按原样输出（此例中没有出现）；, f{.}. 表示名进行缩写为一个大写首字母，然后紧跟一个句号，多个之间格式一致，即 C.L.X.J. 。</p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://blog.karakarua.com/2021/05/21/adbbbfaecb54/" title="转载：BibTeX 定制自己的参考文献模板 BST" target="_blank" rel="external">http://blog.karakarua.com/2021/05/21/adbbbfaecb54/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://blog.karakarua.com/about/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/caracal.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://blog.karakarua.com/about/" target="_blank"><span class="text-dark">Karakarua</span><small class="ml-1x">Developer</small></a></h3>
+        <div>学无止境</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="uyan_frame"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2021/05/21/e1331dc9bf12/" title="LaTeX参考文献模板 BST语法"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=[object Object]"></script>
+
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
