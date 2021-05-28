@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  <!-- Color theme for statusbar -->
+  <meta name="theme-color" content="#000000" />
+  <!-- 强制页面在当前窗口以独立页面显示,防止别人在框架里调用页面 -->
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <title>转载：Gerrit Missing Change-Id | karakarua&#39;s blog</title>
+  <meta name="description" content="转载：Gerrit “Missing Change-Id” 出处：gerrit “missing Change-Id”  场景你用 git push 向 gerrit 提交了待审核代码,一切都很顺利,你脑袋里冒出了”代码头上加了’佛祖保佑’果然有效”的想法.此时 git 打印出如下提示,你的内心OS同步打印 “心情 -5” : 123456789101112remote: Resolving de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="转载：Gerrit Missing Change-Id">
+<meta property="og:url" content="http://blog.karakarua.com/2021/05/28/e792a0bb33b0/">
+<meta property="og:site_name" content="Karakarua&#39;s blog">
+<meta property="og:description" content="转载：Gerrit “Missing Change-Id” 出处：gerrit “missing Change-Id”  场景你用 git push 向 gerrit 提交了待审核代码,一切都很顺利,你脑袋里冒出了”代码头上加了’佛祖保佑’果然有效”的想法.此时 git 打印出如下提示,你的内心OS同步打印 “心情 -5” : 123456789101112remote: Resolving de">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-05-28T08:48:00.000Z">
+<meta property="article:modified_time" content="2021-05-28T08:48:35.376Z">
+<meta property="article:author" content="Ferrilata">
+<meta property="article:tag" content="Git">
+<meta property="article:tag" content="Gerrit">
+<meta name="twitter:card" content="summary">
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://blog.karakarua.com/2021/05/28/e792a0bb33b0/index.html">
+  
+  
+    <link rel="icon" href="/favicon.png" type="image/x-icon">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+  
+  
+<meta name="generator" content="Hexo 5.0.2"></head>
+
+
+<body class="main-center theme-green" itemscope itemtype="http://schema.org/WebPage">
+  <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+  <div class="slimContent">
+    <div class="navbar-header">
+      
+      
+      <div class="profile-block text-center">
+        <a id="avatar" href="https://blog.karakarua.com/about/" target="_blank">
+          <img class="img-circle img-rotate" src="/images/caracal.png" width="200" height="200">
+        </a>
+        <h2 id="name" class="hidden-xs hidden-sm">Karakarua</h2>
+        <h3 id="title" class="hidden-xs hidden-sm hidden-md">Developer</h3>
+        <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i> Beijing, China</small>
+      </div>
+      
+      <div class="search" id="search-form-wrap">
+
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i class="icon icon-search"></i></button>
+            </span>
+        </div>
+    </form>
+    <div class="ins-search">
+  <div class="ins-search-mask"></div>
+  <div class="ins-search-container">
+    <div class="ins-input-wrapper">
+      <input type="text" class="ins-search-input" placeholder="Type something..." x-webkit-speech />
+      <button type="button" class="close ins-close ins-selectable" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <div class="ins-section-wrapper">
+      <div class="ins-section-container"></div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+      <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+      <ul class="nav navbar-nav main-nav ">
+        
+        
+        <li class="menu-item menu-item-home">
+          <a href="/.">
+            
+            <i class="icon icon-home-fill"></i>
+            
+            <span class="menu-title">Home</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives">
+            
+            <i class="icon icon-archives-fill"></i>
+            
+            <span class="menu-title">Archives</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories">
+            
+            <i class="icon icon-folder"></i>
+            
+            <span class="menu-title">Categories</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags">
+            
+            <i class="icon icon-tags"></i>
+            
+            <span class="menu-title">Tags</span>
+          </a>
+        </li>
+        
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about">
+            
+            <i class="icon icon-cup-fill"></i>
+            
+            <span class="menu-title">About</span>
+          </a>
+        </li>
+        
+      </ul>
+      
+    </nav>
+  </div>
+</header>
+
+  
+    <aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title">Board</h3>
+    <div class="widget-body">
+        <div id="board">
+            <div class="content">
+                <p>欢迎交流与分享经验!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget-body">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Code/">Code</a><span class="category-list-count">6</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Concurrency/">Concurrency</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Deepin/">Deepin</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Git/">Git</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/HedgeDoc/">HedgeDoc</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java/">Java</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Java-Web/">Java Web</a><span class="category-list-count">10</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LaTeX/">LaTeX</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Misc/">Misc</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Nginx/">Nginx</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/SQL/">SQL</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/hexo/">hexo</a><span class="category-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget-body">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/BibTeX/" rel="tag">BibTeX</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CentOS/" rel="tag">CentOS</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Code/" rel="tag">Code</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodiMD/" rel="tag">CodiMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Concurrency/" rel="tag">Concurrency</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Deepin/" rel="tag">Deepin</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Docker/" rel="tag">Docker</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Gerrit/" rel="tag">Gerrit</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Git/" rel="tag">Git</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HackMD/" rel="tag">HackMD</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/HedgeDoc/" rel="tag">HedgeDoc</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java/" rel="tag">Java</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Java-Web/" rel="tag">Java Web</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LaTeX/" rel="tag">LaTeX</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Linux/" rel="tag">Linux</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mininet/" rel="tag">Mininet</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mybatis-Plus/" rel="tag">Mybatis-Plus</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Nginx/" rel="tag">Nginx</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Python/" rel="tag">Python</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Regex/" rel="tag">Regex</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SQL/" rel="tag">SQL</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shell/" rel="tag">Shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Shiro/" rel="tag">Shiro</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Spring-Boot/" rel="tag">Spring Boot</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Tomcat/" rel="tag">Tomcat</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget-body tagcloud">
+      <a href="/tags/BibTeX/" style="font-size: 13.17px;">BibTeX</a> <a href="/tags/CentOS/" style="font-size: 13.5px;">CentOS</a> <a href="/tags/Code/" style="font-size: 13.83px;">Code</a> <a href="/tags/CodiMD/" style="font-size: 13px;">CodiMD</a> <a href="/tags/Concurrency/" style="font-size: 13px;">Concurrency</a> <a href="/tags/Deepin/" style="font-size: 13.5px;">Deepin</a> <a href="/tags/Docker/" style="font-size: 13.67px;">Docker</a> <a href="/tags/Gerrit/" style="font-size: 13px;">Gerrit</a> <a href="/tags/Git/" style="font-size: 13px;">Git</a> <a href="/tags/HackMD/" style="font-size: 13px;">HackMD</a> <a href="/tags/HedgeDoc/" style="font-size: 13px;">HedgeDoc</a> <a href="/tags/Java/" style="font-size: 13.17px;">Java</a> <a href="/tags/Java-Web/" style="font-size: 14px;">Java Web</a> <a href="/tags/LaTeX/" style="font-size: 13.33px;">LaTeX</a> <a href="/tags/Linux/" style="font-size: 13.83px;">Linux</a> <a href="/tags/Mininet/" style="font-size: 13px;">Mininet</a> <a href="/tags/Mybatis-Plus/" style="font-size: 13px;">Mybatis-Plus</a> <a href="/tags/Nginx/" style="font-size: 13px;">Nginx</a> <a href="/tags/Python/" style="font-size: 13.17px;">Python</a> <a href="/tags/Regex/" style="font-size: 13px;">Regex</a> <a href="/tags/SQL/" style="font-size: 13.17px;">SQL</a> <a href="/tags/Shell/" style="font-size: 13px;">Shell</a> <a href="/tags/Shiro/" style="font-size: 13px;">Shiro</a> <a href="/tags/Spring-Boot/" style="font-size: 13.5px;">Spring Boot</a> <a href="/tags/Tomcat/" style="font-size: 13px;">Tomcat</a> <a href="/tags/Vue/" style="font-size: 13.5px;">Vue</a> <a href="/tags/hexo/" style="font-size: 13.17px;">hexo</a>
+    </div>
+  </div>
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Archive</h3>
+    <div class="widget-body">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">May 2021</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/04/">April 2021</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/03/">March 2021</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/10/">October 2020</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/09/">September 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">August 2020</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/07/">July 2020</a><span class="archive-list-count">8</span></li></ul>
+    </div>
+  </div>
+
+
+    
+      
+  <div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+      <ul class="recent-post-list list-unstyled no-thumbnail">
+        
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Git/">Git</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/28/e792a0bb33b0/" class="title">转载：Gerrit Missing Change-Id</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-28T08:48:00.000Z" itemprop="datePublished">2021-05-28</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/LaTeX/">LaTeX</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/21/adbbbfaecb54/" class="title">转载：BibTeX 定制自己的参考文献模板 BST</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-21T14:53:40.000Z" itemprop="datePublished">2021-05-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/LaTeX/">LaTeX</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/05/21/e1331dc9bf12/" class="title">LaTeX参考文献模板 BST语法</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-05-21T14:33:40.000Z" itemprop="datePublished">2021-05-21</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Linux/">Linux</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/11/4abf9b4212e8/" class="title">CentOS使用ptrash防止rm误删</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-10T16:00:00.000Z" itemprop="datePublished">2021-04-11</time>
+              </p>
+            </div>
+          </li>
+          
+          <li>
+            
+            <div class="item-inner">
+              <p class="item-category">
+                <a class="category-link" href="/categories/Nginx/">Nginx</a>
+              </p>
+              <p class="item-title">
+                <a href="/2021/04/03/73582942da17/" class="title">Nginx反向代理多个docker容器</a>
+              </p>
+              <p class="item-date">
+                <time datetime="2021-04-03T07:23:00.000Z" itemprop="datePublished">2021-04-03</time>
+              </p>
+            </div>
+          </li>
+          
+      </ul>
+    </div>
+  </div>
+  
+
+    
+  </div>
+</aside>
+
+  
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF"><span class="toc-number">1.</span> <span class="toc-text">场景</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A5%97%E8%B7%AF"><span class="toc-number">2.</span> <span class="toc-text">套路</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80-%E4%BD%BF%E7%94%A8-amend-%E9%80%89%E9%A1%B9%E7%94%9F%E6%88%90-Change-Id"><span class="toc-number">2.1.</span> <span class="toc-text">方法一: 使用 amend 选项生成 Change-Id:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C-%E5%A6%82%E6%9E%9C%E7%BC%BA%E5%A4%B1-Change-Id-%E7%9A%84%E4%B8%8D%E6%98%AF%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA-commit-%E5%8F%AF%E7%94%A8-reset-%E6%96%B9%E6%B3%95"><span class="toc-number">2.2.</span> <span class="toc-text">方法二: 如果缺失 Change-Id 的不是最后一个 commit, 可用 reset 方法:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%89-%E4%BD%BF%E7%94%A8%E4%BA%A4%E4%BA%92%E5%BC%8F-rebase-%E6%89%BE%E5%9B%9E%E4%BB%BB%E6%84%8F%E6%8F%90%E4%BA%A4%E4%BD%8D%E7%BD%AE%E7%9A%84-Change-Id"><span class="toc-number">2.3.</span> <span class="toc-text">方法三: 使用交互式 rebase 找回任意提交位置的 Change-Id:</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5-%E6%89%BE%E5%88%B0%E7%BC%BA%E5%A4%B1-Change-Id-%E7%9A%84%E9%82%A3%E4%B8%AA-commit"><span class="toc-number">2.3.1.</span> <span class="toc-text">第一步,找到缺失 Change-Id 的那个 commit:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E7%BC%96%E8%BE%91%E4%BA%A4%E4%BA%92%E5%BC%8F-rebase-%E7%9A%84%E5%91%BD%E4%BB%A4%E6%96%87%E4%BB%B6"><span class="toc-number">2.3.2.</span> <span class="toc-text">第二步,编辑交互式 rebase 的命令文件:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-%E9%80%90%E4%B8%AA%E7%BC%96%E8%BE%91-commit-msg"><span class="toc-number">2.3.3.</span> <span class="toc-text">第三步,逐个编辑 commit-msg:</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E5%86%8D%E6%AC%A1%E6%8F%90%E4%BA%A4"><span class="toc-number">2.3.4.</span> <span class="toc-text">第四步,再次提交:</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BF%83%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">心法:</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#gerrit-%E7%9A%84-Change-Id-%E6%9C%BA%E5%88%B6"><span class="toc-number">3.1.</span> <span class="toc-text">gerrit 的 Change-Id 机制:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#git-%E7%9A%84-hook-%E6%9C%BA%E5%88%B6"><span class="toc-number">3.2.</span> <span class="toc-text">git 的 hook 机制:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%A9%E7%94%A8-git-commit-%E2%80%94amend-%E9%87%8D%E6%96%B0%E7%94%9F%E6%88%90-Change-Id-%E7%9A%84%E5%8E%9F%E7%90%86"><span class="toc-number">3.3.</span> <span class="toc-text">利用 git commit —amend 重新生成 Change-Id 的原理:</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-转载：Gerrit Missing Change-Id" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      转载：Gerrit Missing Change-Id
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/05/28/e792a0bb33b0/" class="article-date">
+	  <time datetime="2021-05-28T08:48:00.000Z" itemprop="datePublished">2021-05-28</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/Git/">Git</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/Gerrit/" rel="tag">Gerrit</a>, <a class="article-tag-link-link" href="/tags/Git/" rel="tag">Git</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/05/28/e792a0bb33b0/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2.8k(words)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 12(minutes)</span>
+	
+
+      </div>
+    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <p>转载：Gerrit “Missing Change-Id”</p>
+<p>出处：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/9fbc50742b54">gerrit “missing Change-Id” </a></p>
+<h4 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h4><p>你用 git push 向 gerrit 提交了待审核代码,一切都很顺利,你脑袋里冒出了”代码头上加了’佛祖保佑’果然有效”的想法.<br>此时 git 打印出如下提示,你的内心OS同步打印 “心情 -5” :</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">remote: Resolving deltas: 100% (14/14)</span><br><span class="line">remote: Processing changes: refs: 1,<span class="keyword">done</span>   </span><br><span class="line">remote: ERROR: missing Change-Idincommit message footer</span><br><span class="line">remote:</span><br><span class="line">remote: Hint: To automatically insert Change-Id,installthe hook:</span><br><span class="line">remote:   gitdir=$(git rev-parse --git-dir);scp-p -P 29418 liux@gerrit.xxxxx.com:hooks/commit-msg<span class="variable">$&#123;gitdir&#125;</span>/hooks/</span><br><span class="line">remote: And <span class="keyword">then</span> amend the commit:</span><br><span class="line">remote:   git commit --amend</span><br><span class="line">remote:</span><br><span class="line">To ssh://liux@121.xx.xx.xx:29418/kaiba_admin_yunying.git</span><br><span class="line"> ! [remote rejected] HEAD -&gt; refs/<span class="keyword">for</span>/master(missing Change-Idincommit message footer)</span><br><span class="line">error: failed to push some refs to<span class="string">&#x27;ssh://liux@121.xx.xx.xx:29418/sample_project.git&#x27;</span></span><br></pre></td></tr></table></figure>
+<h4 id="套路"><a href="#套路" class="headerlink" title="套路"></a>套路</h4><p><strong>大前提: commit-msg 文件必须已经在该项目中存在.</strong><br>使用ls命令检查该文件是否存在:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> project_dir</span><br><span class="line">$ ls.git/hooks/commit-msg</span><br></pre></td></tr></table></figure><br>如果该文件不存在,则按照 git push 时产生的提示信息,获取该文件:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gitdir=$(git rev-parse --git-dir);scp-p -P 29418 liux@gerrit.xxxxx.com:hooks/commit-msg<span class="variable">$&#123;gitdir&#125;</span>/hooks/</span><br></pre></td></tr></table></figure><br>上面的命令可以直接从 git push 产生的错误信息中复制出来.<br>如果要手敲该命令,别忘了把用户名换成自己的.</p>
+<h5 id="方法一-使用-amend-选项生成-Change-Id"><a href="#方法一-使用-amend-选项生成-Change-Id" class="headerlink" title="方法一: 使用 amend 选项生成 Change-Id:"></a>方法一: 使用 amend 选项生成 Change-Id:</h5><p>如果缺失 Change-Id 的是最后一个 (head) commit, 使用以下命令即可解决问题:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git commit --amend</span><br></pre></td></tr></table></figure><br>该命令会打开默认的 commit message 编辑器,一般是 vi.<br>这时什么都不用修改,直接保存退出即可 (<code>:wq</code>).<br>再次查看 git log,就会发现缺失的 Change-Id 已经被补上了. 再次<code>git push</code> 即可.</p>
+<h5 id="方法二-如果缺失-Change-Id-的不是最后一个-commit-可用-reset-方法"><a href="#方法二-如果缺失-Change-Id-的不是最后一个-commit-可用-reset-方法" class="headerlink" title="方法二: 如果缺失 Change-Id 的不是最后一个 commit, 可用 reset 方法:"></a>方法二: 如果缺失 Change-Id 的不是最后一个 commit, 可用 reset 方法:</h5><p>比如,如果缺失 Change-Id 的 commit 是 git log 中的第二个 commit, 则可以用 git reset 命令将本地分支回退到该 commit.<br>(但其实用 git reset 找回 Change-Id 是普通青年才干的事情,文艺青年有更优雅的办法.见方法三)<br>首先执行 git log, 找出缺失了 Change-Id 的 commit,并复制其 commit-id:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">commit 8e1cad33bcd98e175cba710b1eacfd631a5dda41</span><br><span class="line">Author: liux &lt;liux@xxxx.cn&gt;</span><br><span class="line">Date:   Mon Dec 19 17:43:00 2016 +0800</span><br><span class="line"></span><br><span class="line">    testcommit<span class="string">&quot;with amended commit message&quot;</span></span><br><span class="line">     </span><br><span class="line">    Change-Id: I9d2af0cc31423cf808cd235de0ad02abf451937d</span><br><span class="line"></span><br><span class="line">commit 1a9096a34322885ac101175ddcac7dab4c52665d</span><br><span class="line">Author: liux &lt;liux@xxxx.cn&gt;</span><br><span class="line">Date:   Mon Dec 19 15:23:36 2016 +0800</span><br><span class="line"></span><br><span class="line">    testcommit-msg hook</span><br><span class="line"></span><br><span class="line">......</span><br></pre></td></tr></table></figure><br>发现是第二个 commit 缺失 Change-Id. 将代码 reset 到这个 commit, 并执行 amend:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git reset 1a9096a34322885ac101175ddcac7dab4c52665d</span><br><span class="line">$ git commit --amend</span><br></pre></td></tr></table></figure><br><strong>注</strong>: 上面的 git reset 用法不会毁灭你写的代码,放心执行即可.<br>这时 git log 可以发现该 commit 已经补全了 change-Id.<br>下一步是把 git reset 撤消掉的代码重新 commit, 然后 push 即可:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git add ......</span><br><span class="line">$ git commit -m <span class="string">&quot;你的提交日志&quot;</span></span><br><span class="line">$ git push review HEAD:refs/<span class="keyword">for</span>/master</span><br></pre></td></tr></table></figure></p>
+<h5 id="方法三-使用交互式-rebase-找回任意提交位置的-Change-Id"><a href="#方法三-使用交互式-rebase-找回任意提交位置的-Change-Id" class="headerlink" title="方法三: 使用交互式 rebase 找回任意提交位置的 Change-Id:"></a>方法三: 使用交互式 rebase 找回任意提交位置的 Change-Id:</h5><p>前面方法二中给出的例子是第二个提交缺失 Change-Id,这时用 git reset 还可以解决问题.<br>但如果你在一个方案上已经工作了一个月,生成了100个本地 commit,提交时才发现 git log 中第99个 commit 缺失 Change-Id. 如果这时还用 git reset 来找回 Change-Id ……<br>不要香菇,不要蓝瘦.文艺青年表示有办法优雅的解决问题: 交互式 rebase.</p>
+<h6 id="第一步-找到缺失-Change-Id-的那个-commit"><a href="#第一步-找到缺失-Change-Id-的那个-commit" class="headerlink" title="第一步,找到缺失 Change-Id 的那个 commit:"></a>第一步,找到缺失 Change-Id 的那个 commit:</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">log</span></span><br><span class="line">commit 8aaaa749db4a5b105aa746659c5cd266ac82fffe</span><br><span class="line">Author: liux &lt;liux@xxxx.cn&gt;</span><br><span class="line">Date:   Mon Dec 19 17:43:24 2016 +0800</span><br><span class="line"></span><br><span class="line">    I am commit message 3</span><br><span class="line">     </span><br><span class="line">    Change-Id: Ic89d5ce6ce4de70d1dcb315ce543c86a2b3ac003</span><br><span class="line"></span><br><span class="line">commit 8e1cad33bcd98e175cba710b1eacfd631a5dda41</span><br><span class="line">Author: liux &lt;liux@xxxx.cn&gt;</span><br><span class="line">Date:   Mon Dec 19 17:43:00 2016 +0800</span><br><span class="line"></span><br><span class="line">    I am commit message 2</span><br><span class="line">     </span><br><span class="line">    Change-Id: I9d2af0cc31423cf808cd235de0ad02abf451937d</span><br><span class="line"></span><br><span class="line">commit 1a9096a34322885ac101175ddcac7dab4c52665d</span><br><span class="line">Author: liux &lt;liux@xxxx.cn&gt;</span><br><span class="line">Date:   Mon Dec 19 15:23:36 2016 +0800</span><br><span class="line"></span><br><span class="line">    I am commit message 1</span><br><span class="line"></span><br><span class="line">commit d714bcde0c14ba4622d28952c4b2a80882b19927</span><br><span class="line">Author: shangsb &lt;shangsb@czfw.cn&gt;</span><br><span class="line">Date:   Wed Dec 14 09:20:52 2016 +0800</span><br><span class="line"></span><br><span class="line">    这是一个提交</span><br><span class="line">     </span><br><span class="line">    Change-Id: I629b2bedff95491875f63634ad3da199612735b6</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>发现是 “I am commit message 1” 这个提交没有 Change-Id.</p>
+<h6 id="第二步-编辑交互式-rebase-的命令文件"><a href="#第二步-编辑交互式-rebase-的命令文件" class="headerlink" title="第二步,编辑交互式 rebase 的命令文件:"></a>第二步,编辑交互式 rebase 的命令文件:</h6><p>执行<code>git rebase -i</code>, 参数为 该提交的上一个提交的 commit-id (本例中为 “表单” 那个提交):<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">$ git rebase -i d714bcde0c14ba4622d28952c4b2a80882b19927</span><br><span class="line">这个命令会打开默认的编辑器,一般为 vi. 内容如下:</span><br><span class="line">pick 1a9096a I am commit message 1</span><br><span class="line">pick 8e1cad3 I am commit message 2</span><br><span class="line">pick 8aaaa74 I am commit message 3</span><br><span class="line"><span class="comment"># Rebase d714bcd..8aaaa74 onto d714bcd</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Commands:</span></span><br><span class="line"><span class="comment">#  p, pick = use commit</span></span><br><span class="line"><span class="comment">#  r, reword = use commit, but edit the commit message</span></span><br><span class="line"><span class="comment">#  e, edit = use commit, but stop for amending</span></span><br><span class="line"><span class="comment">#  s, squash = use commit, but meld into previous commit</span></span><br><span class="line"><span class="comment">#  f, fixup = like &quot;squash&quot;, but discard this commit&#x27;s log message</span></span><br><span class="line"><span class="comment">#  x, exec = run command (the rest of the line) using shell</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># These lines can be re-ordered; they are executed from top to bottom.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># If you remove a line here THAT COMMIT WILL BE LOST.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># However, if you remove everything, the rebase will be aborted.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Note that empty commits are commented out</span></span><br></pre></td></tr></table></figure><br>可以将这个文件理解为 git rebase 的内嵌脚本.其命令写法已经在下面的注释里给出了.<br>这里不赘述,仅给出最终要将该文件编辑成什么样子:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">reword 1a9096a I am commit message 1</span><br><span class="line">pick 8e1cad3 I am commit message 2</span><br><span class="line">pick 8aaaa74 I am commit message 3</span><br><span class="line"><span class="comment"># Rebase d714bcd..8aaaa74 onto d714bcd</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Commands:</span></span><br><span class="line"><span class="comment">#  p, pick = use commit</span></span><br><span class="line"><span class="comment">#  r, reword = use commit, but edit the commit message</span></span><br><span class="line"><span class="comment">#  e, edit = use commit, but stop for amending</span></span><br><span class="line"><span class="comment">#  s, squash = use commit, but meld into previous commit</span></span><br><span class="line"><span class="comment">#  f, fixup = like &quot;squash&quot;, but discard this commit&#x27;s log message</span></span><br><span class="line"><span class="comment">#  x, exec = run command (the rest of the line) using shell</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># These lines can be re-ordered; they are executed from top to bottom.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># If you remove a line here THAT COMMIT WILL BE LOST.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># However, if you remove everything, the rebase will be aborted.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># Note that empty commits are commented out</span></span><br></pre></td></tr></table></figure><br>即: 将缺失了 Change-Id 的 commit 前面的<code>pick</code> 改为 <code>reword</code>即可 (简写 <code>r</code>也可以). 保存退出 (<code>:wq</code>)<br><strong>注1</strong>: 上述文件中 commit 的顺序是和 git log 显示的顺序相反的: git log 为最新的在最前; 上述文件为 最新的在最后.<br><strong>注2</strong>: 如果进入该模式后,却不确定该怎么改,这时不要担心,直接退出编辑则什么都不会发生 (:q!)<br><strong>注3</strong>: 如果没有搞清楚原理,就要注意,除了按需把 <code>pick</code> 改为 <code>reword</code>外,不要做其他改动.尤其注意不要删除任何行 (被删除的那行对应的提交将丢失).<br><strong>注4</strong>: 你应该已经发现,有多个 commit 缺失 Change-Id 的情况也可以用该方法一次性处理.</p>
+<h6 id="第三步-逐个编辑-commit-msg"><a href="#第三步-逐个编辑-commit-msg" class="headerlink" title="第三步,逐个编辑 commit-msg:"></a>第三步,逐个编辑 commit-msg:</h6><p>上一步打开的文件保存退出后,git会逐个打开被你标注了 reword 的提交日志页面.<br>不需要修改任何东西,逐个保存退出即可 (一路 <code>:wq</code>).</p>
+<h6 id="第四步-再次提交"><a href="#第四步-再次提交" class="headerlink" title="第四步,再次提交:"></a>第四步,再次提交:</h6><p>用 git log 查看提交日志,会发现缺失的 Change-Id 都生成了. 愉快的提交代码吧!<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git push review HEAD:refs/<span class="keyword">for</span>/master</span><br></pre></td></tr></table></figure></p>
+<h4 id="心法"><a href="#心法" class="headerlink" title="心法:"></a>心法:</h4><h5 id="gerrit-的-Change-Id-机制"><a href="#gerrit-的-Change-Id-机制" class="headerlink" title="gerrit 的 Change-Id 机制:"></a>gerrit 的 Change-Id 机制:</h5><p>首先要明确, Change-Id 是 gerrit (代码审核平台)的概念, 与 git (版本管理) 是没有关系的.<br>简单来说, Change-Id 是 gerrit 用以追踪具体提交的机制. 这里不贴网上已有的解释,举两个栗子大家体会下:</p>
+<ol>
+<li>你已经用 git push 将代码提交 gerrit 审核了,这时你发现代码中有疏漏,修改了一下,执行 git commit —amend, 再次推送还可以成功. 这就是因为 gerrit 检查到两次 push 的 commit 有同一个 change-id, 就认为是同一个提交,因此可以 amend.</li>
+<li>git push 将代码提交到 gerrit 审核,到 gerrit 网站一看,大红字标着 Can Not Merge 字样. 我想常用 gerrit 的同学肯定都遇到过这问题. 之前我的做法是, git reset 后,更新代码,再重新提交. 现在的做法是,不用 git reset 了,直接 git commit —amend, 删掉 commit log 中的 change-id 那行,然后wq保存退出.这时 gerrit 的那个钩子脚本会再生成一个不同的 change-id ,这时再更新代码,重新提交即可成功. 这里只简要介绍该方法,具体步骤将在 代码冲突 场景中详解.<br>Change-Id 的生成机制请继续向下看.<h5 id="git-的-hook-机制"><a href="#git-的-hook-机制" class="headerlink" title="git 的 hook 机制:"></a>git 的 hook 机制:</h5>钩子(hooks)是一些在$GIT-DIR/hooks目录的脚本, 在被特定的事件(certain points)触发后被调用。当git init命令被调用后, 一些非常有用的示例钩子脚本被拷到新仓库的hooks目录中; 但是在默认情况下它们是不生效的。 把这些钩子文件的”.sample”文件名后缀去掉就可以使它们生效。<br>hook机制可以理解为回调.各个钩子其实就是一段 bash 脚本,各钩子脚本的名字都是固定的.可以查看git项目根目录下的 .git/hooks 这个文件夹,看看都有哪些可用的钩子.<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cdproject_dir</span><br><span class="line">$ ls .git/hooks/</span><br><span class="line">applypatch-msg.sample  commit-msg.sample   pre-applypatch.sample  prepare-commit-msg.sample  pre-rebase.sample</span><br><span class="line">commit-msg             post-update.sample  pre-commit.sample      pre-push.sample            update.sample</span><br></pre></td></tr></table></figure>
+如果有自己感兴趣的 git 事件要处理,修改相应的钩子脚本罗辑即可.然后把 .sample 后缀去掉,钩子就生效了.<br>在 gerrit 的 Change-Id 生成机制中,其实 gerrit 就是利用了 commit-msg 的钩子,在我们提交代码后,按一定规则去修改了我们的提交日志,在其末尾添加了这么一行:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Change-Id: .......</span><br></pre></td></tr></table></figure>
+这个钩子脚本是什么时候被加入我们的项目中的呢? 其实就是你在 git push 出错时 gerrit 网站给你的提示中的那句命令:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ gitdir=$(git rev-parse --git-dir);scp -p -P 29418 liux@gerrit.kaiba315.com:hooks/commit-msg<span class="variable">$&#123;gitdir&#125;</span>/hooks/</span><br></pre></td></tr></table></figure>
+执行该命令即可得到生成 Change-Id 的钩子脚本. 这条命令做了以下事情:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// git rev-parse --git-dir 这条命令将找到该项目的 git 目录,并将其赋值给 gitdir 这个变量.</span><br><span class="line">// 一般就是项目根目录下的 .git/ 这个目录.</span><br><span class="line">$ gitdir=$(git rev-parse --git-dir)</span><br><span class="line"></span><br><span class="line">// 执行 scp 命令,从 gerrit 代码服务器将钩子脚本文件 commit-msg 下载到项目的钩子目录下 (一般是 .git/hooks/)</span><br><span class="line">$ scp -p -P 29418 liux@gerrit.kaiba315.com:hooks/commit-msg <span class="variable">$&#123;gitdir&#125;</span>/hooks/</span><br></pre></td></tr></table></figure>
+查看该脚本,会发现它是用 awk 命令处理了 .git/COMMIT_EDITMSG 这个文件.<br>所以如果想手动生成 Change-Id ,只要执行下面命令,就可以生成一个可用的 Change-Id:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cdproject_dir</span><br><span class="line">$ <span class="built_in">echo</span> <span class="string">&quot;some commit&quot;</span> &gt; /tmp/test_generate_change_id</span><br><span class="line">$ .git/hooks/commit-msg/tmp/test_generate_change_id</span><br><span class="line">$ cat /tmp/test_generate_change_id</span><br><span class="line">some commit</span><br><span class="line"></span><br><span class="line">Change-Id: Ic89d5ce6ce4de70d1dcb315ce543c86a2b3ac003</span><br></pre></td></tr></table></figure>
+<h5 id="利用-git-commit-—amend-重新生成-Change-Id-的原理"><a href="#利用-git-commit-—amend-重新生成-Change-Id-的原理" class="headerlink" title="利用 git commit —amend 重新生成 Change-Id 的原理:"></a>利用 git commit —amend 重新生成 Change-Id 的原理:</h5>git commit —amend , 看名字就知道,是对某个 commit 做出修改的.这种修改既可以包含文件修改,也可以仅包含提交日志修改.<br>我们用 —amend 对 commit 做出修改后, commit-msg 的钩子会被重新触发, Change-Id 就会被生成出来.<br>用交互式 git rebase 来生成 Change-Id 也是同一个道理.<br>另:<br>通过总结历次缺失 Change-Id 的例子,发现基本我们自己通过 git commit 生成的提交都会很顺利的生成 Change-Id.<br>通过 git merge, git revert 等命令由 git 自己生成的 commit 则有较高概率会缺失 Change-Id.<br>嗯,我们发现了一个伟大的定律! 然并卵… 并不知道怎么解决这个问题.<br>因此提倡尽量用 git rebase 代替 git merge 来更新代码.<br>事实上, git rebase 更新代码 相较 git merge 更新代码,有诸多优势,只是略复杂些.强烈建议用 git rebase 方式更新代码.</li>
+</ol>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://blog.karakarua.com/2021/05/28/e792a0bb33b0/" title="转载：Gerrit Missing Change-Id" target="_blank" rel="external">http://blog.karakarua.com/2021/05/28/e792a0bb33b0/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://blog.karakarua.com/about/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/caracal.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://blog.karakarua.com/about/" target="_blank"><span class="text-dark">Karakarua</span><small class="ml-1x">Developer</small></a></h3>
+        <div>学无止境</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
+    </div>
+  </article>
+  
+    
+  <section id="comments">
+  	
+      <div id="uyan_frame"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2021/05/21/adbbbfaecb54/" title="转载：BibTeX 定制自己的参考文献模板 BST"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+</main>
+
+  <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+	
+    <div class="copyright">
+    	
+        <div class="publishby">
+        	Theme by <a href="https://github.com/cofess" target="_blank"> cofess </a>base on <a href="https://github.com/cofess/hexo-theme-pure" target="_blank">pure</a>.
+        </div>
+    </div>
+</footer>
+  <script src="//cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script>
+window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+
+<script src="/js/plugin.min.js"></script>
+
+
+<script src="/js/application.js"></script>
+
+
+    <script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: 'Posts',
+            PAGES: 'Pages',
+            CATEGORIES: 'Categories',
+            TAGS: 'Tags',
+            UNTITLED: '(Untitled)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+
+<script src="/js/insight.js"></script>
+
+
+
+
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=[object Object]"></script>
+
+
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
+</html>
