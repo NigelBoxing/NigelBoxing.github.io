@@ -17,21 +17,24 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>LeetCode-146--LRU缓存机制 | karakarua&#39;s blog</title>
-  <meta name="description" content="题目描述:运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。 获取数据 get(key) - 如果关键字 (key) 存在于缓存中，则获取关键字的值（总是正数），否则返回 -1。写入数据 put(key, value) - 如果关键字已经存在，则变更其数据值；如果关键字不存在，则插入该组「关键字&#x2F;值」。当缓">
+  <title>LaTeX参考文献模板 BST语法 | karakarua&#39;s blog</title>
+  <meta name="description" content="需求调整图标题与图的间距 解决方式利用宏包caption，使用\captionsetup，代码如下 1234567\usepackage&amp;#123;caption&amp;#125;% 使用captionsetup设置标题属性\captionsetup[figure]&amp;#123; % 适用于图表题  position&#x3D;bottom,  belowskip&#x3D;3bp, % 控制标题下方间距  aboveski">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LeetCode-146--LRU缓存机制">
-<meta property="og:url" content="http://blog.karakarua.com/2020/07/12/5991101609ed/">
+<meta property="og:title" content="LaTeX参考文献模板 BST语法">
+<meta property="og:url" content="http://blog.karakarua.com/2021/05/21/763fada28e4a/">
 <meta property="og:site_name" content="Karakarua&#39;s blog">
-<meta property="og:description" content="题目描述:运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。 获取数据 get(key) - 如果关键字 (key) 存在于缓存中，则获取关键字的值（总是正数），否则返回 -1。写入数据 put(key, value) - 如果关键字已经存在，则变更其数据值；如果关键字不存在，则插入该组「关键字&#x2F;值」。当缓">
+<meta property="og:description" content="需求调整图标题与图的间距 解决方式利用宏包caption，使用\captionsetup，代码如下 1234567\usepackage&amp;#123;caption&amp;#125;% 使用captionsetup设置标题属性\captionsetup[figure]&amp;#123; % 适用于图表题  position&#x3D;bottom,  belowskip&#x3D;3bp, % 控制标题下方间距  aboveski">
 <meta property="og:locale">
-<meta property="article:published_time" content="2020-07-11T16:00:00.000Z">
-<meta property="article:modified_time" content="2021-03-16T05:27:35.625Z">
+<meta property="og:image" content="https://i.loli.net/2021/05/30/GHKqoMczZxnOTth.png">
+<meta property="og:image" content="https://i.loli.net/2021/05/30/REGLnYNqmHWbalT.png">
+<meta property="article:published_time" content="2021-05-21T14:33:40.000Z">
+<meta property="article:modified_time" content="2021-05-30T13:09:07.747Z">
 <meta property="article:author" content="Ferrilata">
-<meta property="article:tag" content="Code">
+<meta property="article:tag" content="LaTeX">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/05/30/GHKqoMczZxnOTth.png">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://blog.karakarua.com/2020/07/12/5991101609ed/index.html">
+  <link rel="canonical" href="http://blog.karakarua.com/2021/05/21/763fada28e4a/index.html">
   
   
     <link rel="icon" href="/favicon.png" type="image/x-icon">
@@ -303,21 +306,21 @@
   <div class="slimContent">
     <nav id="toc" class="article-toc">
       <h3 class="toc-title">Catalogue</h3>
-      
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">解决方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-number">3.</span> <span class="toc-text">附录</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%BE%E8%A1%A8%E4%B8%8E%E6%96%87%E6%9C%AC%E7%9A%84%E9%97%B4%E8%B7%9D"><span class="toc-number">3.1.</span> <span class="toc-text">图表与文本的间距</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E4%B8%8E%E6%A0%87%E9%A2%98%E7%9A%84%E9%97%B4%E8%B7%9D"><span class="toc-number">3.2.</span> <span class="toc-text">图形与标题的间距</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%9B%BE%E5%BD%A2%E7%9A%84%E6%94%BE%E7%BD%AE"><span class="toc-number">3.3.</span> <span class="toc-text">图形的放置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#latex%E4%B8%AD%E9%95%BF%E5%BA%A6%E5%8D%95%E4%BD%8D"><span class="toc-number">3.4.</span> <span class="toc-text">latex中长度单位</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%84%E5%BD%95-1"><span class="toc-number">4.</span> <span class="toc-text">附录</span></a></li></ol>
     </nav>
   </div>
 </aside>
 
 <main class="main" role="main">
   <div class="content">
-  <article id="post-LeetCode-146--LRU缓存机制" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-LaTeX图表间距" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      LeetCode-146--LRU缓存机制
+      LaTeX参考文献模板 BST语法
     </h1>
   
 
@@ -325,20 +328,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2020/07/12/5991101609ed/" class="article-date">
-	  <time datetime="2020-07-11T16:00:00.000Z" itemprop="datePublished">2020-07-12</time>
+	<a href="/2021/05/21/763fada28e4a/" class="article-date">
+	  <time datetime="2021-05-21T14:33:40.000Z" itemprop="datePublished">2021-05-21</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/Code/">Code</a>
+    <a class="article-category-link" href="/categories/LaTeX/">LaTeX</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/Code/" rel="tag">Code</a>
+	<a class="article-tag-link-link" href="/tags/LaTeX/" rel="tag">LaTeX</a>
   </span>
 
 
@@ -351,25 +354,166 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2020/07/12/5991101609ed/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/05/21/763fada28e4a/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.7k(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.9k(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 6(minutes)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 7(minutes)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p><strong>题目描述:</strong><br>运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制。它应该支持以下操作： 获取数据 get 和 写入数据 put 。</p>
-<p>获取数据 get(key) - 如果关键字 (key) 存在于缓存中，则获取关键字的值（总是正数），否则返回 -1。<br>写入数据 put(key, value) - 如果关键字已经存在，则变更其数据值；如果关键字不存在，则插入该组「关键字/值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间。<br>请在 O(1) 时间复杂度内完成这两种操作。</p>
-<p>来源：力扣（LeetCode）<br>链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/lru-cache">https://leetcode-cn.com/problems/lru-cache</a><br>著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。</p>
-<p><strong>解答：</strong><br><strong>方法一：（来自LeetCode官方题解）</strong><br>使用自带的LinkedHashMap，可以直接模拟LRU。<br>LinkedHashMap的数据结构是在HashMap的基础上，为每个HashMap节点都增加了两个属性before、after，并用双链表把每个节点连接起来，before、after分别代表某元素在双链表的前一个、后一个元素。<br>详细可参考<a target="_blank" rel="noopener" href="https://blog.csdn.net/a724888/article/details/80290276">Java集合详解5：深入理解LinkedHashMap和LRU缓存</a></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//LinkedHashMap的双向链表实现LRU，最后节点为常访问的，头部的节点是最近最久未使用的</span></span><br><span class="line"><span class="keyword">import</span> java.util.LinkedHashMap;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span> <span class="keyword">extends</span> <span class="title">LinkedHashMap</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> capacity;</span><br><span class="line"></span><br><span class="line">    LRUCache(<span class="keyword">int</span> capacity) &#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 需要使用LinkedHashMap中accessOrder=true的构造函数</span></span><br><span class="line">        <span class="comment">// LinkedHashMap(int initialCapacity,float loadFactor,boolean accessOrder)</span></span><br><span class="line">        <span class="comment">// 顺便说个知识点，HashMap初始化并不会分配内存，分配是在第一次put元素后</span></span><br><span class="line">        <span class="keyword">super</span>(capacity, <span class="number">0.75F</span>, <span class="keyword">true</span>);</span><br><span class="line">        <span class="keyword">this</span>.capacity = capacity;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 这个函数是getkey，如果取不到，则返回defaulValue，即第二个参数</span></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">super</span>.getOrDefault(key, -<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 直接继承HashMap的put方法，如果accessOrder=true，则会把刚访问的节点或者新添加的节点安排到双链表末尾</span></span><br><span class="line">        <span class="keyword">super</span>.put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">boolean</span> <span class="title">removeEldestEntry</span><span class="params">(Map.Entry&lt;Integer, Integer&gt; eldest)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// LinkedHashMap继承HashMap，二者的removeEldestEntry均return false，表示不删除最近最久未使用节点</span></span><br><span class="line">        <span class="comment">// 需要重写，这里的逻辑是当元素个数大于初始容量时</span></span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        <span class="comment">// HashMap的threshold修饰级别是default，除了HashMap的实例外，HashMap所在package的其他类也可以访问，</span></span><br><span class="line">        <span class="comment">// 但是除此之外其他都不能访问。因此，这里发生删除元素时，size&gt;16，实际的capacity&gt;24(16/0.75=24)</span></span><br><span class="line">        <span class="keyword">return</span> size() &gt; capacity;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>方法二：</strong><br>哈希表+双向链表方式构造LRU。<br>HashMap用来定位某元素在节点中的位置，映射关系是<Key, ListNode>，(HashMap).get(key)直接拿到节点。<br>双向链表模拟LRU缓存，<strong>头部位置代表最近访问过的，尾部表示最久未使用的。原因：访问过的都往头部转移，那些不常访问的元素就会越来越往后移动。</strong> 这个哪一端是刚刚访问的，随你心情定义，你也可以定义尾部就是刚刚访问的，而头部是最久未使用的。<br>get(int key)的逻辑：寻找某元素时，找不到就返回-1，找得到就返回value，并把该元素移动到头部，代表最近访问了，久而久之，尾部就会使最久未使用的元素。<br>put(int key, int value)的逻辑是，如果不是新元素，就更新该元素value（同时意味着该元素要移动到开头,<strong>可以利用get(key)判断是否是新元素，若元素已存在就会移动到开头，然后更新开头元素value</strong>）；如果是新元素，容量足够就加到头部，代表刚刚访问；容量不够，就得移除尾部节点，再在头部节点添加元素。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashMap;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.Map;</span><br><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> key;</span><br><span class="line">    <span class="keyword">int</span> value;</span><br><span class="line">    ListNode before;</span><br><span class="line">    ListNode after;</span><br><span class="line"></span><br><span class="line">    ListNode(<span class="keyword">int</span> key, <span class="keyword">int</span> value) &#123;</span><br><span class="line">        <span class="keyword">this</span>.key = key;</span><br><span class="line">        <span class="keyword">this</span>.value = value;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LRUCache</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> capacity;</span><br><span class="line">    <span class="comment">// head和tail操作来自LinkedHashMap思想，好处是可以避免好多节点判空操作，比较方便。</span></span><br><span class="line">    <span class="comment">// 牺牲两个节点空间换来操作方便，可以作为编程技巧。</span></span><br><span class="line">    ListNode head;</span><br><span class="line">    ListNode tail;</span><br><span class="line">    Map&lt;Integer, ListNode&gt; map;</span><br><span class="line"></span><br><span class="line">    LRUCache(<span class="keyword">int</span> capacity) &#123;</span><br><span class="line">        <span class="keyword">this</span>.capacity = capacity;</span><br><span class="line">        head = <span class="keyword">new</span> ListNode(-<span class="number">1</span>, -<span class="number">1</span>);</span><br><span class="line">        tail = <span class="keyword">new</span> ListNode(-<span class="number">1</span>, -<span class="number">1</span>);</span><br><span class="line">        head.after = tail;</span><br><span class="line">        tail.before = head;</span><br><span class="line">        map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// get的逻辑是：找不到返回-1，找得到就返回value，并把该元素移动到头部，代表最近访问了，久而久之，尾部就会使最久未使用的元素</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> key)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (capacity == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        ListNode vn = map.get(key);</span><br><span class="line">        <span class="comment">// 找不到元素</span></span><br><span class="line">        <span class="keyword">if</span> (vn == <span class="keyword">null</span>)</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 找到元素，无论它在哪，肯定有前后节点，最不济是head和tail，所以前后节点一定不为空</span></span><br><span class="line">        <span class="comment">// 如果vn是头一个节点，不必操作，直接返回</span></span><br><span class="line">        <span class="keyword">if</span> (vn.before == head)</span><br><span class="line">            <span class="keyword">return</span> vn.value;</span><br><span class="line">        <span class="comment">// 否则，在vn原来的地方移除vn</span></span><br><span class="line">        removeNode(vn);</span><br><span class="line">        <span class="comment">// 移动到开头</span></span><br><span class="line">        addToHead(vn);</span><br><span class="line">        <span class="keyword">return</span> vn.value;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// put的逻辑是，如果不是新元素，就更新该元素value(同时意味着该元素要移动到开头,可以利用get判断是否是新元素，若元素已存在会移动到开头)；</span></span><br><span class="line">    <span class="comment">// 如果是新元素，容量够就加到头部，代表刚刚访问；容量不够，就得移除尾部节点，再在头部节点添加元素</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">put</span><span class="params">(<span class="keyword">int</span> key, <span class="keyword">int</span> value)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (capacity == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        <span class="comment">// 增添就意味着可能要移除元素</span></span><br><span class="line">        <span class="keyword">int</span> v = get(key);</span><br><span class="line">        <span class="comment">// 并非新元素，更新</span></span><br><span class="line">        <span class="keyword">if</span> (v != -<span class="number">1</span>) &#123;</span><br><span class="line">            head.after.value = value;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode newNode = <span class="keyword">new</span> ListNode(key, value);</span><br><span class="line">  </span><br><span class="line">       <span class="comment">/*  这个注释掉的内容是添加新节点的另一个方式</span></span><br><span class="line"><span class="comment">        // 超容量就删除尾部节点</span></span><br><span class="line"><span class="comment">        if (map.size() + 1 &gt; capacity) &#123;</span></span><br><span class="line"><span class="comment">            map.remove(tail.before.key);</span></span><br><span class="line"><span class="comment">            removeNode(tail.before);</span></span><br><span class="line"><span class="comment">        &#125;</span></span><br><span class="line"><span class="comment">        // 添加节点到头部</span></span><br><span class="line"><span class="comment">        map.put(key, newNode);</span></span><br><span class="line"><span class="comment">        addToHead(newNode); </span></span><br><span class="line"><span class="comment">       */</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 多一个元素不超容量，可以直接压入头部</span></span><br><span class="line">        <span class="keyword">if</span> (map.size() + <span class="number">1</span> &lt;= capacity) &#123;</span><br><span class="line">            addToHead(newNode);</span><br><span class="line">            map.put(key, newNode);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 超容量，要去除最后一个最久未使用,并在最前面加入新元素</span></span><br><span class="line">        <span class="comment">// tail.before=head是为了防止容量为0，当然可以直接在开头预防</span></span><br><span class="line">        <span class="comment">// if (tail.before = head)</span></span><br><span class="line">        <span class="comment">// return;</span></span><br><span class="line">        <span class="comment">// 对应map要删除重添加</span></span><br><span class="line">        map.remove(tail.before.key);</span><br><span class="line">        map.put(key, newNode);</span><br><span class="line">        removeNode(tail.before);</span><br><span class="line">        addToHead(newNode);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">removeNode</span><span class="params">(ListNode node)</span> </span>&#123;</span><br><span class="line">        node.before.after = node.after;</span><br><span class="line">        node.after.before = node.before;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">addToHead</span><span class="params">(ListNode vn)</span> </span>&#123;</span><br><span class="line">        ListNode first = head.after;</span><br><span class="line">        head.after = vn;</span><br><span class="line">        vn.before = head;</span><br><span class="line">        vn.after = first;</span><br><span class="line">        first.before = vn;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>完毕。<br>LRU缓存这道题常见于字节跳动的面试题，这里同时分享一个字节跳动面试常考算法题，来自LeetCode.<br><a target="_blank" rel="noopener" href="https://leetcode-cn.com/explore/interview/card/bytedance/">LeetCode探索之字节跳动</a></p>
+        <h4 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h4><p>调整图标题与图的间距</p>
+<h4 id="解决方式"><a href="#解决方式" class="headerlink" title="解决方式"></a>解决方式</h4><p>利用宏包caption，使用\captionsetup，代码如下</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">usepackage</span><span class="string">&#123;caption&#125;</span></span></span><br><span class="line"><span class="comment">% 使用captionsetup设置标题属性</span></span><br><span class="line"><span class="tag">\<span class="name">captionsetup</span><span class="string">[figure]</span><span class="string">&#123; % 适用于图表题</span></span></span><br><span class="line"><span class="tag"><span class="string">  position=bottom,</span></span></span><br><span class="line"><span class="tag"><span class="string">  belowskip=3bp, % 控制标题下方间距</span></span></span><br><span class="line"><span class="tag"><span class="string">  aboveskip=3bp % 控制标题上方间距</span></span></span><br><span class="line"><span class="tag"><span class="string">&#125;</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h4><h5 id="图表与文本的间距"><a href="#图表与文本的间距" class="headerlink" title="图表与文本的间距"></a>图表与文本的间距</h5><p>出处：<a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node72.html">18.1 图形的间距 (ctex.org)</a></p>
+<p>表 <a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node72.html#tab:figlength">18.1</a> 中给出的长度控制着两幅图形之间或图形与正文之间 的间距。与其它的 LATEX 长度不同的是，这三个都是弹性长度，这就使得 它们可以缩短或拉长来更好的排版页面。这些长度可用 <code>\setlength</code> 命令 来设定。例如：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">setlength</span><span class="string">&#123;\floatsep&#125;</span><span class="string">&#123;10pt plus 3pt minus 2pt&#125;</span></span></span><br></pre></td></tr></table></figure>
+<p>将正常的 <code>\floatsep</code> 的值设定为 10pt。并且在需要时可缩短到 8pt 或拉长到 13pt。<br>|tex命令|解释|<br>|—|—|<br>|<code>\floatsep</code>|出现在页面的顶部或底部的浮动对象之间的垂直距离。 缺省为 <code>12pt plus 2pt minus 2pt</code>。|<br>|<code>\textfloatsep</code>|出现在页面的顶部或底部的浮动对象与文本之间的垂直距离。 缺省为 <code>20pt plus 2pt minus 4pt</code>。|<br>|<code>\intextsep</code>|出现在页面中间的浮动对象（如使用了 <code>h</code> 选项 的浮动对象）与上下方文本之间的垂直距离。 缺省为 <code>12pt plus 2pt minus 2pt</code>。|</p>
+<p>表 <a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node72.html#tab:figlength">18.1</a> 中给出的长度不会影响浮动页上各浮动对象之间 的距离。它们由表 <a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node72.html#tab:figlength1">18.2</a> 中给出的长度控制。单位  <code>fil</code> 允许无限伸长，就像由 <code>\vfill</code> 产生的垂直距离 一样。当在一段距离中出现多个 <code>fil</code> 时，它们将按比例 充满这段距离。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>tex命令</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\@fptop</code></td>
+<td>浮动页中顶部的浮动对象上方的空白。 缺省为 <code>0pt plus 1.0fil</code>。</td>
+</tr>
+<tr>
+<td><code>\@fpsep</code></td>
+<td>浮动页中的浮动对象之间的距离。 缺省为 <code>8pt plus 2.0fil</code>。</td>
+</tr>
+<tr>
+<td><code>\@fpbot</code></td>
+<td>浮动页中底部的浮动对象下方的空白。 缺省为 <code>0pt plus 1.0fil</code>。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>在表 <a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node72.html#tab:figlength1">18.2</a> 中的长度名字前的 <code>@</code> 表示 这是一个 LATEX 内部命令<a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/footnode.html#foot4719">18.1</a>。所以，所有改变这些长度的 <code>\setlength</code> 命令都必须放到 <code>\makeatletter</code> 和 <code>\makeatother</code> 之间。例如：</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">makeatletter</span></span> </span><br><span class="line">  <span class="tag">\<span class="name">addtolength</span><span class="string">&#123;\@fpsep&#125;</span><span class="string">&#123;4pt&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">makeatother</span></span></span><br></pre></td></tr></table></figure>
+<p>将浮动页中浮动对象之间的距离增加了 4pt。</p>
+<h5 id="图形与标题的间距"><a href="#图形与标题的间距" class="headerlink" title="图形与标题的间距"></a>图形与标题的间距</h5><p>出处：<a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node74.html">18.3 图形与标题的间距 (ctex.org)</a></p>
+<p>LATEX 假定图形的标题位于图形的下方，故而在标题上方保留了更 多的空白。因此<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;figure&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">centering</span></span> </span><br><span class="line"><span class="tag">\<span class="name">caption</span><span class="string">&#123;Caption Above Graphic&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">includegraphics</span><span class="string">[width=2in]</span><span class="string">&#123;graphic.eps&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">&#123;figure&#125;</span></span></span><br></pre></td></tr></table></figure><br>生成的图 18.1 中标题和图形非常接近。</p>
+<p><img src="https://i.loli.net/2021/05/30/GHKqoMczZxnOTth.png" alt="图18.1"></p>
+<p>标题上下方的间距由长度 \abovecaptionskip 和  \belowcaptionskip （缺省分别为 10pt 与零）。可以用标准的 LATEX  命令 \setlength 和 \addtolength 来修改这些长度。 例如：<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">begin</span><span class="string">&#123;figure&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">setlength</span><span class="string">&#123;\abovecaptionskip&#125;</span><span class="string">&#123;0pt&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">setlength</span><span class="string">&#123;\belowcaptionskip&#125;</span><span class="string">&#123;10pt&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">centering</span></span> </span><br><span class="line"><span class="tag">\<span class="name">caption</span><span class="string">&#123;Caption Above Graphic&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">includegraphics</span><span class="string">[width=2in]</span><span class="string">&#123;graphic.eps&#125;</span></span> </span><br><span class="line"><span class="tag">\<span class="name">end</span><span class="string">&#123;figure&#125;</span></span></span><br></pre></td></tr></table></figure><br>得到图 18.2。其中标题的上方没有额外的 空白，与图形之间则有 10pt 的距离。<br><img src="https://i.loli.net/2021/05/30/REGLnYNqmHWbalT.png" alt="图18.2"><br>如果一个文档的所有浮动对象的标题都位于该对象的上方，那么可将 命令<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">setlength</span><span class="string">&#123;\abovecaptionskip&#125;</span><span class="string">&#123;0pt&#125;</span></span></span><br><span class="line"><span class="tag">\<span class="name">setlength</span><span class="string">&#123;\belowcaptionskip&#125;</span><span class="string">&#123;10pt&#125;</span></span></span><br></pre></td></tr></table></figure><br>放到导言区里，从而对整个文档都起作用。如果只是有一部分标题 要求位于浮动对象的上方，那么可定义如下的命令：<br><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">newcommand</span><span class="string">&#123;\topcaption&#125;</span><span class="string">&#123;% </span></span></span><br><span class="line"><span class="tag"><span class="string">  \setlength&#123;\abovecaptionskip&#125;</span><span class="string">&#123;0pt&#125;</span></span><span class="comment">% </span></span><br><span class="line">  <span class="tag">\<span class="name">setlength</span><span class="string">&#123;\belowcaptionskip&#125;</span><span class="string">&#123;10pt&#125;</span></span><span class="comment">% </span></span><br><span class="line">  <span class="tag">\<span class="name">caption</span></span>&#125;</span><br></pre></td></tr></table></figure><br>在希望得到上方标题的时候可用 \topcaption{标题文本}  来代替 \caption{标题文本} 即可。</p>
+<h5 id="图形的放置"><a href="#图形的放置" class="headerlink" title="图形的放置"></a>图形的放置</h5><p>图形（<code>figure</code>）环境有一个可选参数项允许用户来指示图形有可能 被放置的位置。这一可选参数项可以是下列字母的任意组合。</p>
+<ul>
+<li><strong><code>h</code></strong>当前位置。 将图形放置在 正文文本中给出该图形环境的地方。如果本页所剩的页面不够， 这一参数将不起作用。</li>
+<li><strong><code>t</code></strong>顶部。 将图形放置在页面的顶部。</li>
+<li><strong><code>b</code></strong>底部。 将图形放置在页面的底部 <a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/footnode.html#foot2585">16.1</a>。</li>
+<li><strong><code>p</code></strong>浮动页。 将图形放置在一只允许 有浮动对象的页面上。<br><strong>注</strong>：</li>
+<li>如果在图形环境中没有给出上述任一参数，则缺省为 <code>[tbp]</code>。</li>
+<li>给出参数的顺序不会影响到最后的结果。因为在考虑这些参数时 LATEX 总是尝试以 <code>h-t-b-p</code> 的顺序来确定图形的位置。所以  <code>[hb]</code> 和 <code>[bh]</code> 都使 LATEX 以 <code>h-b</code> 的顺序来排版。</li>
+<li>给出的参数越多， LATEX 的排版结果就会越好。 <code>[htbp], [tbp], [htp], [tp]</code> 这些组合得到的效果不错。</li>
+<li>只给出单个的参数项极易引发问题<a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/footnode.html#foot4703">16.2</a>。 如果该图形不适合所指定的位置，它就会被搁置并阻碍对后面的图形 的处理。一旦这些阻塞的图形数目超过了 18 幅这一 LATEX 所能容许 的最大值，就会产生 ``Too Many Unprocessed Floats’’ 的错误（见 第 <a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node65.html#sec:unprocessfig">16.3</a> 节）。</li>
+</ul>
+<p>当 LATEX ”试图“ 放置一浮动图形时， 它将遵循以下规则：</p>
+<ol>
+<li>图形只能置于由位置参数所确定的地点。</li>
+<li>图形的放置不能造成超过版心的错误（<code>overfull page</code>）。</li>
+<li>图形只能置于当前页或后面的页中<a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/footnode.html#foot4706">16.3</a>。所以图形只能 “ 向后浮动” 而 不能 “向前浮动”。</li>
+<li>图形必须按顺序出现。这样只有当前面的图形都被放置好之后才能被放置。<ol>
+<li>只要前面有未被处理的图形，一幅图形就不会被放在当前位置。</li>
+<li>一幅 “不可能放置” 的图形将阻碍它后面的图形的放置。直到 文件结束或达到 LATEX 的浮动限制。参见第 <a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node66.html#sec:toomanyfig">16.4</a> 节。</li>
+<li>同样地，一表格也只能在其前面的表格都被处理完后才能被放置。 不过，表格在排版时是跳过图形而单独处理的。</li>
+</ol>
+</li>
+<li>必须符合在第 <a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node67.html#chap:typerule">17</a> 章中给出的审美条件。例如，一页上的 浮动对象的数目不能超过 <code>totalnumber</code>。 在浮动位置选项前加上一个惊叹号（如 <code>\begin&#123;figure&#125;[!ht]</code>） 会使 LATEX 忽略应用于文本页的审美条件，试图用最严格的标准来 放置浮动图形。不过， <code>!</code> 不会影响应用于浮动页的审美条件。</li>
+</ol>
+<h5 id="latex中长度单位"><a href="#latex中长度单位" class="headerlink" title="latex中长度单位"></a>latex中长度单位</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mm</td>
+<td>毫米</td>
+<td>1 mm = 2.845 pt</td>
+</tr>
+<tr>
+<td>pt    点</td>
+<td></td>
+<td>1 pt = 0.351 mm</td>
+</tr>
+<tr>
+<td>bp</td>
+<td>大点</td>
+<td>1 bp = 0.353 mm &gt; 1 pt</td>
+</tr>
+<tr>
+<td>dd</td>
+<td>迪多</td>
+<td>1 dd = 0.376 mm = 1.07 pt</td>
+</tr>
+<tr>
+<td>pc</td>
+<td>排卡</td>
+<td>1 pc = 4.218 mm = 12 pt</td>
+</tr>
+<tr>
+<td>sp</td>
+<td>定标点</td>
+<td>65536 sp = 1 pt</td>
+</tr>
+<tr>
+<td>cm</td>
+<td>厘米</td>
+<td>1 cm= 10 mm= 28.453 pt</td>
+</tr>
+<tr>
+<td>cc</td>
+<td>西塞罗</td>
+<td>1 cc= 4.513 mm= 12 dd = 12.84 pt</td>
+</tr>
+<tr>
+<td>in</td>
+<td>英寸</td>
+<td>1 in = 25.4 mm = 72.27 pt</td>
+</tr>
+<tr>
+<td>ex</td>
+<td>ex</td>
+<td>1 ex = 当前字体尺寸中 x 的高度</td>
+</tr>
+<tr>
+<td>em</td>
+<td>em</td>
+<td>1 em = 当前字体尺寸中 M 的宽度</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>参考链接：</p>
+<ul>
+<li>关键链接：<ul>
+<li><a target="_blank" rel="noopener" href="https://www.latexstudio.net/archives/8652.html">LaTeX技巧884：如何用caption宏包格式化图表标题和子标题</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/shouhangli/p/14606347.html">latex如何调整段落、图片或者表格上下的空白</a>    </li>
+<li><a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node72.html">18.1 图形的间距 (ctex.org)</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node74.html">18.3 图形与标题的间距 (ctex.org)</a></li>
+</ul>
+</li>
+<li>非关键链接：<ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/liuqiangaliuv/article/details/79947889">latex图表</a></li>
+<li><a target="_blank" rel="noopener" href="https://tex.stackexchange.com/questions/26220/control-spacing-around-table-caption">Control spacing around table caption</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="附录-1"><a href="#附录-1" class="headerlink" title="附录"></a>附录</h4><p><a target="_blank" rel="noopener" href="http://www.ctex.org/documents/latex/graphics/node2.html">CTeX 在线文档—Contents (ctex.org)</a></p>
 
       
     </div>
@@ -379,7 +523,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://blog.karakarua.com/2020/07/12/5991101609ed/" title="LeetCode-146--LRU缓存机制" target="_blank" rel="external">http://blog.karakarua.com/2020/07/12/5991101609ed/</a>
+      <a href="http://blog.karakarua.com/2021/05/21/763fada28e4a/" title="LaTeX参考文献模板 BST语法" target="_blank" rel="external">http://blog.karakarua.com/2021/05/21/763fada28e4a/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -426,12 +570,12 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2020/07/21/93b1076d0048/" title="(Windows-Linux)Spring Boot启动异常：Sprint-Boot-Tomcat--An-incompatible-version-[1-x-x]-o"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2021/05/21/e1331dc9bf12/" title="LaTeX参考文献模板 BST语法"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2020/07/11/09321f9ef153/" title="Linux-VSCode-Code-Runner编译不生成临时文件(Java)"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/04/11/4abf9b4212e8/" title="CentOS使用ptrash防止rm误删"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
     
