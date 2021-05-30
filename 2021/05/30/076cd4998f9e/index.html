@@ -17,16 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>Category: Code | karakarua&#39;s blog</title>
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Karakarua&#39;s blog">
-<meta property="og:url" content="http://blog.karakarua.com/categories/Code/">
+  <title>LaTeX设置标题样式 | karakarua&#39;s blog</title>
+  <meta name="description" content="需求需要定制标题样式，比如标题的前后间距，标题的字体样式 解决方法通过@startsection命令 \@startsection命令参数可见 1\@startsection &amp;#123;NAME&amp;#125;&amp;#123;LEVEL&amp;#125;&amp;#123;INDENT&amp;#125;&amp;#123;BEFORESKIP&amp;#125;&amp;#123;AFTERSKIP&amp;#125;&amp;#123;STYLE&amp;#125;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LaTeX设置标题样式">
+<meta property="og:url" content="http://blog.karakarua.com/2021/05/30/076cd4998f9e/">
 <meta property="og:site_name" content="Karakarua&#39;s blog">
+<meta property="og:description" content="需求需要定制标题样式，比如标题的前后间距，标题的字体样式 解决方法通过@startsection命令 \@startsection命令参数可见 1\@startsection &amp;#123;NAME&amp;#125;&amp;#123;LEVEL&amp;#125;&amp;#123;INDENT&amp;#125;&amp;#123;BEFORESKIP&amp;#125;&amp;#123;AFTERSKIP&amp;#125;&amp;#123;STYLE&amp;#125;">
 <meta property="og:locale">
+<meta property="article:published_time" content="2021-05-30T13:28:26.000Z">
+<meta property="article:modified_time" content="2021-05-30T13:28:32.039Z">
 <meta property="article:author" content="Ferrilata">
+<meta property="article:tag" content="LaTeX">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://blog.karakarua.com/categories/Code/index.html">
+  <link rel="canonical" href="http://blog.karakarua.com/2021/05/30/076cd4998f9e/index.html">
   
   
     <link rel="icon" href="/favicon.png" type="image/x-icon">
@@ -293,117 +298,248 @@
 </aside>
 
   
-  <main class="main" role="main">
-  <article class="content article article-categories article-type-list" itemscope="">
-    <header class="article-header">
-      <h1 itemprop="name" class="hidden-xs">Category: Code</h1>
-      <p class="hidden-xs">Total 6 articles</p>
-      <nav role="navigation" id="nav-main" class="okayNav">
-        <ul>
-          <li><a href="/categories">All</a></li>
-          
-          <li><a href="/categories/Java/">Java</a></li>
-          
-          <li><a href="/categories/Java-Web/">Java Web</a></li>
-          
-          <li><a href="/categories/Deepin/">Deepin</a></li>
-          
-          <li><a href="/categories/Code/">Code</a></li>
-          
-          <li><a href="/categories/Misc/">Misc</a></li>
-          
-          <li><a href="/categories/hexo/">hexo</a></li>
-          
-          <li><a href="/categories/Concurrency/">Concurrency</a></li>
-          
-          <li><a href="/categories/Docker/">Docker</a></li>
-          
-          <li><a href="/categories/SQL/">SQL</a></li>
-          
-          <li><a href="/categories/Linux/">Linux</a></li>
-          
-          <li><a href="/categories/HedgeDoc/">HedgeDoc</a></li>
-          
-          <li><a href="/categories/Nginx/">Nginx</a></li>
-          
-          <li><a href="/categories/LaTeX/">LaTeX</a></li>
-          
-          <li><a href="/categories/Git/">Git</a></li>
-          
-        </ul>
-      </nav>
-    </header>
-    <!-- /header -->
-    <div class="article-body">
-      <div class="panel panel-default b-no">
-    <div class="panel-heading" role="tab">
-        <h4 class="panel-title">
-            <a data-toggle="collapse" href="#collapseCode" aria-expanded="true">
-              <i class="icon icon-folder text-active"></i><i class="icon icon-folder-open text"></i>
-              Code
-            </a>
-            <small class="text-muted">(Total 6 articles)</small>
-        </h4>
+  
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <nav id="toc" class="article-toc">
+      <h3 class="toc-title">Catalogue</h3>
+      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">解决方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.1.</span> <span class="toc-text">示例</span></a></li></ol></li></ol>
+    </nav>
+  </div>
+</aside>
+
+<main class="main" role="main">
+  <div class="content">
+  <article id="post-LaTeX设置标题样式" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      
+        
+  
+    <h1 class="article-title" itemprop="name">
+      LaTeX设置标题样式
+    </h1>
+  
+
+      
+      <div class="article-meta">
+        <span class="article-date">
+    <i class="icon icon-calendar-check"></i>
+	<a href="/2021/05/30/076cd4998f9e/" class="article-date">
+	  <time datetime="2021-05-30T13:28:26.000Z" itemprop="datePublished">2021-05-30</time>
+	</a>
+</span>
+        
+  <span class="article-category">
+    <i class="icon icon-folder"></i>
+    <a class="article-category-link" href="/categories/LaTeX/">LaTeX</a>
+  </span>
+
+        
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>
+	<a class="article-tag-link-link" href="/tags/LaTeX/" rel="tag">LaTeX</a>
+  </span>
+
+
+        
+	<span class="article-read hidden-xs">
+	    <i class="icon icon-eye-fill" aria-hidden="true"></i>
+	    <span id="busuanzi_container_page_pv">
+			<span id="busuanzi_value_page_pv">0</span>
+		</span>
+	</span>
+
+
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/05/30/076cd4998f9e/#comments" class="article-comment-link">Comments</a></span>
+        
+	
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 587(words)</span>
+	
+	
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 2(minutes)</span>
+	
+
+      </div>
     </div>
-    <div id="collapseCode" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingCode">
-        <div class="panel-body">
-            <div class="collection">
-              
-                
-<a href="/2021/03/16/fb2f8daaafda/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-03-15T16:00:00.000Z" itemprop="datePublished">2021-03-16</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 转载-数据结构与算法知识点思维导图
-</a>
-
-
-              
-                
-<a href="/2021/01/13/166d8b96ee8b/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2021-01-12T16:00:00.000Z" itemprop="datePublished">2021-01-13</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 从暴力破解到动态规划解答题目连续子数组的最大和
-</a>
-
-
-              
-                
-<a href="/2020/10/25/364db06a3c43/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-10-25T13:41:48.000Z" itemprop="datePublished">2020-10-25</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Java 优先队列自排序时机
-</a>
-
-
-              
-                
-<a href="/2020/09/22/118d0a70269e/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-22T12:31:00.000Z" itemprop="datePublished">2020-09-22</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> 大厂笔试题1——小强去买东西的概率
-</a>
-
-
-              
-                
-<a href="/2020/09/05/ad3e8ec3f0f6/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-09-05T04:00:22.000Z" itemprop="datePublished">2020-09-05</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> Leetcode 11 盛最多水的容器
-</a>
-
-
-              
-                
-<a href="/2020/07/12/5991101609ed/" class="collection-item" target="_blank" itemprop="url">
-  <time datetime="2020-07-11T16:00:00.000Z" itemprop="datePublished">2020-07-12</time>
-  <span>&nbsp;&nbsp;&nbsp;</span> LeetCode-146--LRU缓存机制
-</a>
-
-
-              
-            </div>
-        </div>
-    </div>
+    <div class="article-entry marked-body" itemprop="articleBody">
+      
+        <h4 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h4><p>需要定制标题样式，比如标题的前后间距，标题的字体样式</p>
+<h4 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h4><p>通过<code>@startsection</code>命令</p>
+<p><code>\@startsection</code>命令参数可见</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">@</span></span>startsection &#123;NAME&#125;&#123;LEVEL&#125;&#123;INDENT&#125;&#123;BEFORESKIP&#125;&#123;AFTERSKIP&#125;&#123;STYLE&#125;</span><br></pre></td></tr></table></figure>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NAME</code></td>
+<td>表示所定义的节标题的名称（不要带反斜杠），比如section和subsection。</td>
+</tr>
+<tr>
+<td><code>LEVEL</code></td>
+<td>是一个数字，可以定义节标题的命令层次。这个数决定了定义的节标题是否编号（若是小于等于 secnumdepth则被编号）也决定了标题是否会被编进目录（若是小于等于tocdepth则被编号）。</td>
+</tr>
+<tr>
+<td><code>INDENT</code></td>
+<td>定义节标题到版心左边的距离。此度量若是负数则标题进入边空。</td>
+</tr>
+<tr>
+<td><code>BEFORESKIP</code></td>
+<td>是一个长度，其绝对值表示标题到上文之间的距离。若是此距离为负数，则标题后面的第一个段落不缩进。此度量最好是一个可以被伸长和缩短的长度。另外标题总是另起一段的。因而parskip已被加入到标题与上下文的距离。</td>
+</tr>
+<tr>
+<td><code>AFTERSKIP</code></td>
+<td>是一个长度，其绝对值表示独立显示的标题到下文之间的垂直间距或者是段内显示的标题到下文之间的距离。此度量若是负的，则定义的标题是段内显示的。对于独立显示的标题，parskip也已被加进标题与下文的距离。</td>
+</tr>
+<tr>
+<td><code>STYLE</code></td>
+<td>决定标题的内容形式。可以是任意影响文本排版结构的命令如加入尺寸\huge \large \bfseries 对齐命令等</td>
+</tr>
+</tbody>
+</table>
 </div>
+<p>以section为例， beforeskip {-3.5ex plus -1ex minus -.2ex} 表示最大-4.5ex, 最小－3.7ex.</p>
+<h5 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h5><p>编写在<code>xxx.cls</code>中的标题示例</p>
+<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">section</span><span class="string">&#123;%</span></span></span><br><span class="line"><span class="tag"><span class="string">  \@startsection &#123;section&#125;</span><span class="string">&#123;1&#125;</span><span class="string">&#123;\z@&#125;</span></span><span class="comment">%</span></span><br><span class="line">  &#123;-8bp <span class="tag">\<span class="name">@</span></span>plus -.1bp <span class="tag">\<span class="name">@</span></span>minus -.2bp&#125;<span class="comment">%</span></span><br><span class="line">  &#123;8bp <span class="tag">\<span class="name">@</span></span>plus .1bp&#125;<span class="comment">%</span></span><br><span class="line">  &#123;<span class="tag">\<span class="name">bfseries</span></span><span class="tag">\<span class="name">csname</span></span> bupt@title@font<span class="tag">\<span class="name">endcsname</span></span><span class="tag">\<span class="name">sihao</span><span class="string">[1.429]</span></span>&#125;<span class="comment">% 此处控制section标题的字体</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">subsection</span><span class="string">&#123;%</span></span></span><br><span class="line"><span class="tag"><span class="string">  \@startsection&#123;subsection&#125;</span><span class="string">&#123;2&#125;</span><span class="string">&#123;\z@&#125;</span></span><span class="comment">%</span></span><br><span class="line">  &#123;-6bp <span class="tag">\<span class="name">@</span></span>plus -.1bp <span class="tag">\<span class="name">@</span></span>minus -.2bp&#125;<span class="comment">%</span></span><br><span class="line">  &#123;6bp <span class="tag">\<span class="name">@</span></span>plus .1bp&#125;<span class="comment">%</span></span><br><span class="line">  &#123;<span class="tag">\<span class="name">bfseries</span></span><span class="tag">\<span class="name">csname</span></span> bupt@title@font<span class="tag">\<span class="name">endcsname</span></span><span class="tag">\<span class="name">xiaosi</span><span class="string">[1.538]</span></span>&#125;<span class="comment">% 此处控制subsection标题的字体</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">\<span class="name">renewcommand</span></span><span class="tag">\<span class="name">subsubsection</span><span class="string">&#123;%</span></span></span><br><span class="line"><span class="tag"><span class="string">  \@startsection&#123;subsubsection&#125;</span><span class="string">&#123;3&#125;</span><span class="string">&#123;\z@&#125;</span></span><span class="comment">%</span></span><br><span class="line">  &#123;-4bp <span class="tag">\<span class="name">@</span></span>plus -.1bp <span class="tag">\<span class="name">@</span></span>minus -.2bp&#125;<span class="comment">%</span></span><br><span class="line">  &#123;4bp <span class="tag">\<span class="name">@</span></span>plus .1bp&#125;<span class="comment">%</span></span><br><span class="line">  &#123;<span class="tag">\<span class="name">song</span></span><span class="tag">\<span class="name">csname</span></span> bupt@title@font<span class="tag">\<span class="name">endcsname</span></span><span class="tag">\<span class="name">xiaosi</span><span class="string">[1.667]</span></span>&#125;<span class="comment">%</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考链接：<a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_5e16f1770100lqn7.html">LaTeX技巧356：修改Latex默认section,subsection样式</a></p>
+
+      
+    </div>
+    <div class="article-footer">
+      <blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    
+    <li class="post-copyright-link hidden-xs">
+      <strong>本文链接：</strong>
+      <a href="http://blog.karakarua.com/2021/05/30/076cd4998f9e/" title="LaTeX设置标题样式" target="_blank" rel="external">http://blog.karakarua.com/2021/05/30/076cd4998f9e/</a>
+    </li>
+    
+    <li class="post-copyright-license">
+      <strong>版权声明： </strong> 本博客所有文章除特别声明外，均采用 <a href="http://creativecommons.org/licenses/by/4.0/deed.zh" target="_blank" rel="external">CC BY 4.0 CN协议</a> 许可协议。转载请注明出处！
+    </li>
+  </ul>
+</blockquote>
+
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://blog.karakarua.com/about/" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="/images/caracal.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://blog.karakarua.com/about/" target="_blank"><span class="text-dark">Karakarua</span><small class="ml-1x">Developer</small></a></h3>
+        <div>学无止境</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+
     </div>
   </article>
-   
+  
+    
+  <section id="comments">
+  	
+      <div id="uyan_frame"></div>
+    
+  </section>
+
+
+  
+</div>
+
+  <nav class="bar bar-footer clearfix" data-stick-bottom>
+  <div class="bar-inner">
+  
+  <ul class="pager pull-left">
+    
+    
+    <li class="next">
+      <a href="/2021/05/28/e792a0bb33b0/" title="转载：Gerrit Missing Change-Id"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+    </li>
+    
+    
+    <li class="toggle-toc">
+      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
+        <span>[&nbsp;</span><span>Catalogue</span>
+        <i class="text-collapsed icon icon-anchor"></i>
+        <i class="text-in icon icon-close"></i>
+        <span>]</span>
+      </a>
+    </li>
+    
+  </ul>
+  
+  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-fancy btn-donate pop-onhover bg-gradient-warning" data-toggle="modal" data-target="#donateModal"><span>$</span></button>
+  <!-- <div class="wave-icon wave-icon-danger btn-donate" data-toggle="modal" data-target="#donateModal">
+    <div class="wave-circle"><span class="icon"><i class="icon icon-bill"></i></span></div>
+  </div> -->
+  
+  
+  <div class="bar-right">
+    
+    <div class="share-component" data-sites="weibo,qq,wechat" data-mobile-sites="weibo,qq,wechat"></div>
+    
+  </div>
+  </div>
+</nav>
+  
+<!-- Modal -->
+<div class="modal modal-center modal-small modal-xs-full fade" id="donateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content donate">
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <div class="modal-body">
+        <div class="donate-box">
+          <div class="donate-head">
+            <p>Maybe you could buy me a cup of coffee.</p>
+          </div>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="alipay">
+              <div class="donate-payimg">
+                <img src="/images/donate/alipayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open alipay app scan this qrcode, buy me a coffee!</p>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="wechatpay">
+              <div class="donate-payimg">
+                <img src="/images/donate/wechatpayimg.png" alt="Scan Qrcode" title="Scan" />
+              </div>
+              <p class="text-muted mv">Scan this qrcode</p>
+              <p class="text-grey">Open wechat app scan this qrcode, buy me a coffee!</p>
+            </div>
+          </div>
+          <div class="donate-footer">
+            <ul class="nav nav-tabs nav-justified" role="tablist">
+              <li role="presentation" class="active">
+                <a href="#alipay" id="alipay-tab" role="tab" data-toggle="tab" aria-controls="alipay" aria-expanded="true"><i class="icon icon-alipay"></i> alipay</a>
+              </li>
+              <li role="presentation" class="">
+                <a href="#wechatpay" role="tab" id="wechatpay-tab" data-toggle="tab" aria-controls="wechatpay" aria-expanded="false"><i class="icon icon-wepay"></i> wechat payment</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </main>
 
   <footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
@@ -448,6 +584,18 @@ window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
 
 
 
+
+
+   
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+   
+    
+    <script defer type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=[object Object]"></script>
 
 
 
