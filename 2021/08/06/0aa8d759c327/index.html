@@ -17,22 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>LaTeX参考文献模板 BST语法 | karakarua&#39;s blog</title>
-  <meta name="description" content="BST表达式语法变量前要加上&#39;，比如表示变量A：’A BST语法是逆波兰表达式，即后缀表达式。 A B + 的含义是A+B，遇到符号，就把栈顶的两个元素拿出来做运算再压回栈内。 部分语法可见连接：关于修改.bst文件（bibtex模板）的几点说明 - 简书 (jianshu.com) if条件判断1234condition&amp;#123;function1&amp;#125; % function1是">
+  <title>泛型类与泛型方法 | karakarua&#39;s blog</title>
+  <meta name="description" content="Java泛型类与泛型方法泛型类定义一个泛型类和普通类的过程类似，区别就在于要在类名的地方使用尖括号”&lt;&gt;”声明泛型变量。比如下面的例子：123456789101112131415&#x2F;&#x2F; T是泛型变量，在类名处被声明，除此之外与定义普通类无差别&#x2F;&#x2F; 泛型变量被声明后，可以在类中被使用public class Pair&lt;T&gt;&amp;#123;    T first;    T seco">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LaTeX参考文献模板 BST语法">
-<meta property="og:url" content="http://blog.karakarua.com/2021/05/21/e1331dc9bf12/">
+<meta property="og:title" content="泛型类与泛型方法">
+<meta property="og:url" content="http://blog.karakarua.com/2021/08/06/0aa8d759c327/">
 <meta property="og:site_name" content="Karakarua&#39;s blog">
-<meta property="og:description" content="BST表达式语法变量前要加上&#39;，比如表示变量A：’A BST语法是逆波兰表达式，即后缀表达式。 A B + 的含义是A+B，遇到符号，就把栈顶的两个元素拿出来做运算再压回栈内。 部分语法可见连接：关于修改.bst文件（bibtex模板）的几点说明 - 简书 (jianshu.com) if条件判断1234condition&amp;#123;function1&amp;#125; % function1是">
+<meta property="og:description" content="Java泛型类与泛型方法泛型类定义一个泛型类和普通类的过程类似，区别就在于要在类名的地方使用尖括号”&lt;&gt;”声明泛型变量。比如下面的例子：123456789101112131415&#x2F;&#x2F; T是泛型变量，在类名处被声明，除此之外与定义普通类无差别&#x2F;&#x2F; 泛型变量被声明后，可以在类中被使用public class Pair&lt;T&gt;&amp;#123;    T first;    T seco">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-05-21T14:33:40.000Z">
-<meta property="article:modified_time" content="2021-05-23T10:35:02.205Z">
+<meta property="article:published_time" content="2021-08-06T17:03:00.000Z">
+<meta property="article:modified_time" content="2021-08-07T17:06:21.206Z">
 <meta property="article:author" content="Ferrilata">
-<meta property="article:tag" content="LaTeX">
-<meta property="article:tag" content="BibTeX">
+<meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://blog.karakarua.com/2021/05/21/e1331dc9bf12/index.html">
+  <link rel="canonical" href="http://blog.karakarua.com/2021/08/06/0aa8d759c327/index.html">
   
   
     <link rel="icon" href="/favicon.png" type="image/x-icon">
@@ -300,25 +299,16 @@
 
   
   
-<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
-  <div class="slimContent">
-    <nav id="toc" class="article-toc">
-      <h3 class="toc-title">Catalogue</h3>
-      <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#BST%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">BST表达式语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#if%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="toc-number">2.</span> <span class="toc-text">if条件判断</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A"><span class="toc-number">2.0.1.</span> <span class="toc-text">示例：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#while%E5%BE%AA%E7%8E%AF"><span class="toc-number">3.</span> <span class="toc-text">while循环</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#BST%E5%86%85%E7%BD%AE%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">BST内置函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%BA%E5%90%8D%E6%A0%BC%E5%BC%8F%E5%8C%96"><span class="toc-number">5.</span> <span class="toc-text">人名格式化</span></a></li></ol>
-    </nav>
-  </div>
-</aside>
-
 <main class="main" role="main">
   <div class="content">
-  <article id="post-LaTeX BST语法" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-泛型类与泛型方法" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      LaTeX参考文献模板 BST语法
+      泛型类与泛型方法
     </h1>
   
 
@@ -326,20 +316,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2021/05/21/e1331dc9bf12/" class="article-date">
-	  <time datetime="2021-05-21T14:33:40.000Z" itemprop="datePublished">2021-05-21</time>
+	<a href="/2021/08/06/0aa8d759c327/" class="article-date">
+	  <time datetime="2021-08-06T17:03:00.000Z" itemprop="datePublished">2021-08-07</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/LaTeX/">LaTeX</a>
+    <a class="article-category-link" href="/categories/Java/">Java</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/BibTeX/" rel="tag">BibTeX</a>, <a class="article-tag-link-link" href="/tags/LaTeX/" rel="tag">LaTeX</a>
+	<a class="article-tag-link-link" href="/tags/Java/" rel="tag">Java</a>
   </span>
 
 
@@ -352,10 +342,10 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/05/21/e1331dc9bf12/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/08/06/0aa8d759c327/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 555(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 558(words)</span>
 	
 	
 		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 2(minutes)</span>
@@ -365,23 +355,11 @@
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <h4 id="BST表达式语法"><a href="#BST表达式语法" class="headerlink" title="BST表达式语法"></a>BST表达式语法</h4><p>变量前要加上<code>&#39;</code>，比如表示变量A：’A</p>
-<p>BST语法是逆波兰表达式，即后缀表达式。 A B + 的含义是A+B，遇到符号，就把栈顶的两个元素拿出来做运算再压回栈内。</p>
-<p>部分语法可见连接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/34153b27fb3e">关于修改.bst文件（bibtex模板）的几点说明 - 简书 (jianshu.com)</a></p>
-<h4 id="if条件判断"><a href="#if条件判断" class="headerlink" title="if条件判断"></a>if条件判断</h4><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">condition</span><br><span class="line">&#123;function1&#125; <span class="comment">% function1是条件为真时的逻辑</span></span><br><span class="line">&#123;function2&#125; <span class="comment">% function2是条件为false的逻辑。</span></span><br><span class="line">if<span class="formula">$</span></span><br></pre></td></tr></table></figure>
-<p>if的示例见链接：<a target="_blank" rel="noopener" href="https://liwt31.github.io/2021/03/02/bst/">通过修改bst文件手动设置LaTeX参考文献格式 | Weitang Li’s blog (liwt31.github.io)</a></p>
-<h6 id="示例："><a href="#示例：" class="headerlink" title="示例："></a>示例：</h6><p>自己用过的一个示例，</p>
-<p>中文文献，超过3个人名时，用小明，小红，小白等，等前面不用逗号，</p>
-<p>英文文献，超过3个人名时，用Tom，Alice，Bob, et al，et al前面要有逗号。</p>
-<figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">language empty<span class="formula">$       %增加判断语句，判断中文文献还是英文文献</span></span><br><span class="line"><span class="formula">&#123; punc.comma *</span></span><br><span class="line"><span class="formula">  bbl.etal *</span></span><br><span class="line"><span class="formula">  num.names &#x27;idx.names :=</span></span><br><span class="line"><span class="formula">&#125;</span></span><br><span class="line"><span class="formula">&#123; bbl.etal *        % 中文作者数量超限时，等字前面没有逗号。</span></span><br><span class="line"><span class="formula">  num.names &#x27;idx.names :=</span></span><br><span class="line"><span class="formula">&#125;</span></span><br><span class="line"><span class="formula">if$</span></span><br></pre></td></tr></table></figure>
-<h4 id="while循环"><a href="#while循环" class="headerlink" title="while循环"></a>while循环</h4><figure class="highlight tex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;condition&#125;</span><br><span class="line">&#123;function&#125;   <span class="comment">%条件为真时的逻辑</span></span><br><span class="line">while<span class="formula">$</span></span><br></pre></td></tr></table></figure>
-<h4 id="BST内置函数"><a href="#BST内置函数" class="headerlink" title="BST内置函数"></a>BST内置函数</h4><p>一般以$结尾的大部分是内置函数</p>
-<p>示例：</p>
-<p>num.names$  弹出堆栈最上层的字符串，计算其中的人名的个数，其中每出现一个 “and” （忽略大小写），并之前有非空的字符，则计数加一。最后将结果压入堆栈。</p>
-<p>empty$ 弹出堆栈最上层的一个元素，如果它是空白字符串或没有内容，压入 1 至堆栈；否则，压入 0 。</p>
-<p>format.name$    弹出堆栈最上层的三个元素，分别是字符串，整数，字符串。第一个字符串代表一个名字列表（人名），第二个整数表示将列表中哪一个人名提出，最后一个字符串代表如何进行格式化。最后将格式化后的人名结果压回堆栈。</p>
-<p>更多内部函数见链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/xueshengke/article/details/77446478">BibTeX 定制自己的参考文献模板 bst_Xue Shengke 博客-CSDN博客</a></p>
-<h4 id="人名格式化"><a href="#人名格式化" class="headerlink" title="人名格式化"></a>人名格式化</h4><p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39713686/article/details/111554464">latex写姓名_Latex中bibtex的命名_weixin_39713686的博客-CSDN博客</a></p>
+        <h1 id="Java泛型类与泛型方法"><a href="#Java泛型类与泛型方法" class="headerlink" title="Java泛型类与泛型方法"></a>Java泛型类与泛型方法</h1><h4 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h4><p>定义一个泛型类和普通类的过程类似，区别就在于要在类名的地方使用尖括号”&lt;&gt;”声明泛型变量。<br>比如下面的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// T是泛型变量，在类名处被声明，除此之外与定义普通类无差别</span></span><br><span class="line"><span class="comment">// 泛型变量被声明后，可以在类中被使用</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;<span class="title">T</span>&gt;</span>&#123;</span><br><span class="line">    T first;</span><br><span class="line">    T second;</span><br><span class="line">    <span class="comment">// 定义类的构造函数时不必再次声明泛型变量</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">()</span></span>&#123;</span><br><span class="line">        first = <span class="keyword">null</span>;</span><br><span class="line">        second = <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(T first, T second)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.first = first;</span><br><span class="line">        <span class="keyword">this</span>.second = second;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>也可以声明多个泛型变量，如下面的例子：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// K,V都是泛型变量</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Pair</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt;</span>&#123;</span><br><span class="line">    K key;</span><br><span class="line">    V value;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(K k, V v)</span></span>&#123;</span><br><span class="line">        key = k;</span><br><span class="line">        value = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h4><p>泛型方法是指定义一个带有泛型参数的方法，该泛型方法在使用泛型参数之前需要声明泛型变量。<br>下面是一个例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="comment">// T是泛型变量，使用尖括号声明，声明要放在修饰符（public static）和返回类型之间</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">getMiddle</span><span class="params">(T[] arr)</span></span>&#123;</span><br><span class="line">        <span class="comment">//示例方法含义是取数组中间的数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><br>下面有个java程序可以运行一下试一试。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span> <span class="params">(String[] args)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        print(<span class="keyword">new</span> man());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Person&gt; <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(T p)</span></span>&#123;</span><br><span class="line">        p.print();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sex;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;&#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">man</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">()</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;i am men&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>Q&amp;A：<br>Question：上面这个例子中，第7行的泛型变量T实际上只被使用了一次，是否将代码改为<code>public static void print(&lt;T extends Person&gt; p)</code>，即同时声明和使用？<br>Answer：不可以，泛型变量使用前必须被声明，且声明应该被放在修饰符（public static）和返回类型之间，否则Java无法识别泛型变量。Java程序会对此段代码<code>public static void print(&lt;T extends Person&gt; p)</code>编译出错，错误结果为<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Main.java:<span class="number">7</span>: error: illegal start of type</span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(&lt;T extends Person&gt; p)</span></span>&#123;</span><br><span class="line">                         ^</span><br><span class="line">Main.java:<span class="number">7</span>: error: &gt; expected</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">print</span><span class="params">(&lt;T extends Person&gt; p)</span></span>&#123;</span><br><span class="line">                                ^</span><br></pre></td></tr></table></figure></p>
+</blockquote>
 
       
     </div>
@@ -391,7 +369,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://blog.karakarua.com/2021/05/21/e1331dc9bf12/" title="LaTeX参考文献模板 BST语法" target="_blank" rel="external">http://blog.karakarua.com/2021/05/21/e1331dc9bf12/</a>
+      <a href="http://blog.karakarua.com/2021/08/06/0aa8d759c327/" title="泛型类与泛型方法" target="_blank" rel="external">http://blog.karakarua.com/2021/08/06/0aa8d759c327/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -437,24 +415,11 @@
   
   <ul class="pager pull-left">
     
-    <li class="prev">
-      <a href="/2021/05/21/adbbbfaecb54/" title="转载：BibTeX 定制自己的参考文献模板 BST"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
-    </li>
-    
     
     <li class="next">
-      <a href="/2021/05/21/763fada28e4a/" title="LaTeX参考文献模板 BST语法"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/05/30/ff68a983e1db/" title="LaTeX设置标题样式"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
-    
-    <li class="toggle-toc">
-      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
-        <span>[&nbsp;</span><span>Catalogue</span>
-        <i class="text-collapsed icon icon-anchor"></i>
-        <i class="text-in icon icon-close"></i>
-        <span>]</span>
-      </a>
-    </li>
     
   </ul>
   
