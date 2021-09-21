@@ -17,21 +17,21 @@
   <meta http-equiv="window-target" content="_top" />
   
   
-  <title>转载：MySQL将查询结果存入新表 | karakarua&#39;s blog</title>
-  <meta name="description" content="链接：MySQL将查询结果插入到另一个表中  如果两张表（查询表和插入表）的字段一致，并且希望插入查询表的全部数据，可以用此方法  123INSERT INTO 目标表 SELECT * FROM 来源表;-- 示例：INSERT INTO user_login1 SELECT * FROM user_login;  如果只希望插入指定字段，可以用此方法，注意两表的字段类型必须一致 123INSE">
+  <title>快速排序算法 | karakarua&#39;s blog</title>
+  <meta name="description" content="题目链接：排序数组 快速排序的思想在于 partion的目标是让比pivot小的元素分布在其左侧，比pivot大的元素分布在其右侧，在排列过程的最后找到一个合适的pivot位置输出。 partion方法1：遇到左边比pivot大的与右边比pivot小时，二者进行交换，最后low&#x3D;&#x3D;high时就是pivot的位置，交换pivot与low&#x3D;&#x3D;high的位置上的数即可。 1234567891011121">
 <meta property="og:type" content="article">
-<meta property="og:title" content="转载：MySQL将查询结果存入新表">
-<meta property="og:url" content="http://blog.karakarua.com/2021/03/30/505a385dca9d/">
+<meta property="og:title" content="快速排序算法">
+<meta property="og:url" content="http://blog.karakarua.com/2021/03/01/3971b354f93d/">
 <meta property="og:site_name" content="Karakarua&#39;s blog">
-<meta property="og:description" content="链接：MySQL将查询结果插入到另一个表中  如果两张表（查询表和插入表）的字段一致，并且希望插入查询表的全部数据，可以用此方法  123INSERT INTO 目标表 SELECT * FROM 来源表;-- 示例：INSERT INTO user_login1 SELECT * FROM user_login;  如果只希望插入指定字段，可以用此方法，注意两表的字段类型必须一致 123INSE">
+<meta property="og:description" content="题目链接：排序数组 快速排序的思想在于 partion的目标是让比pivot小的元素分布在其左侧，比pivot大的元素分布在其右侧，在排列过程的最后找到一个合适的pivot位置输出。 partion方法1：遇到左边比pivot大的与右边比pivot小时，二者进行交换，最后low&#x3D;&#x3D;high时就是pivot的位置，交换pivot与low&#x3D;&#x3D;high的位置上的数即可。 1234567891011121">
 <meta property="og:locale">
-<meta property="article:published_time" content="2021-03-30T09:28:16.000Z">
-<meta property="article:modified_time" content="2021-03-30T09:34:51.165Z">
+<meta property="article:published_time" content="2021-03-01T20:38:00.000Z">
+<meta property="article:modified_time" content="2021-09-21T04:39:35.072Z">
 <meta property="article:author" content="Ferrilata">
-<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="Code">
 <meta name="twitter:card" content="summary">
   <!-- Canonical links -->
-  <link rel="canonical" href="http://blog.karakarua.com/2021/03/30/505a385dca9d/index.html">
+  <link rel="canonical" href="http://blog.karakarua.com/2021/03/01/3971b354f93d/index.html">
   
   
     <link rel="icon" href="/favicon.png" type="image/x-icon">
@@ -39,8 +39,6 @@
   
 <link rel="stylesheet" href="/css/style.css">
 
-  
-    <link href="//cdn.jsdelivr.net/npm/katex@0.9.0/dist/katex.min.css" rel="stylesheet">
   
   
   
@@ -301,25 +299,16 @@
 
   
   
-<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
-  <div class="slimContent">
-    <nav id="toc" class="article-toc">
-      <h3 class="toc-title">Catalogue</h3>
-      
-    </nav>
-  </div>
-</aside>
-
 <main class="main" role="main">
   <div class="content">
-  <article id="post-转载：MySQL将查询结果存入新表" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
+  <article id="post-快速排序苏算法" class="article article-type-post" itemscope itemtype="http://schema.org/BlogPosting">
     
     <div class="article-header">
       
         
   
     <h1 class="article-title" itemprop="name">
-      转载：MySQL将查询结果存入新表
+      快速排序算法
     </h1>
   
 
@@ -327,20 +316,20 @@
       <div class="article-meta">
         <span class="article-date">
     <i class="icon icon-calendar-check"></i>
-	<a href="/2021/03/30/505a385dca9d/" class="article-date">
-	  <time datetime="2021-03-30T09:28:16.000Z" itemprop="datePublished">2021-03-30</time>
+	<a href="/2021/03/01/3971b354f93d/" class="article-date">
+	  <time datetime="2021-03-01T20:38:00.000Z" itemprop="datePublished">2021-03-02</time>
 	</a>
 </span>
         
   <span class="article-category">
     <i class="icon icon-folder"></i>
-    <a class="article-category-link" href="/categories/SQL/">SQL</a>
+    <a class="article-category-link" href="/categories/Code/">Code</a>
   </span>
 
         
   <span class="article-tag">
     <i class="icon icon-tags"></i>
-	<a class="article-tag-link-link" href="/tags/SQL/" rel="tag">SQL</a>
+	<a class="article-tag-link-link" href="/tags/Code/" rel="tag">Code</a>
   </span>
 
 
@@ -353,28 +342,38 @@
 	</span>
 
 
-        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/30/505a385dca9d/#comments" class="article-comment-link">Comments</a></span>
+        <span class="post-comment"><i class="icon icon-comment"></i> <a href="/2021/03/01/3971b354f93d/#comments" class="article-comment-link">Comments</a></span>
         
 	
-		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 135(words)</span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1.3k(words)</span>
 	
 	
-		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 1(minutes)</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 6(minutes)</span>
 	
 
       </div>
     </div>
     <div class="article-entry marked-body" itemprop="articleBody">
       
-        <p>链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45739720/article/details/102686217">MySQL将查询结果插入到另一个表中</a></p>
-<ol>
-<li><p>如果两张表（查询表和插入表）的字段一致，并且希望插入查询表的全部数据，可以用此方法</p>
- <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 目标表 <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> 来源表;</span><br><span class="line"><span class="comment">-- 示例：</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_login1 <span class="keyword">SELECT</span> * <span class="keyword">FROM</span> user_login;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>如果只希望插入指定字段，可以用此方法，注意两表的字段类型必须一致</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> 目标表(字段<span class="number">1</span>,字段<span class="number">2</span>,...) <span class="keyword">SELECT</span> 字段<span class="number">1</span>,字段<span class="number">2</span>,... <span class="keyword">FROM</span> 来源表;</span><br><span class="line"><span class="comment">-- 示例：</span></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> user_info(login_name,<span class="keyword">password</span>) <span class="keyword">SELECT</span> login_name,<span class="keyword">password</span> <span class="keyword">FROM</span> user_login</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
+        <p>题目链接：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/sort-an-array/submissions/">排序数组</a></p>
+<p>快速排序的思想在于</p>
+<p>partion的目标是让比pivot小的元素分布在其左侧，比pivot大的元素分布在其右侧，在排列过程的最后找到一个合适的pivot位置输出。</p>
+<p>partion方法1：遇到左边比pivot大的与右边比pivot小时，二者进行交换，最后low==high时就是pivot的位置，交换pivot与low==high的位置上的数即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution1</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// select one pivot to sort the array partly</span></span><br><span class="line">        <span class="comment">// and return the position of pivot</span></span><br><span class="line">        <span class="keyword">int</span> pos = high;</span><br><span class="line">        <span class="keyword">int</span> pivot = nums[casualPos];</span><br><span class="line">        <span class="keyword">while</span> (low &lt; high) &#123;</span><br><span class="line">            <span class="keyword">while</span> (low &lt; high &amp;&amp; nums[low] &lt;= pivot)</span><br><span class="line">                low++;</span><br><span class="line">            <span class="keyword">while</span> (low &lt; high &amp;&amp; nums[high] &gt;= pivot)</span><br><span class="line">                high--;</span><br><span class="line">            swap(nums, low, high);</span><br><span class="line">        &#125;</span><br><span class="line">        swap(nums, pos, high);</span><br><span class="line">        <span class="keyword">return</span> high;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (start &lt; end) &#123;</span><br><span class="line">            <span class="keyword">int</span> pivot = partition(nums, start, end);</span><br><span class="line">            System.out.println(<span class="string">&quot;pivot=&quot;</span> + pivot);</span><br><span class="line">            Arrays.stream(nums).forEach(System.out::print);</span><br><span class="line">            System.out.println();</span><br><span class="line">            quicksort(nums, start, pivot - <span class="number">1</span>);</span><br><span class="line">            quicksort(nums, pivot + <span class="number">1</span>, end);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> i, <span class="keyword">int</span> j)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> tmp = nums[i];</span><br><span class="line">        nums[i] = nums[j];</span><br><span class="line">        nums[j] = tmp;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123;<span class="number">5</span>,<span class="number">7</span>,<span class="number">1</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">3</span>,<span class="number">2</span> &#125;;</span><br><span class="line">        Solution1 slt = <span class="keyword">new</span> Solution1();</span><br><span class="line">        slt.quicksort(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : nums) &#123;</span><br><span class="line">            System.out.println(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>partion中有需要注意的地方，如果pivot一开始选择左侧，则要先high后low；如果pivot一开始选择右侧，则要先low后high，这样才能保证low==high时，交换pivot和pos时不会错。</p>
+<p>原因：在low==high的上一步，pivot的位置与low、high三者的位置可能有两种关系：</p>
+<ul>
+<li>pivot的位置在nums[low]和nums[high]的左侧，此时交换nums[low]和pivot就能完成partion过程，只有让high向low移动，然后才可以在low==high时交换pivot和nums[low]；</li>
+<li>pivot的位置在nums[low]和nums[high]的右侧，此时交换nums[high]和pivot就能完成partion过程，只有让low向high移动，然后才可以在low==high时交换pivot和nums[high]。</li>
+</ul>
+<p>Note：如果一开始选择中间元素作为pivot并非不可，只是在low==high的上一步，pivot的位置与low、high三者的位置关系就较难确定，不易编码。选择始选择最左或最右元素作pivot更利于思考。</p>
+<p>partion方法2：左侧遇到比pivot大的，与pivot交换，右侧遇到比pivot小的，与pivot交换。每次交换后pivot的索引就会变化，下次使用pivot时要先更新索引。待low==high时，pivot已经被排列到合适的位置，就是low==high的位置。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">partition2</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// select one pivot to sort the array partly</span></span><br><span class="line">        <span class="comment">// and return the position of pivot</span></span><br><span class="line">        <span class="keyword">int</span> pivot = nums[high];</span><br><span class="line">        <span class="keyword">while</span> (low &lt; high) &#123;</span><br><span class="line">            <span class="keyword">while</span> (low &lt; high &amp;&amp; nums[low] &lt;= pivot)</span><br><span class="line">                low++;</span><br><span class="line">            pivot = nums[high];</span><br><span class="line">            nums[high] = nums[low];</span><br><span class="line">            nums[low] = pivot;</span><br><span class="line">            <span class="keyword">while</span> (low &lt; high &amp;&amp; nums[high] &gt;= pivot)</span><br><span class="line">                high--;</span><br><span class="line">            pivot = nums[low];</span><br><span class="line">            nums[low] = nums[high];</span><br><span class="line">            nums[high] = pivot;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> high;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (start &lt; end) &#123;</span><br><span class="line">            <span class="keyword">int</span> pivot = partition2(nums, start, end);</span><br><span class="line">            System.out.println(<span class="string">&quot;pivot=&quot;</span> + pivot);</span><br><span class="line">            Arrays.stream(nums).forEach(System.out::print);</span><br><span class="line">            System.out.println();</span><br><span class="line">            quicksort(nums, start, pivot - <span class="number">1</span>);</span><br><span class="line">            quicksort(nums, pivot + <span class="number">1</span>, end);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="number">5</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">2</span> &#125;;</span><br><span class="line">        Solution1 slt = <span class="keyword">new</span> Solution1();</span><br><span class="line">        slt.quicksort(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : nums) &#123;</span><br><span class="line">            System.out.println(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码可以简化，简化后的代码如下。左侧遇到比pivot大的数，该位置的数值赋值到high所在位置，省略对low位置赋值pivot操作（等到最后统一做，此时会会导致low位置的数失效）；右侧遇到比pivot小的数，该位置的数值赋值到low所在位置，省略对high位置赋值pivot操作（等到最后统一做，此时会导致high位置的数失效）。失效的位置实际上是潜在的pivot的位置，即将来可能会被赋值pivot。最后一步是把pivot放到low==high的位置上。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution1</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">partition2</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// select one pivot to sort the array partly</span></span><br><span class="line">        <span class="comment">// and return the position of pivot</span></span><br><span class="line">        <span class="keyword">int</span> pivot = nums[high];</span><br><span class="line">        <span class="keyword">while</span> (low &lt; high) &#123;</span><br><span class="line">            <span class="keyword">while</span> (low &lt; high &amp;&amp; nums[low] &lt;= pivot)</span><br><span class="line">                low++;</span><br><span class="line">            nums[high] = nums[low];</span><br><span class="line">            <span class="keyword">while</span> (low &lt; high &amp;&amp; nums[high] &gt;= pivot)</span><br><span class="line">                high--;</span><br><span class="line">            nums[low] = nums[high];</span><br><span class="line">        &#125;</span><br><span class="line">        nums[high] = pivot;</span><br><span class="line">        <span class="keyword">return</span> high;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span>[] nums, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (start &lt; end) &#123;</span><br><span class="line">            <span class="keyword">int</span> pivot = partition2(nums, start, end);</span><br><span class="line">            System.out.println(<span class="string">&quot;pivot=&quot;</span> + pivot);</span><br><span class="line">            Arrays.stream(nums).forEach(System.out::print);</span><br><span class="line">            System.out.println();</span><br><span class="line">            quicksort(nums, start, pivot - <span class="number">1</span>);</span><br><span class="line">            quicksort(nums, pivot + <span class="number">1</span>, end);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>[] nums = <span class="keyword">new</span> <span class="keyword">int</span>[] &#123; <span class="number">5</span>, <span class="number">7</span>, <span class="number">1</span>, <span class="number">6</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">2</span> &#125;;</span><br><span class="line">        Solution1 slt = <span class="keyword">new</span> Solution1();</span><br><span class="line">        slt.quicksort(nums, <span class="number">0</span>, nums.length - <span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i : nums) &#123;</span><br><span class="line">            System.out.println(i);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>简化后的方法其实是一种挖坑法，坑就是被转移走数值的位置上的数，由于坑实际上是未被赋值pivot的位置，所以这个坑可能将来被存放pivot，是pivot潜在的位置。</p>
+<p>我感觉方法一易思考和编写，因此将方法一编写在了前面位置，由于没有找到合适的GIF动画讲解方法一，所以给个哔哩哔哩视频的链接，1分11秒开始讲解方法一的partion过程。链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1zD4y197Qi">【理性的设计#01】用10秒，度过30秒时间 - oooooohmygosh</a></p>
+<p>严蔚敏《数据结构》采用的是简化后的方法二，可能是大部分人最先接触的partion方法。</p>
 
       
     </div>
@@ -384,7 +383,7 @@
     
     <li class="post-copyright-link hidden-xs">
       <strong>本文链接：</strong>
-      <a href="http://blog.karakarua.com/2021/03/30/505a385dca9d/" title="转载：MySQL将查询结果存入新表" target="_blank" rel="external">http://blog.karakarua.com/2021/03/30/505a385dca9d/</a>
+      <a href="http://blog.karakarua.com/2021/03/01/3971b354f93d/" title="快速排序算法" target="_blank" rel="external">http://blog.karakarua.com/2021/03/01/3971b354f93d/</a>
     </li>
     
     <li class="post-copyright-license">
@@ -431,23 +430,14 @@
   <ul class="pager pull-left">
     
     <li class="prev">
-      <a href="/2021/04/01/d73364c2eba5/" title="Centos开启防火墙超时失败"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
+      <a href="/2021/03/07/cce4c2665410/" title="docker基础"><i class="icon icon-angle-left" aria-hidden="true"></i><span>&nbsp;&nbsp;Newer</span></a>
     </li>
     
     
     <li class="next">
-      <a href="/2021/03/21/a7d4b89ae5e4/" title="查询LaTeX英文论文中标点后无空格的句子"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
+      <a href="/2021/01/12/166d8b96ee8b/" title="从暴力破解到动态规划解答题目连续子数组的最大和"><span>Older&nbsp;&nbsp;</span><i class="icon icon-angle-right" aria-hidden="true"></i></a>
     </li>
     
-    
-    <li class="toggle-toc">
-      <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false" title="Catalogue" role="button">
-        <span>[&nbsp;</span><span>Catalogue</span>
-        <i class="text-collapsed icon icon-anchor"></i>
-        <i class="text-in icon icon-close"></i>
-        <span>]</span>
-      </a>
-    </li>
     
   </ul>
   
